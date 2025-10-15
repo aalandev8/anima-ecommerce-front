@@ -1,0 +1,36 @@
+/* ===== Órdenes ===== */
+.order-list {
+  padding: 2rem;
+}
+
+.order-card {
+  background-color: #F5EFE9;
+  border: 1px solid #D9CBBE;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.order-detail {
+  background-color: #D9CBBE;
+  padding: 2rem;
+  border-radius: 10px;
+}
+
+.order-status {
+  font-weight: bold;
+  color: #3E2F25;
+  text-transform: capitalize;
+}
+
+.order-status.pending {
+  color: #BFA48A;
+}
+
+.order-status.completed {
+  color: #3E2F25;
+}
+
+.order-status.canceled {
+  color: #6B4F3B;
+}
