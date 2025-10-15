@@ -36,26 +36,7 @@ const Product = () => {
   const productInCart = cartItems.find(item => item.id === product.id)?.quantity || 0;
 
   return (
-    <div className="container py-4">
-      <div className="row align-items-center">
-        <div className="col-md-6">
-          <img
-            src={product.image || "/placeholder.jpg"}
-            alt={product.name}
-            className="img-fluid rounded shadow-sm"
-          />
-        </div>
-        <div className="col-md-6">
-          <h2>{product.name}</h2>
-          <p className="text-muted">${product.price}</p>
-          <p>{product.description}</p>
-          <button className="btn btn-dark mt-3" onClick={handleAddToCart}>
-            Agregar al carrito
-          </button>
-          {productInCart > 0 && <p>En el carrito: {productInCart}</p>}
-        </div>
-      </div>
-    </div>
+    <div></div>
   );
 };
 
