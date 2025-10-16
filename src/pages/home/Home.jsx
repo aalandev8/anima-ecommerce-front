@@ -1,7 +1,23 @@
+import { useNavigate } from 'react-router-dom';
 import { Navbar } from "@/components/ui/Navbar";
 import { Hero } from "@/components/ui/Hero";
 
 const Home = () => {
+  const navigate = useNavigate();
+
+  // Configuración de categorías
+  const categories = [
+    { id: 'kosher', name: 'Kosher', icon: '✡️', bgColor: 'bg-blue-100' },
+    { id: 'diabetic', name: 'Diabetic', icon: '🍃', bgColor: 'bg-green-100' },
+    { id: 'gluten-free', name: 'Gluten-Free', icon: '🌾', bgColor: 'bg-amber-100' },
+    { id: 'vegan', name: 'Vegan', icon: '🥗', bgColor: 'bg-purple-100' },
+    { id: 'halal', name: 'Halal', icon: '☪️', bgColor: 'bg-red-100' },
+  ];
+
+  const handleCategoryClick = (categoryId) => {
+    navigate(`/stores/${categoryId}`);
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
@@ -14,40 +30,18 @@ const Home = () => {
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-          <div className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all cursor-pointer group">
-            <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-              <span className="text-3xl">✡️</span>
+          {categories.map((category) => (
+            <div
+              key={category.id}
+              onClick={() => handleCategoryClick(category.id)}
+              className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all cursor-pointer group"
+            >
+              <div className={`w-16 h-16 ${category.bgColor} rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform`}>
+                <span className="text-3xl">{category.icon}</span>
+              </div>
+              <h3 className="font-semibold text-center text-gray-900">{category.name}</h3>
             </div>
-            <h3 className="font-semibold text-center text-gray-900">Kosher</h3>
-          </div>
-
-          <div className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all cursor-pointer group">
-            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-              <span className="text-3xl">🍃</span>
-            </div>
-            <h3 className="font-semibold text-center text-gray-900">Diabetic</h3>
-          </div>
-
-          <div className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all cursor-pointer group">
-            <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-              <span className="text-3xl">🌾</span>
-            </div>
-            <h3 className="font-semibold text-center text-gray-900">Gluten-Free</h3>
-          </div>
-
-          <div className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all cursor-pointer group">
-            <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-              <span className="text-3xl">🥗</span>
-            </div>
-            <h3 className="font-semibold text-center text-gray-900">Vegan</h3>
-          </div>
-
-          <div className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all cursor-pointer group">
-            <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-              <span className="text-3xl">☪️</span>
-            </div>
-            <h3 className="font-semibold text-center text-gray-900">Halal</h3>
-          </div>
+          ))}
         </div>
       </section>
 
