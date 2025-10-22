@@ -7,22 +7,37 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Primary brand colors - Warm browns and neutrals from the design
         primary: {
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          200: '#bae6fd',
-          300: '#7dd3fc',
-          400: '#38bdf8',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
-          800: '#075985',
-          900: '#0c4a6e',
-          950: '#082f49',
+          DEFAULT: '#3d2817',
+          dark: '#2a1a0f',
+          light: '#5c3f28',
         },
+        secondary: {
+          DEFAULT: '#c7986b',
+          dark: '#a67e56',
+          light: '#ddb389',
+        },
+        accent: {
+          DEFAULT: '#d4a574',
+          dark: '#c08f5c',
+          light: '#e6c09d',
+        },
+        // Neutral/Background colors - Beige tones
+        neutral: {
+          cream: '#f5f0eb',
+          beige: '#e8ddd4',
+          light: '#f9f6f3',
+          dark: '#4a3f35',
+        },
+        // Utility colors
+        success: '#4d7b0f',
+        warning: '#f59e0b',
+        error: '#dc2626',
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Lato', 'Inter', 'system-ui', 'sans-serif'],
+        lato: ['Lato', 'sans-serif'],
       },
     },
   },
