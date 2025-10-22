@@ -61,3 +61,68 @@
 .product-form button:hover {
   background-color: #6B4F3B;
 }
+
+/* ===== Modal de Producto ===== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(75, 63, 54, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 50;
+}
+
+.modal-card {
+  background-color: #F5EFE9;
+  padding: 25px;
+  border-radius: 12px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.modal-card h2 {
+  margin-top: 0;
+  color: #8B5E3C;
+}
+
+.modal-card input,
+.modal-card textarea,
+.modal-card select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 12px;
+  border-radius: 6px;
+  border: 1px solid #D2BBA0;
+  background-color: #F5EFE9;
+  color: #3E2F25;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.modal-actions button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.modal-actions button[type="submit"] {
+  background-color: #8B5E3C;
+  color: white;
+}
+
+.modal-actions .btn-cancel {
+  background-color: #C49A6C;
+  color: white;
+}
+
+.modal-card button:hover {
+  opacity: 0.9;
+}

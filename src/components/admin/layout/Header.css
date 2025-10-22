@@ -1,0 +1,75 @@
+/* ==== HEADER ==== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #e7ded0;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid #d4c2a8;
+  box-shadow: 0 2px 5px rgba(60, 47, 47, 0.1);
+  position: relative;
+  z-index: 10;
+}
+
+/* Título */
+.header h1 {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #4a3f35;
+}
+
+/* Contenedor de usuario */
+.user {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.user span {
+  font-weight: 500;
+  color: #4a3f35;
+}
+
+.user button {
+  background-color: #c6a97e;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.user button:hover {
+  background-color: #b08c5e;
+}
+
+/* Botón hamburguesa */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.6rem;
+  color: #4a3f35;
+  cursor: pointer;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .header h1 {
+    font-size: 1.2rem;
+  }
+
+  .user span {
+    display: none; /* ocultamos el texto para ahorrar espacio */
+  }
+
+  .user button {
+    padding: 0.4rem 1rem;
+  }
+}

@@ -1,0 +1,39 @@
+/* ==== ADMIN LAYOUT ==== */
+.admin-layout {
+  display: flex;
+  min-height: 100vh;
+  background-color: #f9f6f1; /* beige claro */
+  color: #3c2f2f;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Contenido principal */
+.admin-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: #fffdf9;
+  border-left: 1px solid #e2d5c3;
+  box-shadow: inset 0 0 10px rgba(60, 47, 47, 0.05);
+  transition: margin-left 0.3s ease;
+}
+
+/* Sidebar colapsado (para móvil) */
+.admin-layout.sidebar-collapsed .sidebar {
+  transform: translateX(-100%);
+}
+
+.admin-layout.sidebar-collapsed .admin-content {
+  margin-left: 0;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .admin-layout {
+    flex-direction: column;
+  }
+
+  .admin-content {
+    margin-left: 0;
+  }
+}

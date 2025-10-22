@@ -1,7 +1,7 @@
 // src/components/admin/routes/PrivateRoute.jsx
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
-import { authService } from "../../services/authService";
+import { authService } from "../../../services/authService";
 import jwtDecode from "jwt-decode"; // npm install jwt-decode
 
 const PrivateRoute = ({ children }) => {

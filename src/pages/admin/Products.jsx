@@ -1,7 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import AdminLayout from '../../components/admin/layout/AdminLayout';
-import ProductModal from '../../components/admin/products/ProductModal';
-import { getProducts, deleteProduct } from '../../services/admin/productService';
+// src/pages/admin/Products.jsx
+import React, { useState, useEffect } from "react";
+import AdminLayout from "../../components/admin/layout/AdminLayout";
+import ProductModal from "../../components/admin/products/ProductModal";
+import {
+  getProducts,
+  createProduct,
+  updateProduct,
+  deleteProduct,
+} from "../../services/admin/productService";
+import "../../services/styles/admin/products.css";
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -9,16 +16,21 @@ const Products = () => {
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
-    loadProducts();
+    fetchProducts();
   }, []);
 
-  const loadProducts = async () => {
+  const fetchProducts = async () => {
     try {
       const data = await getProducts();
       setProducts(data);
     } catch (error) {
-      console.error('Error loading products:', error);
+      console.error("Error loading products:", error);
     }
+  };
+
+  const handleAdd = () => {
+    setSelectedProduct(null);
+    setIsModalOpen(true);
   };
 
   const handleEdit = (product) => {
@@ -26,13 +38,27 @@ const Products = () => {
     setIsModalOpen(true);
   };
 
+  const handleSave = async (productData) => {
+    try {
+      if (productData.id) {
+        await updateProduct(productData.id, productData);
+      } else {
+        await createProduct(productData);
+      }
+      setIsModalOpen(false);
+      fetchProducts();
+    } catch (error) {
+      console.error("Error saving product:", error);
+    }
+  };
+
   const handleDelete = async (id) => {
-    if (window.confirm('¿Estás seguro de eliminar este producto?')) {
+    if (window.confirm("¿Estás seguro de eliminar este producto?")) {
       try {
         await deleteProduct(id);
-        loadProducts();
+        fetchProducts();
       } catch (error) {
-        console.error('Error deleting product:', error);
+        console.error("Error deleting product:", error);
       }
     }
   };
@@ -42,13 +68,7 @@ const Products = () => {
       <div className="products-container">
         <div className="flex-between mb-6">
           <h1 className="page-title">Gestión de Productos</h1>
-          <button 
-            className="btn btn-primary"
-            onClick={() => {
-              setSelectedProduct(null);
-              setIsModalOpen(true);
-            }}
-          >
+          <button className="btn btn-primary" onClick={handleAdd}>
             + Nuevo Producto
           </button>
         </div>
@@ -69,8 +89,8 @@ const Products = () => {
                 <tr key={product.id}>
                   <td>
                     <div className="flex gap-2">
-                      <img 
-                        src={product.image} 
+                      <img
+                        src={product.image}
                         alt={product.name}
                         className="product-thumb"
                       />
@@ -82,13 +102,13 @@ const Products = () => {
                   <td>{product.stock} unidades</td>
                   <td>
                     <div className="flex gap-2">
-                      <button 
+                      <button
                         className="btn-edit"
                         onClick={() => handleEdit(product)}
                       >
                         Editar
                       </button>
-                      <button 
+                      <button
                         className="btn-delete"
                         onClick={() => handleDelete(product.id)}
                       >
@@ -102,16 +122,12 @@ const Products = () => {
           </table>
         </div>
 
-        {isModalOpen && (
-          <ProductModal
-            product={selectedProduct}
-            onClose={() => setIsModalOpen(false)}
-            onSave={() => {
-              setIsModalOpen(false);
-              loadProducts();
-            }}
-          />
-        )}
+        <ProductModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSave={handleSave}
+          product={selectedProduct}
+        />
       </div>
     </AdminLayout>
   );
