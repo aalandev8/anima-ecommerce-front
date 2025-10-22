@@ -22,7 +22,8 @@ export default {
         },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        sans: ['Lato', 'Inter', 'system-ui', 'sans-serif'],
+        lato: ['Lato', 'sans-serif'],
       },
     },
   },
