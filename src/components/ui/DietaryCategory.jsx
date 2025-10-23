@@ -1,11 +1,12 @@
-import VeganLogo from './icons/VeganLogo.svg';
-import KosherLogo from './icons/KosherLogo.png';
-import VegetarianLogo from './icons/VegetarianLogo.png';
-import HalalLogo from './icons/HalalLogo.png';
-import GlutenFreeLogo from './icons/GlutenFree.webp';
-import DiabetesLogo from './icons/DiabetesLogo.png';
-import BajoEnSodioLogo from './icons/BajoEnSodio.jpg';
-import LactoseFreeLogo from './icons/LactoseFree.jpg';
+import { useNavigate } from 'react-router-dom';
+import VeganLogo from './Icons/VeganLogo.svg';
+import KosherLogo from './Icons/KosherLogo.png';
+import VegetarianLogo from './Icons/VegetarianLogo.png';
+import HalalLogo from './Icons/HalalLogo.png';
+import GlutenFreeLogo from './Icons/GlutenFree.webp';
+import DiabetesLogo from './Icons/DiabetesLogo.png';
+import BajoEnSodioLogo from './Icons/BajoEnSodio.jpg';
+import LactoseFreeLogo from './Icons/LactoseFree.jpg';
 
 const dietaryLogos = {
   vegano: VeganLogo,
@@ -18,9 +19,18 @@ const dietaryLogos = {
   sinLactosa: LactoseFreeLogo,
 };
 
-export const DietaryCategory = ({ type, label, colorClass }) => {
+export const DietaryCategory = ({ type, label }) => {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/stores/${type}`);
+  };
+
   return (
-    <div className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all cursor-pointer group border border-neutral-beige hover:border-secondary">
+    <div 
+      onClick={handleClick}
+      className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all cursor-pointer group border border-neutral-beige hover:border-secondary"
+    >
       <div className="w-16 h-16 bg-neutral-cream rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform overflow-hidden">
         <img
           src={dietaryLogos[type]}

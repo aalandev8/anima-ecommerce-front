@@ -1,24 +1,8 @@
-import { useNavigate } from 'react-router-dom';
 import { Navbar } from "@/components/ui/Navbar";
 import { Hero } from "@/components/ui/Hero";
 import { DietaryCategory } from "@/components/ui/DietaryCategory";
 
 const Home = () => {
-  const navigate = useNavigate();
-
-  // Configuración de categorías
-  const categories = [
-    { id: 'kosher', name: 'Kosher', icon: '✡️', bgColor: 'bg-blue-100' },
-    { id: 'diabetic', name: 'Diabetic', icon: '🍃', bgColor: 'bg-green-100' },
-    { id: 'gluten-free', name: 'Gluten-Free', icon: '🌾', bgColor: 'bg-amber-100' },
-    { id: 'vegan', name: 'Vegan', icon: '🥗', bgColor: 'bg-purple-100' },
-    { id: 'halal', name: 'Halal', icon: '☪️', bgColor: 'bg-red-100' },
-  ];
-
-  const handleCategoryClick = (categoryId) => {
-    navigate(`/stores/${categoryId}`);
-  };
-
   return (
     <div className="min-h-screen bg-neutral-light">
       <Navbar />

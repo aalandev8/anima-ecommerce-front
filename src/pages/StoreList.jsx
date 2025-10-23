@@ -1,6 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import VeganLogo from '../components/ui/Icons/VeganLogo.svg';
+import KosherLogo from '../components/ui/Icons/KosherLogo.png';
+import VegetarianLogo from '../components/ui/Icons/VegetarianLogo.png';
+import HalalLogo from '../components/ui/Icons/HalalLogo.png';
+import GlutenFreeLogo from '../components/ui/Icons/GlutenFree.webp';
+import DiabetesLogo from '../components/ui/Icons/DiabetesLogo.png';
+import BajoEnSodioLogo from '../components/ui/Icons/BajoEnSodio.jpg';
+import LactoseFreeLogo from '../components/ui/Icons/LactoseFree.jpg';
 
 const StoreList = () => {
   const { category } = useParams();
@@ -9,54 +17,96 @@ const StoreList = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
- 
+  // Mapeo de categorías de Home a las del backend
+  const categoryMapping = {
+    'vegano': 'vegan',
+    'vegetariano': 'vegetarian',
+    'sinGluten': 'gluten-free',
+    'sinLactosa': 'lactose-free',
+    'diabetico': 'diabetic',
+    'bajo_sodio': 'low-sodium',
+    'kosher': 'kosher',
+    'halal': 'halal'
+  };
+
+  const dietaryLogos = {
+    vegano: VeganLogo,
+    kosher: KosherLogo,
+    vegetariano: VegetarianLogo,
+    halal: HalalLogo,
+    sinGluten: GlutenFreeLogo,
+    diabetico: DiabetesLogo,
+    bajo_sodio: BajoEnSodioLogo,
+    sinLactosa: LactoseFreeLogo,
+  };
+
+  // Configuración de categorías
   const categoryConfig = {
-    'kosher': {
-      title: 'Tiendas Kosher',
-      description: 'Encuentra las mejores opciones de comida kosher certificada',
-      icon: '✡️',
-      bgColor: 'bg-blue-100'
-    },
-    'diabetic': {
-      title: 'Tiendas para Diabéticos',
-      description: 'Opciones saludables con bajo índice glucémico',
-      icon: '🍃',
-      bgColor: 'bg-green-100'
-    },
-    'gluten-free': {
-      title: 'Tiendas Gluten Free',
-      description: 'Opciones sin gluten para celíacos y sensibles al gluten',
-      icon: '🌾',
-      bgColor: 'bg-amber-100'
-    },
-    'vegan': {
+    'vegano': {
       title: 'Tiendas Veganas',
       description: 'Comida 100% vegetal, sin productos de origen animal',
-      icon: '🥗',
-      bgColor: 'bg-purple-100'
+      logo: dietaryLogos.vegano,
+      colorClass: 'bg-green-100 text-green-700'
+    },
+    'vegetariano': {
+      title: 'Tiendas Vegetarianas',
+      description: 'Opciones vegetarianas sin carne ni pescado',
+      logo: dietaryLogos.vegetariano,
+      colorClass: 'bg-lime-100 text-lime-700'
+    },
+    'sinGluten': {
+      title: 'Tiendas Sin Gluten',
+      description: 'Opciones sin gluten para celíacos y sensibles al gluten',
+      logo: dietaryLogos.sinGluten,
+      colorClass: 'bg-amber-100 text-amber-700'
+    },
+    'sinLactosa': {
+      title: 'Tiendas Sin Lactosa',
+      description: 'Productos libres de lactosa',
+      logo: dietaryLogos.sinLactosa,
+      colorClass: 'bg-blue-100 text-blue-700'
+    },
+    'diabetico': {
+      title: 'Tiendas para Diabéticos',
+      description: 'Opciones saludables con bajo índice glucémico',
+      logo: dietaryLogos.diabetico,
+      colorClass: 'bg-purple-100 text-purple-700'
+    },
+    'bajo_sodio': {
+      title: 'Tiendas Bajo en Sodio',
+      description: 'Comida con contenido reducido de sal',
+      logo: dietaryLogos.bajo_sodio,
+      colorClass: 'bg-cyan-100 text-cyan-700'
+    },
+    'kosher': {
+      title: 'Tiendas Kosher',
+      description: 'Comida certificada kosher según normas judías',
+      logo: dietaryLogos.kosher,
+      colorClass: 'bg-indigo-100 text-indigo-700'
     },
     'halal': {
       title: 'Tiendas Halal',
       description: 'Comida preparada siguiendo las normas islámicas',
-      icon: '☪️',
-      bgColor: 'bg-red-100'
+      logo: dietaryLogos.halal,
+      colorClass: 'bg-rose-100 text-rose-700'
     }
   };
 
   const currentCategory = categoryConfig[category] || {
     title: 'Tiendas',
     description: 'Encuentra las mejores opciones',
-    icon: '🏪',
-    bgColor: 'bg-gray-100'
+    logo: null,
+    colorClass: 'bg-gray-100 text-gray-700'
   };
 
   useEffect(() => {
     const fetchStores = async () => {
       try {
         setLoading(true);
-        // Reemplaza esta URL con tu endpoint real
-    const response = await axios.get(`http://localhost:3000/api/stores?category=${category}`);
-     setStores(response.data.data);  
+        // Convertir la categoría del frontend al formato del backend
+        const backendCategory = categoryMapping[category] || category;
+        const response = await axios.get(`http://localhost:3000/api/stores?category=${backendCategory}`);
+        setStores(response.data.data);  
         setError(null);
       } catch (err) {
         setError('Error al cargar las tiendas. Por favor intenta nuevamente.');
@@ -100,8 +150,16 @@ const StoreList = () => {
           </button>
           
           <div className="flex items-center mb-4">
-            <div className={`w-16 h-16 ${currentCategory.bgColor} rounded-full flex items-center justify-center mr-4`}>
-              <span className="text-3xl">{currentCategory.icon}</span>
+            <div className={`w-16 h-16 ${currentCategory.colorClass.split(' ')[0]} rounded-full flex items-center justify-center mr-4 p-2`}>
+              {currentCategory.logo ? (
+                <img 
+                  src={currentCategory.logo} 
+                  alt={currentCategory.title}
+                  className="w-full h-full object-contain"
+                />
+              ) : (
+                <span className="text-3xl">🏪</span>
+              )}
             </div>
             <div>
               <h1 className="text-4xl font-bold text-gray-900">{currentCategory.title}</h1>
@@ -110,7 +168,6 @@ const StoreList = () => {
           </div>
         </div>
 
-  
         {error && (
           <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg mb-6">
             <div className="flex items-center">
@@ -122,7 +179,6 @@ const StoreList = () => {
           </div>
         )}
 
-        
         {stores.length === 0 ? (
           <div className="bg-blue-50 border border-blue-200 text-blue-800 px-4 py-3 rounded-lg">
             No hay tiendas disponibles en esta categoría por el momento.
@@ -135,14 +191,12 @@ const StoreList = () => {
                 onClick={() => handleStoreClick(store.id)}
                 className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all cursor-pointer group overflow-hidden"
               >
-               
                 <div className="relative h-48 overflow-hidden">
                   <img 
-              src={store.image_url || 'https://placehold.co/400x300?text=Tienda'}
+                    src={store.image_url || 'https://placehold.co/400x300?text=Tienda'}
                     alt={store.name}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                   />
-               
                   {store.featured && (
                     <div className="absolute top-3 right-3 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
                       Destacado
@@ -150,14 +204,12 @@ const StoreList = () => {
                   )}
                 </div>
 
-        
                 <div className="p-5">
                   <h3 className="text-xl font-bold text-gray-900 mb-2">{store.name}</h3>
                   <p className="text-gray-600 text-sm mb-4 line-clamp-2">
                     {store.description || 'Deliciosas opciones para ti'}
                   </p>
                   
-               
                   <div className="flex items-center justify-between text-sm text-gray-600 mb-3">
                     <div className="flex items-center">
                       <svg className="w-5 h-5 text-yellow-400 mr-1" fill="currentColor" viewBox="0 0 20 20">
@@ -180,7 +232,6 @@ const StoreList = () => {
                     </span>
                   </div>
 
-       
                   {store.tags && store.tags.length > 0 && (
                     <div className="flex flex-wrap gap-2 mt-3">
                       {store.tags.slice(0, 3).map((tag, index) => (
