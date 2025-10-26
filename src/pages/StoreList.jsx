@@ -10,12 +10,7 @@ import DiabetesLogo from '../components/ui/Icons/DiabetesLogo.png';
 import BajoEnSodioLogo from '../components/ui/Icons/BajoEnSodio.jpg';
 import LactoseFreeLogo from '../components/ui/Icons/LactoseFree.jpg';
 
-const StoreList = () => {
-  const { category } = useParams();
-  const navigate = useNavigate();
-  const [stores, setStores] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+
 
   // Mapeo de categorías de Home a las del backend
   const categoryMapping = {
@@ -92,12 +87,22 @@ const StoreList = () => {
     }
   };
 
+const StoreList = () => {
+  const { category } = useParams();
+  const navigate = useNavigate();
+  const [stores, setStores] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+
   const currentCategory = categoryConfig[category] || {
     title: 'Tiendas',
     description: 'Encuentra las mejores opciones',
     logo: null,
     colorClass: 'bg-gray-100 text-gray-700'
   };
+
+
 
   useEffect(() => {
     const fetchStores = async () => {
