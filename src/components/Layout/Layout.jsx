@@ -1,17 +1,26 @@
-import React from "react";
-import Sidebar from "./Sidebar";
-import Navbar from "./Navbar";
+import Sidebar from './Sidebar'
+import Navbar from './Navbar'
 
-const Layout = ({ children }) => {
+function Layout({ children }) {
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen bg-gradient-to-br from-neutral-light via-neutral-cream to-neutral-beige overflow-hidden">
+      {/* Sidebar */}
       <Sidebar />
-      <div className="flex-1 flex flex-col">
+      
+      {/* Main Content Area */}
+      <div className="flex-1 flex flex-col overflow-hidden">
+        {/* Navbar */}
         <Navbar />
-        <main className="flex-1 p-6 bg-gray-50 overflow-y-auto">{children}</main>
+        
+        {/* Page Content */}
+        <main className="flex-1 overflow-y-auto p-6 lg:p-8">
+          <div className="max-w-7xl mx-auto">
+            {children}
+          </div>
+        </main>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout
