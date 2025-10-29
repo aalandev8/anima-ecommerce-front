@@ -1,13 +1,13 @@
 // src/pages/StorePage.jsx
-import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import axios from 'axios';
-import StoreHeader from '../components/store/StoreHeader';
-import CategoryTabs from '../components/store/CategoryTabs';
-import ProductList from '../components/store/ProductList';
-import OrderSidebar from '../components/cart/OrderSidebar';
-import { addToCart } from '../redux/slices/cartSlice';
+import React, { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import axios from "axios";
+import StoreHeader from "../components/store/StoreHeader";
+import CategoryTabs from "../components/store/CategoryTabs";
+import ProductList from "../components/store/ProductList";
+import OrderSidebar from "../components/cart/OrderSidebar";
+import { addToCart } from "../redux/slices/cartSlice";
 
 const StorePage = () => {
   const { storeId } = useParams();
@@ -29,33 +29,36 @@ const StorePage = () => {
         setError(null);
 
         // Obtener datos de la tienda
-        const storeResponse = await axios.get(`http://localhost:3000/api/stores/${storeId}`);
+        const storeResponse = await axios.get(
+          `http://localhost:3000/api/stores/${storeId}`
+        );
         setStore(storeResponse.data.data);
 
         // Obtener productos de la tienda
-        const productsResponse = await axios.get(`http://localhost:3000/api/stores/${storeId}/products`);
-        const fetchedProducts = productsResponse.data.data;
+        const productsResponse = await axios.get(
+          `http://localhost:3000/api/products/store/${storeId}`
+        );
+        const fetchedProducts = productsResponse.data;
         setProducts(fetchedProducts);
 
         // Extraer categorías únicas de los productos
         const uniqueCategories = [];
         const categoryIds = new Set();
 
-        fetchedProducts.forEach(product => {
+        fetchedProducts.forEach((product) => {
           if (product.category && !categoryIds.has(product.category.id)) {
             categoryIds.add(product.category.id);
             uniqueCategories.push({
               id: product.category.id,
-              name: product.category.name
+              name: product.category.name,
             });
           }
         });
 
         setCategories(uniqueCategories);
-
       } catch (err) {
-        console.error('Error fetching store data:', err);
-        setError('Error al cargar la tienda. Por favor intenta nuevamente.');
+        console.error("Error fetching store data:", err);
+        setError("Error al cargar la tienda. Por favor intenta nuevamente.");
       } finally {
         setLoading(false);
       }
@@ -68,7 +71,7 @@ const StorePage = () => {
 
   // Filtrar productos por categoría
   const filteredProducts = activeCategory
-    ? products.filter(product => product.category?.id === activeCategory)
+    ? products.filter((product) => product.category?.id === activeCategory)
     : products;
 
   // Manejar agregar al carrito
@@ -97,7 +100,7 @@ const StorePage = () => {
             {error}
           </div>
           <button
-            onClick={() => navigate('/stores')}
+            onClick={() => navigate("/stores")}
             className="text-gray-600 hover:text-gray-900"
           >
             ← Volver a tiendas
@@ -112,7 +115,7 @@ const StorePage = () => {
       {/* Columna principal */}
       <div className="flex-1">
         <StoreHeader store={store} />
-        
+
         {categories.length > 0 && (
           <CategoryTabs
             categories={categories}
