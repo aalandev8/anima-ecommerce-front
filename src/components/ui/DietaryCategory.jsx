@@ -27,18 +27,26 @@ export const DietaryCategory = ({ type, label }) => {
   };
 
   return (
-    <div 
+    <div
       onClick={handleClick}
-      className="bg-white rounded-2xl p-6 shadow-md hover:shadow-xl transition-all cursor-pointer group border border-neutral-beige hover:border-secondary"
+      className="relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer group border-2 border-transparent hover:border-secondary overflow-hidden"
     >
-      <div className="w-16 h-16 bg-neutral-cream rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform overflow-hidden">
-        <img
-          src={dietaryLogos[type]}
-          alt={label}
-          className="w-full h-full object-contain p-1"
-        />
+      {/* Gradient background overlay on hover */}
+      <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+      <div className="relative z-10">
+        <div className="w-24 h-24 bg-gradient-to-br from-neutral-cream to-white rounded-2xl flex items-center justify-center mx-auto mb-5 group-hover:scale-110 group-hover:rotate-3 transition-all duration-300 overflow-hidden shadow-md">
+          <img
+            src={dietaryLogos[type]}
+            alt={label}
+            className="w-full h-full object-contain p-2"
+          />
+        </div>
+        <h3 className="font-bold text-lg text-center text-primary group-hover:text-secondary transition-colors duration-300">{label}</h3>
       </div>
-      <h3 className="font-semibold text-center text-primary">{label}</h3>
+
+      {/* Decorative corner accent */}
+      <div className="absolute top-0 right-0 w-16 h-16 bg-secondary/10 rounded-bl-full transform translate-x-8 -translate-y-8 group-hover:translate-x-6 group-hover:-translate-y-6 transition-transform duration-300" />
     </div>
   );
 };
