@@ -1,7 +1,6 @@
-import React from "react";
-import CardProduct from "../products/CardProduct";
+import { CardProduct } from "@/components/products/CardProduct";
 
-const ProductList = ({ products, onAddToCart, isLoading, storeId }) => {
+export const ProductList = ({ products, onAddToCart, isLoading, storeId }) => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-20">
@@ -40,4 +39,3 @@ const ProductList = ({ products, onAddToCart, isLoading, storeId }) => {
   );
 };
 
-export default ProductList;

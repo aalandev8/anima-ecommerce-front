@@ -1,11 +1,7 @@
-// src/components/store/CategoryTabs.jsx
-import React from 'react';
-
-const CategoryTabs = ({ categories, activeCategory, onSelectCategory }) => {
+export const CategoryTabs = ({ categories, activeCategory, onSelectCategory }) => {
   return (
     <div className="bg-white border-b border-gray-200 px-6 overflow-x-auto">
       <div className="flex gap-1 min-w-max">
-        {/* Tab "Todos" */}
         <button
           onClick={() => onSelectCategory(null)}
           className={`px-4 py-3 font-medium whitespace-nowrap transition-colors border-b-2 ${
@@ -16,8 +12,6 @@ const CategoryTabs = ({ categories, activeCategory, onSelectCategory }) => {
         >
           Todos
         </button>
-
-        {/* Tabs de categorías */}
         {categories.map((category) => (
           <button
             key={category.id}
@@ -36,4 +30,3 @@ const CategoryTabs = ({ categories, activeCategory, onSelectCategory }) => {
   );
 };
 
-export default CategoryTabs;

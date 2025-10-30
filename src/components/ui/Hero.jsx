@@ -1,18 +1,14 @@
 export const Hero = () => {
   return (
     <section className="relative overflow-hidden min-h-[600px] flex items-center">
-      {/* Background Image */}
       <div className="absolute inset-0">
         <img
           src="/HeroImage.jpg"
           alt="Delicious food background"
           className="w-full h-full object-cover"
         />
-        {/* Overlay for better text readability */}
         <div  iv className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent"></div>
       </div>
-
-      {/* Content */}
       <div className="relative max-w-7xl px-4 sm:px-6 lg:px-8 py-20 sm:py-32">
         <div className="max-w-2xl">
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6">

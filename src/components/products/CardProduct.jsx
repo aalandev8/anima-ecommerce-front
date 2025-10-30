@@ -1,10 +1,10 @@
 // src/components/products/CardProduct.jsx
 import React from "react";
 import { useDispatch } from "react-redux";
-import { addToCart } from "../../redux/slices/cartSlice";
+import { addToCart } from "@/redux/slices/cartSlice";
 import { Link } from "react-router-dom";
 
-const CardProduct = ({ product, onAddToCart, storeId, showBadge }) => {
+export const CardProduct = ({ product, onAddToCart, storeId, showBadge }) => {
   const dispatch = useDispatch();
 
   const handleAddToCart = () => {
@@ -62,4 +62,3 @@ const CardProduct = ({ product, onAddToCart, storeId, showBadge }) => {
   );
 };
 
-export default CardProduct;

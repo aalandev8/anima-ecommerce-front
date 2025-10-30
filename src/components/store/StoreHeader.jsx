@@ -1,14 +1,11 @@
-// src/components/store/StoreHeader.jsx
-import React from 'react';
 import { Link } from 'react-router-dom';
 
-const StoreHeader = ({ store }) => {
+export const StoreHeader = ({ store }) => {
 const backUrl = store?.type ? `/stores/${store.type}` : '/';
 
   return (
     <div className="bg-white border-b border-gray-200 px-6 py-4">
       <div className="flex items-center gap-4">
-        {/* Botón volver */}
         <Link 
             to={backUrl}
           className="text-gray-600 hover:text-gray-900 transition"
@@ -27,14 +24,11 @@ const backUrl = store?.type ? `/stores/${store.type}` : '/';
             />
           </svg>
         </Link>
-
-        {/* Nombre de la tienda */}
         <h1 className="text-2xl font-bold text-gray-900">
-          {store?.name || 'Tienda'}
+          {store?.name}
         </h1>
       </div>
     </div>
   );
 };
 
-export default StoreHeader;

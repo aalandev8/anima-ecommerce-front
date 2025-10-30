@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import axios from "axios";
-import StoreHeader from "../components/store/StoreHeader";
-import CategoryTabs from "../components/store/CategoryTabs";
-import ProductList from "../components/store/ProductList";
-import OrderSidebar from "../components/cart/OrderSidebar";
+import { StoreHeader } from "@/components/store/StoreHeader";
+import { CategoryTabs }from "@/components/store/CategoryTabs";
+import { ProductList } from "@/components/store/ProductList";
+import { OrderSidebar }  from "@/components/cart/OrderSidebar";
 import { addToCart } from "../redux/slices/cartSlice";
 
 const StorePage = () => {
