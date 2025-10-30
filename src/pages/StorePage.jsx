@@ -1,4 +1,3 @@
-// src/pages/StorePage.jsx
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -21,30 +20,25 @@ const StorePage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Cargar datos de la tienda y productos
   useEffect(() => {
     const fetchStoreData = async () => {
       try {
         setLoading(true);
         setError(null);
 
-        // Obtener datos de la tienda
         const storeResponse = await axios.get(
           `http://localhost:3000/api/stores/${storeId}`
         );
         setStore(storeResponse.data.data);
 
-        // Obtener productos de la tienda
         const productsResponse = await axios.get(
           `http://localhost:3000/api/products/store/${storeId}`
         );
         const fetchedProducts = productsResponse.data;
         setProducts(fetchedProducts);
 
-        // Extraer categorías únicas de los productos
         const uniqueCategories = [];
         const categoryIds = new Set();
-
         fetchedProducts.forEach((product) => {
           if (product.category && !categoryIds.has(product.category.id)) {
             categoryIds.add(product.category.id);
@@ -54,7 +48,6 @@ const StorePage = () => {
             });
           }
         });
-
         setCategories(uniqueCategories);
       } catch (err) {
         console.error("Error fetching store data:", err);
@@ -64,22 +57,17 @@ const StorePage = () => {
       }
     };
 
-    if (storeId) {
-      fetchStoreData();
-    }
+    if (storeId) fetchStoreData();
   }, [storeId]);
 
-  // Filtrar productos por categoría
   const filteredProducts = activeCategory
     ? products.filter((product) => product.category?.id === activeCategory)
     : products;
 
-  // Manejar agregar al carrito
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
   };
 
-  // Pantalla de carga
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -91,7 +79,6 @@ const StorePage = () => {
     );
   }
 
-  // Pantalla de error
   if (error) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -112,7 +99,6 @@ const StorePage = () => {
 
   return (
     <div className="flex min-h-screen bg-gray-50">
-      {/* Columna principal */}
       <div className="flex-1">
         <StoreHeader store={store} />
 
@@ -128,10 +114,10 @@ const StorePage = () => {
           products={filteredProducts}
           onAddToCart={handleAddToCart}
           isLoading={false}
+          storeId={storeId}
         />
       </div>
 
-      {/* Sidebar del carrito */}
       <OrderSidebar />
     </div>
   );

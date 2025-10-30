@@ -1,9 +1,15 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 
 // Rutas públicas (tuyas)
-import Home from './pages/home/Home';
-import StoreList from './pages/StoreList';
-import StorePage from './pages/StorePage';
+import Home from "./pages/home/Home";
+import StoreList from "./pages/StoreList";
+import StorePage from "./pages/StorePage";
+import ProductDetail from "./pages/ProductDetail";
 
 // // Rutas del dashboard (de tu compañera)
 // import PrivateRoute from './routes/PrivateRoute';
@@ -18,10 +24,10 @@ function App() {
   return (
     <Router>
       <Routes>
-        {/* ===== RUTAS PÚBLICAS (Cliente/Tienda) ===== */}
         <Route path="/" element={<Home />} />
         <Route path="/stores/:category" element={<StoreList />} />
         <Route path="/store/:storeId" element={<StorePage />} />
+        <Route path="/store/:storeId/product/:id" element={<ProductDetail />} />
 
         {/* ===== RUTAS DEL DASHBOARD (Admin) ===== */}
         {/* <Route path="/login" element={<Login />} />

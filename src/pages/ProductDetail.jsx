@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 
 const ProductDetail = () => {
-  const { id } = useParams();
+  const { id, storeId } = useParams();
   const navigate = useNavigate();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -10,13 +10,23 @@ const ProductDetail = () => {
 
   useEffect(() => {
     fetch(`http://localhost:3000/api/products/${id}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.success) setProduct(data.data);
+      .then((res) => {
+        if (!res.ok) throw new Error("Producto no encontrado");
+        return res.json();
+      })
+      .then((productData) => {
+        if (productData.store_id !== Number(storeId)) {
+          setProduct(null);
+        } else {
+          setProduct(productData);
+        }
         setLoading(false);
       })
-      .catch(() => setLoading(false));
-  }, [id]);
+      .catch(() => {
+        setProduct(null);
+        setLoading(false);
+      });
+  }, [id, storeId]);
 
   if (loading) {
     return (
@@ -37,14 +47,13 @@ const ProductDetail = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <button
-        onClick={() => navigate("/")}
+        onClick={() => navigate(`/store/${storeId}`)}
         className="mb-6 text-blue-600 hover:underline"
       >
         ← Volver
       </button>
 
       <div className="grid md:grid-cols-2 gap-8 bg-white rounded-lg shadow-lg p-6">
-        {/* Imagen */}
         <div>
           <img
             src={product.image_url || "https://via.placeholder.com/600"}
@@ -53,7 +62,6 @@ const ProductDetail = () => {
           />
         </div>
 
-        {/* Información */}
         <div>
           <span className="inline-block px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-sm mb-4">
             {product.category?.name}
@@ -87,21 +95,7 @@ const ProductDetail = () => {
                   >
                     -
                   </button>
-                  <input
-                    type="number"
-                    value={quantity}
-                    onChange={(e) =>
-                      setQuantity(
-                        Math.max(
-                          1,
-                          Math.min(product.stock, parseInt(e.target.value) || 1)
-                        )
-                      )
-                    }
-                    className="w-16 text-center border rounded"
-                    min="1"
-                    max={product.stock}
-                  />
+                  <span>{quantity}</span>
                   <button
                     onClick={() =>
                       setQuantity(Math.min(product.stock, quantity + 1))
@@ -114,12 +108,12 @@ const ProductDetail = () => {
               </div>
 
               <button
+                className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700"
                 onClick={() =>
-                  alert(`${quantity} ${product.name} agregados al carrito`)
+                  alert(`Agregaste ${quantity} productos al carrito`)
                 }
-                className="w-full py-3 bg-blue-600 text-white font-bold rounded-lg hover:bg-blue-700"
               >
-                🛒 Agregar al Carrito
+                Agregar al carrito
               </button>
             </>
           )}
