@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState, useMemo } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import axios from "axios";
+import { useStore } from "@/api/stores";
+import { useProductsByStore } from "@/api/products";
 import { StoreHeader } from "@/components/store/StoreHeader";
 import { CategoryTabs }from "@/components/store/CategoryTabs";
 import { ProductList } from "@/components/store/ProductList";
@@ -12,63 +13,42 @@ const StorePage = () => {
   const { storeId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const [store, setStore] = useState(null);
-  const [products, setProducts] = useState([]);
-  const [categories, setCategories] = useState([]);
   const [activeCategory, setActiveCategory] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchStoreData = async () => {
-      try {
-        setLoading(true);
-        setError(null);
+  const { data: storeData, isLoading: isLoadingStore, isError: isStoreError } = useStore(storeId);
+  const { data: productsData = [], isLoading: isLoadingProducts, isError: isProductsError } = useProductsByStore(storeId);
 
-        const storeResponse = await axios.get(
-          `http://localhost:3000/api/stores/${storeId}`
-        );
-        setStore(storeResponse.data.data);
+  const store = storeData?.data;
+  const products = Array.isArray(productsData) ? productsData : [];
+  const isLoading = isLoadingStore || isLoadingProducts;
+  const isError = isStoreError || isProductsError;
 
-        const productsResponse = await axios.get(
-          `http://localhost:3000/api/products/store/${storeId}`
-        );
-        const fetchedProducts = productsResponse.data;
-        setProducts(fetchedProducts);
-
-        const uniqueCategories = [];
-        const categoryIds = new Set();
-        fetchedProducts.forEach((product) => {
-          if (product.category && !categoryIds.has(product.category.id)) {
-            categoryIds.add(product.category.id);
-            uniqueCategories.push({
-              id: product.category.id,
-              name: product.category.name,
-            });
-          }
+  const categories = useMemo(() => {
+    const uniqueCategories = [];
+    const categoryIds = new Set();
+    products.forEach((product) => {
+      if (product.category && !categoryIds.has(product.category.id)) {
+        categoryIds.add(product.category.id);
+        uniqueCategories.push({
+          id: product.category.id,
+          name: product.category.name,
         });
-        setCategories(uniqueCategories);
-      } catch (err) {
-        console.error("Error fetching store data:", err);
-        setError("Error al cargar la tienda. Por favor intenta nuevamente.");
-      } finally {
-        setLoading(false);
       }
-    };
+    });
+    return uniqueCategories;
+  }, [products]);
 
-    if (storeId) fetchStoreData();
-  }, [storeId]);
-
-  const filteredProducts = activeCategory
-    ? products.filter((product) => product.category?.id === activeCategory)
-    : products;
+  const filteredProducts = useMemo(() => {
+    return activeCategory
+      ? products.filter((product) => product.category?.id === activeCategory)
+      : products;
+  }, [products, activeCategory]);
 
   const handleAddToCart = (product) => {
     dispatch(addToCart(product));
   };
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
@@ -79,12 +59,12 @@ const StorePage = () => {
     );
   }
 
-  if (error) {
+  if (isError || !store) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <div className="bg-red-50 border border-red-200 text-red-800 px-6 py-4 rounded-lg mb-4">
-            {error}
+            Error al cargar la tienda. Por favor intenta nuevamente.
           </div>
           <button
             onClick={() => navigate("/stores")}

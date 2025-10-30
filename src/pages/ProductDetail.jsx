@@ -1,34 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { useCart } from '@/hooks/useCart';
+import { useProduct } from '@/api/products';
 
 const ProductDetail = () => {
   const { id, storeId } = useParams();
   const navigate = useNavigate();
-  const [product, setProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
   const [quantity, setQuantity] = useState(1);
+  const { addToCart } = useCart();
 
-  useEffect(() => {
-    fetch(`http://localhost:3000/api/products/${id}`)
-      .then((res) => {
-        if (!res.ok) throw new Error("Producto no encontrado");
-        return res.json();
-      })
-      .then((productData) => {
-        if (productData.store_id !== Number(storeId)) {
-          setProduct(null);
-        } else {
-          setProduct(productData);
-        }
-        setLoading(false);
-      })
-      .catch(() => {
-        setProduct(null);
-        setLoading(false);
-      });
-  }, [id, storeId]);
+  const { data: product, isLoading, isError } = useProduct(id);
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="flex justify-center items-center h-screen">
         Cargando...
@@ -36,7 +19,7 @@ const ProductDetail = () => {
     );
   }
 
-  if (!product) {
+  if (isError || !product || product.store_id !== Number(storeId)) {
     return (
       <div className="flex justify-center items-center h-screen">
         Producto no encontrado
@@ -110,7 +93,7 @@ const ProductDetail = () => {
               <button
                 className="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700"
                 onClick={() =>
-                  alert(`Agregaste ${quantity} productos al carrito`)
+                  addToCart({ ...product, quantity })
                 }
               >
                 Agregar al carrito

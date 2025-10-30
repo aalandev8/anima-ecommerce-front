@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { useStoresByCategory } from '@/api/stores';
 import VeganLogo from '../components/ui/Icons/VeganLogo.svg';
 import KosherLogo from '../components/ui/Icons/KosherLogo.png';
 import VegetarianLogo from '../components/ui/Icons/VegetarianLogo.png';
@@ -10,19 +10,16 @@ import DiabetesLogo from '../components/ui/Icons/DiabetesLogo.png';
 import BajoEnSodioLogo from '../components/ui/Icons/BajoEnSodio.jpg';
 import LactoseFreeLogo from '../components/ui/Icons/LactoseFree.jpg';
 
-
-
-  // Mapeo de categorías de Home a las del backend
-  const categoryMapping = {
-    'vegano': 'vegan',
-    'vegetariano': 'vegetarian',
-    'sinGluten': 'gluten-free',
-    'sinLactosa': 'lactose-free',
-    'diabetico': 'diabetic',
-    'bajo_sodio': 'low-sodium',
-    'kosher': 'kosher',
-    'halal': 'halal'
-  };
+const categoryMapping = {
+  'vegano': 'vegan',
+  'vegetariano': 'vegetarian',
+  'sinGluten': 'gluten-free',
+  'sinLactosa': 'lactose-free',
+  'diabetico': 'diabetic',
+  'bajo_sodio': 'low-sodium',
+  'kosher': 'kosher',
+  'halal': 'halal'
+};
 
   const dietaryLogos = {
     vegano: VeganLogo,
@@ -90,10 +87,11 @@ import LactoseFreeLogo from '../components/ui/Icons/LactoseFree.jpg';
 const StoreList = () => {
   const { category } = useParams();
   const navigate = useNavigate();
-  const [stores, setStores] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
 
+  const backendCategory = useMemo(() => categoryMapping[category] || category, [category]);
+
+  const { data: storesData, isLoading, isError } = useStoresByCategory(backendCategory);
+  const stores = storesData?.data || [];
 
   const currentCategory = categoryConfig[category] || {
     title: 'Tiendas',
@@ -102,33 +100,11 @@ const StoreList = () => {
     colorClass: 'bg-gray-100 text-gray-700'
   };
 
-
-
-  useEffect(() => {
-    const fetchStores = async () => {
-      try {
-        setLoading(true);
-        // Convertir la categoría del frontend al formato del backend
-        const backendCategory = categoryMapping[category] || category;
-        const response = await axios.get(`http://localhost:3000/api/stores?category=${backendCategory}`);
-        setStores(response.data.data);  
-        setError(null);
-      } catch (err) {
-        setError('Error al cargar las tiendas. Por favor intenta nuevamente.');
-        console.error('Error fetching stores:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchStores();
-  }, [category]);
-
   const handleStoreClick = (storeId) => {
     navigate(`/store/${storeId}`);
   };
 
-  if (loading) {
+  if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
@@ -173,13 +149,13 @@ const StoreList = () => {
           </div>
         </div>
 
-        {error && (
+        {isError && (
           <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg mb-6">
             <div className="flex items-center">
               <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
               </svg>
-              {error}
+              Error al cargar las tiendas. Por favor intenta nuevamente.
             </div>
           </div>
         )}
