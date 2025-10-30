@@ -7,7 +7,10 @@ export const Hero = () => {
           alt="Delicious food background"
           className="w-full h-full object-cover"
         />
-        <div  iv className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent"></div>
+        <div
+          iv
+          className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent"
+        ></div>
       </div>
       <div className="relative max-w-7xl px-4 sm:px-6 lg:px-8 py-20 sm:py-32">
         <div className="max-w-2xl">
@@ -17,7 +20,9 @@ export const Hero = () => {
           </h1>
 
           <p className="text-xl sm:text-2xl text-neutral-light leading-relaxed mb-8 text-white">
-            Descubre una experiencia culinaria personalizada con nuestras comidas a domicilio, diseñadas para satisfacer tus necesidades dietéticas específicas y deleitar tu paladar.
+            Descubre una experiencia culinaria personalizada con nuestras
+            comidas a domicilio, diseñadas para satisfacer tus necesidades
+            dietéticas específicas y deleitar tu paladar.
           </p>
 
           <button className="bg-primary hover:bg-primary-dark text-white px-8 py-4 rounded-lg font-semibold text-lg transition-all transform hover:scale-105 shadow-lg">
