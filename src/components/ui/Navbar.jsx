@@ -142,8 +142,6 @@ export const Navbar = () => {
                 </span>
               )}
             </Link>
-
-            {/* Menú de usuario - Desktop */}
             {isAuthenticated ? (
               <div className="hidden md:block relative">
                 <button
@@ -229,8 +227,6 @@ export const Navbar = () => {
                 </svg>
               </Link>
             )}
-
-            {/* Botón hamburguesa - Mobile */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="md:hidden text-gray-600 hover:text-[#4d7b0f] transition"
@@ -260,8 +256,6 @@ export const Navbar = () => {
             </button>
           </div>
         </div>
-
-        {/* Menú móvil */}
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-gray-200">
             <Link
@@ -317,8 +311,6 @@ export const Navbar = () => {
             >
               Sobre Nosotros
             </Link>
-
-            {/* Usuario - Mobile */}
             {isAuthenticated ? (
               <div className="border-t border-gray-200 mt-2 pt-2">
                 <div className="px-2 py-2">

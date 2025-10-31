@@ -4,11 +4,11 @@ import { DietaryCategory } from "@/components/ui/DietaryCategory";
 
 const Home = () => {
   return (
-    <div className="min-h-screen bg-neutral-light">
+    <div className="min-h-screen bg-[#f8f4ef]">
       <Navbar />
       <Hero />
 
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 ">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-primary mb-4">
             Navegá por Necesidades Dietéticas
@@ -18,7 +18,7 @@ const Home = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-6">
           <DietaryCategory
             type="vegano"
             label="Vegano"
@@ -35,19 +35,9 @@ const Home = () => {
             colorClass="bg-amber-100 text-amber-700"
           />
           <DietaryCategory
-            type="sinLactosa"
-            label="Sin Lactosa"
-            colorClass="bg-blue-100 text-blue-700"
-          />
-          <DietaryCategory
             type="diabetico"
             label="Diabético"
             colorClass="bg-purple-100 text-purple-700"
-          />
-          <DietaryCategory
-            type="bajo_sodio"
-            label="Bajo en Sodio"
-            colorClass="bg-cyan-100 text-cyan-700"
           />
           <DietaryCategory
             type="kosher"
