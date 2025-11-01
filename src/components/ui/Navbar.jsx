@@ -179,9 +179,7 @@ export const Navbar = () => {
                 {isUserMenuOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-50">
                     <div className="px-4 py-2 border-b border-gray-200">
-                      <p className="text-sm font-semibold text-gray-800">
-                        {user?.name || "Usuario"}
-                      </p>
+                      <p className="text-sm font-semibold text-gray-800">{user?.name || 'Usuario'}{user?.apellido}</p>
                       <p className="text-xs text-gray-500">{user?.email}</p>
                     </div>
                     <Link
@@ -311,41 +309,35 @@ export const Navbar = () => {
             >
               Sobre Nosotros
             </Link>
-            {isAuthenticated ? (
-              <div className="border-t border-gray-200 mt-2 pt-2">
-                <div className="px-2 py-2">
-                  <p className="text-sm font-semibold text-gray-800">
-                    {user?.name || "Usuario"}
-                  </p>
-                  <p className="text-xs text-gray-500">{user?.email}</p>
-                </div>
-                <Link
-                  to="/profile"
-                  className="block py-2 text-gray-700 hover:text-[#4d7b0f] font-medium"
-                >
-                  Mi Perfil
-                </Link>
-                <Link
-                  to="/orders"
-                  className="block py-2 text-gray-700 hover:text-[#4d7b0f] font-medium"
-                >
-                  Mis Pedidos
-                </Link>
-                <button
-                  onClick={handleLogout}
-                  className="block py-2 text-red-600 hover:text-red-700 font-medium w-full text-left"
-                >
-                  Cerrar Sesión
-                </button>
-              </div>
-            ) : (
-              <Link
-                to="/login"
-                className="block py-2 text-gray-700 hover:text-[#4d7b0f] font-medium"
-              >
-                Iniciar Sesión
-              </Link>
-            )}
+           {isAuthenticated ? (
+  <div className="border-t border-gray-200 mt-2 pt-2">
+    <div className="px-2 py-2">
+      <p className="text-sm font-semibold text-gray-800">
+        {user?.name} {user?.lastname}
+      </p>
+      <p className="text-xs text-gray-500">{user?.email}</p>
+    </div>
+    <Link to="/profile" className="block py-2 text-gray-700 hover:text-[#4d7b0f] font-medium">
+      Mi Perfil
+    </Link>
+    <Link to="/orders" className="block py-2 text-gray-700 hover:text-[#4d7b0f] font-medium">
+      Mis Pedidos
+    </Link>
+    <button
+      onClick={handleLogout}
+      className="block py-2 text-red-600 hover:text-red-700 font-medium w-full text-left"
+    >
+      Cerrar Sesión
+    </button>
+  </div>
+) : (
+  <Link
+    to="/login"
+    className="block py-2 text-gray-700 hover:text-[#4d7b0f] font-medium"
+  >
+    Iniciar Sesión
+  </Link>
+)}
           </div>
         )}
       </div>

@@ -11,6 +11,7 @@ import StoreList from "./pages/StoreList";
 import StorePage from "./pages/StorePage";
 import ProductDetail from "./pages/ProductDetail";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/stores/:category" element={<StoreList />} />
           <Route path="/store/:storeId" element={<StorePage />} />

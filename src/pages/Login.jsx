@@ -28,8 +28,10 @@ const Login = () => {
     
     try {
       const data = await authAPI.login(formData);
-      dispatch(loginSuccess({ user: data.user, token: data.token }));
-      navigate('/'); // Redirigir al home
+      dispatch(loginSuccess({ 
+        user: data.data.user,
+         token: data.data.token }));
+      navigate('/'); 
     } catch (err) {
       dispatch(loginFailure(err.response?.data?.message || 'Error al iniciar sesión'));
     }
@@ -85,7 +87,7 @@ const Login = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-primary text-white py-3 rounded-md font-semibold hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-black text-white py-3 rounded-md font-semibold hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
           </button>
