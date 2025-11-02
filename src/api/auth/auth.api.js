@@ -8,6 +8,7 @@ export const authAPI = {
   },
   
   register: async (userData) => {
+      console.log("🚀 API recibe:", userData);
     const response = await apiClient.post(`/auth/register`, userData);
     return response.data;
   },

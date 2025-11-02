@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import { loginStart, loginSuccess, loginFailure } from '@/redux/slices/authSlice';
@@ -9,10 +9,17 @@ const Login = () => {
     email: '',
     password: '',
   });
-  
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading, error } = useSelector((state) => state.auth);
+  const { loading, error, isAuthenticated } = useSelector((state) => state.auth);
+
+  // Redirect if user is already authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/', { replace: true });
+    }
+  }, [isAuthenticated, navigate]);
 
   const handleChange = (e) => {
     setFormData({
@@ -28,8 +35,10 @@ const Login = () => {
     
     try {
       const data = await authAPI.login(formData);
-      dispatch(loginSuccess({ user: data.user, token: data.token }));
-      navigate('/'); // Redirigir al home
+      dispatch(loginSuccess({ 
+        user: data.data.user,
+         token: data.data.token }));
+      navigate('/'); 
     } catch (err) {
       dispatch(loginFailure(err.response?.data?.message || 'Error al iniciar sesión'));
     }
@@ -85,7 +94,7 @@ const Login = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-primary text-white py-3 rounded-md font-semibold hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-black text-white py-3 rounded-md font-semibold hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
           </button>
