@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import { loginStart, loginSuccess, loginFailure } from '@/redux/slices/authSlice';
@@ -12,12 +12,19 @@ const Register = () => {
     password: '',
     confirmPassword: '',
   });
-  
+
   const [validationErrors, setValidationErrors] = useState({});
-  
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading, error } = useSelector((state) => state.auth);
+  const { loading, error, isAuthenticated } = useSelector((state) => state.auth);
+
+  // Redirect if user is already authenticated
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/', { replace: true });
+    }
+  }, [isAuthenticated, navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -68,15 +75,15 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     const errors = validateForm();
     if (Object.keys(errors).length > 0) {
       setValidationErrors(errors);
       return;
     }
-    
+
     dispatch(loginStart());
-    
+
     try {
       const data = await authAPI.register({
         nombre: formData.name,
@@ -84,16 +91,26 @@ const Register = () => {
         email: formData.email,
         password: formData.password,
       });
-      
+
       // Tu backend devuelve { success, message, data: { user, token } }
-      dispatch(loginSuccess({ 
-        user: data.data.user, 
-        token: data.data.token 
+      dispatch(loginSuccess({
+        user: data.data.user,
+        token: data.data.token
       }));
       navigate('/');
     } catch (err) {
       const errorMessage = err.response?.data?.message || 'Error al registrarse';
-      dispatch(loginFailure(errorMessage));
+
+      // Check if error is about existing email
+      const isEmailExists = errorMessage.toLowerCase().includes('existe') ||
+                           errorMessage.toLowerCase().includes('registrado') ||
+                           errorMessage.toLowerCase().includes('ya está en uso');
+
+      if (isEmailExists) {
+        dispatch(loginFailure('Este email ya está registrado. Por favor, inicia sesión.'));
+      } else {
+        dispatch(loginFailure(errorMessage));
+      }
     }
   };
 
@@ -108,6 +125,13 @@ const Register = () => {
         {error && (
           <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
             {error}
+            {error.includes('ya está registrado') && (
+              <div className="mt-2">
+                <Link to="/login" className="font-semibold underline hover:text-red-900">
+                  Ir a inicio de sesión
+                </Link>
+              </div>
+            )}
           </div>
         )}
 

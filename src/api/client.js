@@ -35,9 +35,14 @@ apiClient.interceptors.response.use(
     if (error.response) {
       switch (error.response.status) {
         case 401:
-          // Handle unauthorized
-          localStorage.removeItem('authToken');
-          window.location.href = '/login';
+          // Solo redirigir si NO estamos en la ruta de login/register
+          // Esto permite que los errores de login se muestren correctamente
+          const isAuthRoute = window.location.pathname === "/login" ||
+                             window.location.pathname === "/register";
+          if (!isAuthRoute) {
+            localStorage.removeItem('authToken');
+            window.location.href = '/login';
+          }
           break;
         case 404:
           console.error('Resource not found');
