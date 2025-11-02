@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { logout } from "@/redux/slices/authSlice";
@@ -6,6 +6,7 @@ import { logout } from "@/redux/slices/authSlice";
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   const cartItems = useSelector((state) => state.cart.items);
   const { isAuthenticated, user } = useSelector((state) => state.auth);
@@ -20,10 +21,29 @@ export const Navbar = () => {
     navigate("/");
   };
 
+  // Detectar scroll para cambiar el color de fondo
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50">
+    <nav
+      className={`fixed top-0 w-full z-50 transition-colors duration-300 ${
+        isScrolled ? "bg-[#f8f3e7] shadow-md" : "bg-transparent"
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
+          {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
             <div className="w-10 h-10 bg-gradient-to-r from-green-300 to-emerald-400 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-xl">A</span>
@@ -31,6 +51,7 @@ export const Navbar = () => {
             <span className="font-bold text-xl text-gray-800">AppTo</span>
           </Link>
 
+          {/* Links de navegación desktop */}
           <div className="hidden md:flex items-center space-x-8">
             <Link
               to="/"
@@ -46,7 +67,7 @@ export const Navbar = () => {
             </Link>
             <div className="relative group">
               <button className="text-gray-700 hover:text-[#4d7b0f] font-medium transition flex items-center">
-                Opciones dieteticas
+                Opciones dietéticas
                 <svg
                   className="w-4 h-4 ml-1"
                   fill="none"
@@ -61,7 +82,7 @@ export const Navbar = () => {
                   />
                 </svg>
               </button>
-              <div className="absolute hidden group-hover:block w-48 bg-white shadow-lg rounded-md mt-2 py-2">
+              <div className="absolute hidden group-hover:block w-48 bg-[#f8f3e7] shadow-lg rounded-md mt-2 py-2">
                 <a
                   href="#kosher"
                   className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-[#4d7b0f]"
@@ -102,6 +123,7 @@ export const Navbar = () => {
             </Link>
           </div>
 
+          {/* Iconos derecha */}
           <div className="flex items-center space-x-4">
             <button className="hidden md:block text-gray-600 hover:text-[#4d7b0f] transition">
               <svg
@@ -142,6 +164,7 @@ export const Navbar = () => {
                 </span>
               )}
             </Link>
+
             {isAuthenticated ? (
               <div className="hidden md:block relative">
                 <button
@@ -177,9 +200,11 @@ export const Navbar = () => {
                 </button>
 
                 {isUserMenuOpen && (
-                  <div className="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-2 z-50">
+                  <div className="absolute right-0 mt-2 w-48 bg-[#f8f3e7] rounded-md shadow-lg py-2 z-50">
                     <div className="px-4 py-2 border-b border-gray-200">
-                      <p className="text-sm font-semibold text-gray-800">{user?.name}  {user?.lastname}</p>
+                      <p className="text-sm font-semibold text-gray-800">
+                        {user?.name} {user?.lastname}
+                      </p>
                       <p className="text-xs text-gray-500">{user?.email}</p>
                     </div>
                     <Link
@@ -225,6 +250,8 @@ export const Navbar = () => {
                 </svg>
               </Link>
             )}
+
+            {/* Botón menú mobile */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="md:hidden text-gray-600 hover:text-[#4d7b0f] transition"
@@ -254,8 +281,10 @@ export const Navbar = () => {
             </button>
           </div>
         </div>
+
+        {/* Menú móvil */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-200">
+          <div className="md:hidden py-4 border-t border-gray-200 bg-[#f8f3e7]">
             <Link
               to="/"
               className="block py-2 text-gray-700 hover:text-[#4d7b0f] font-medium"
@@ -309,35 +338,42 @@ export const Navbar = () => {
             >
               Sobre Nosotros
             </Link>
-           {isAuthenticated ? (
-  <div className="border-t border-gray-200 mt-2 pt-2">
-    <div className="px-2 py-2">
-      <p className="text-sm font-semibold text-gray-800">
-        {user?.name} {user?.lastname}
-      </p>
-      <p className="text-xs text-gray-500">{user?.email}</p>
-    </div>
-    <Link to="/profile" className="block py-2 text-gray-700 hover:text-[#4d7b0f] font-medium">
-      Mi Perfil
-    </Link>
-    <Link to="/orders" className="block py-2 text-gray-700 hover:text-[#4d7b0f] font-medium">
-      Mis Pedidos
-    </Link>
-    <button
-      onClick={handleLogout}
-      className="block py-2 text-red-600 hover:text-red-700 font-medium w-full text-left"
-    >
-      Cerrar Sesión
-    </button>
-  </div>
-) : (
-  <Link
-    to="/login"
-    className="block py-2 text-gray-700 hover:text-[#4d7b0f] font-medium"
-  >
-    Iniciar Sesión
-  </Link>
-)}
+
+            {isAuthenticated ? (
+              <div className="border-t border-gray-200 mt-2 pt-2">
+                <div className="px-2 py-2">
+                  <p className="text-sm font-semibold text-gray-800">
+                    {user?.name} {user?.lastname}
+                  </p>
+                  <p className="text-xs text-gray-500">{user?.email}</p>
+                </div>
+                <Link
+                  to="/profile"
+                  className="block py-2 text-gray-700 hover:text-[#4d7b0f] font-medium"
+                >
+                  Mi Perfil
+                </Link>
+                <Link
+                  to="/orders"
+                  className="block py-2 text-gray-700 hover:text-[#4d7b0f] font-medium"
+                >
+                  Mis Pedidos
+                </Link>
+                <button
+                  onClick={handleLogout}
+                  className="block py-2 text-red-600 hover:text-red-700 font-medium w-full text-left"
+                >
+                  Cerrar Sesión
+                </button>
+              </div>
+            ) : (
+              <Link
+                to="/login"
+                className="block py-2 text-gray-700 hover:text-[#4d7b0f] font-medium"
+              >
+                Iniciar Sesión
+              </Link>
+            )}
           </div>
         )}
       </div>

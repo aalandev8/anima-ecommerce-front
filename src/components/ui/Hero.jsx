@@ -15,8 +15,8 @@ export const Hero = () => {
       <div className="relative max-w-7xl px-4 sm:px-6 lg:px-8 py-20 sm:py-32">
         <div className="max-w-2xl">
           <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6">
-            Comida Deliciosa
-            <span className="text-accent"> Adaptada</span> a Tus Necesidades
+            Comida deliciosa
+            <span className="text-accent"> Adaptada</span> a tus Necesidades
           </h1>
 
           <p className="text-xl sm:text-2xl text-neutral-light leading-relaxed mb-8 text-white">

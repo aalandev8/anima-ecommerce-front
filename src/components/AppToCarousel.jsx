@@ -4,12 +4,14 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 // Slides definidos fuera del componente para no recrearlos en cada render
 const slides = [
   {
-    title: "Comida Deliciosa Adaptada a Tus Necesidades",
+    title: "Comida deliciosa Adaptada a tus Necesidades",
     subtitle:
       "Descubre una experiencia culinaria personalizada con nuestras comidas a domicilio, diseñadas para satisfacer tus necesidades dietéticas específicas y deleitar tu paladar.",
-    tags: ["Sin Gluten", "Vegano", "Sin Lactosa"],
+    tags: [],
+    isHero: true,
     image:
-      "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=1200&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=1600&h=800&fit=crop",
+    buttonText: "Ordenar Ahora",
   },
   {
     title: "Postres Sin Azúcar, Con Todo el Sabor",
@@ -17,7 +19,8 @@ const slides = [
       "Endulza tu vida de forma saludable. Nuestros postres para diabéticos y opciones bajas en azúcar te permiten disfrutar sin preocupaciones.",
     tags: ["Diabéticos", "Bajo en Azúcar", "Delicioso"],
     image:
-      "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=1200&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1646678257607-32fae49fb5ad?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1204",
+    buttonText: "Ordenar Ahora",
   },
   {
     title: "Bowls Veganos Llenos de Vida",
@@ -25,7 +28,8 @@ const slides = [
       "Nutrición completa basada en plantas. Cada bowl está diseñado para ofrecerte energía, sabor y todos los nutrientes que necesitas.",
     tags: ["100% Vegano", "Alto en Proteína", "Orgánico"],
     image:
-      "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=1200&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1511690743698-d9d85f2fbf38?ixlib=rb-4.1.0&auto=format&fit=crop&q=80&w=1200",
+    buttonText: "Ordenar Ahora",
   },
   {
     title: "Pizza Sin Gluten, Sin Compromisos",
@@ -33,7 +37,8 @@ const slides = [
       "Para celíacos que no quieren renunciar al sabor. Masa crujiente, ingredientes frescos, cero gluten.",
     tags: ["Celíaco", "Sin TACC", "Certificado"],
     image:
-      "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1200&h=600&fit=crop",
+      "https://plus.unsplash.com/premium_photo-1675103910740-533375dd3864?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1200",
+    buttonText: "Ordenar Ahora",
   },
   {
     title: "Smoothie Bowls Naturales",
@@ -41,7 +46,8 @@ const slides = [
       "Energía pura desde el desayuno. Frutas frescas, superfoods y toppings que se adaptan a tu estilo de vida saludable.",
     tags: ["Sin Lácteos", "Antioxidantes", "Energizante"],
     image:
-      "https://images.unsplash.com/photo-1590301157890-4810ed352733?w=1200&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1646343589919-3108514cb1ac?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1200",
+    buttonText: "Ordenar Ahora",
   },
   {
     title: "Proteína para Deportistas",
@@ -49,13 +55,15 @@ const slides = [
       "Comidas balanceadas diseñadas para tu rendimiento. Alto contenido proteico, bajo en grasas, sabor excepcional.",
     tags: ["Alto en Proteína", "Bajo en Grasa", "Fitness", "Halal", "Kosher"],
     image:
-      "https://images.unsplash.com/photo-1604152135912-04a022e23696?w=1200&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1532550907401-a500c9a57435?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1200",
+    buttonText: "Ordenar Ahora",
   },
 ];
 
 const AppToCarousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   // Auto-play
   useEffect(() => {
@@ -68,23 +76,33 @@ const AppToCarousel = () => {
     return () => clearInterval(interval);
   }, [isAutoPlaying]);
 
+  // Detecta el scroll para cambiar estilo del navbar
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 80);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const goToSlide = (index) => {
     setCurrentSlide(index);
-    setIsAutoPlaying(false);
+    // No detener el auto-play al hacer clic en indicadores
   };
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
-    setIsAutoPlaying(false);
+    // Mantener auto-play activo
   };
 
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-    setIsAutoPlaying(false);
+    // Mantener auto-play activo
   };
 
   return (
-    <div className="relative w-full h-screen overflow-hidden bg-gray-900">
+    <div
+      className="relative w-full h-screen overflow-hidden bg-gray-900"
+      style={{ fontFamily: "'Lato', sans-serif" }}
+    >
       {/* Slides */}
       <div className="relative w-full h-full">
         {slides.map((slide, index) => (
@@ -94,44 +112,60 @@ const AppToCarousel = () => {
               index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
             }`}
           >
-            {/* Imagen de fondo */}
+            {/* Imagen de fondo - con mejor brillo */}
             <div
               className="absolute inset-0 bg-cover bg-center brightness-90"
               style={{ backgroundImage: `url(${slide.image})`, opacity: 0.85 }}
             />
 
-            {/* Overlay beige translúcido */}
-            <div className="absolute inset-0 bg-[rgba(245,235,220,0.45)]"></div>
+            {/* Overlay beige más suave */}
+            <div
+              className={`absolute inset-0 ${
+                slide.isHero
+                  ? "bg-gradient-to-r from-black/50 via-[rgba(139,90,43,0.2)] to-transparent"
+                  : "bg-[rgba(222,196,160,0.35)]"
+              }`}
+            ></div>
 
             {/* Contenido del slide - Alineado con el navbar */}
             <div className="relative h-full flex items-center">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
                 <div className="max-w-3xl">
                   {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mb-6">
-                    {slide.tags.map((tag, i) => (
-                      <span
-                        key={i}
-                        className="px-4 py-2 bg-white/25 text-gray-900 text-sm font-semibold rounded-full border border-white/40 backdrop-blur-sm"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                  {!slide.isHero && slide.tags.length > 0 && (
+                    <div className="flex flex-wrap gap-2 mb-6">
+                      {slide.tags.map((tag, i) => (
+                        <span
+                          key={i}
+                          className="px-4 py-2 bg-white/30 text-white text-sm font-semibold rounded-full border border-white/50 backdrop-blur-sm"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                  )}
 
                   {/* Title */}
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6 leading-tight drop-shadow-md">
-                    {slide.title}
-                  </h1>
+                  {slide.isHero ? (
+                    <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6">
+                      Comida Deliciosa
+                      <span className="text-green-400"> Adaptada</span> a Tus
+                      Necesidades
+                    </h1>
+                  ) : (
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
+                      {slide.title}
+                    </h1>
+                  )}
 
                   {/* Subtitle */}
-                  <p className="text-lg md:text-xl text-gray-800/90 mb-8 leading-relaxed drop-shadow-sm">
+                  <p className="text-lg md:text-xl text-white mb-8 leading-relaxed drop-shadow-md">
                     {slide.subtitle}
                   </p>
 
                   {/* CTA Button */}
-                  <button className="px-8 py-4 bg-white text-gray-900 font-bold text-lg rounded-full hover:bg-gray-100 transition-all transform hover:scale-105 shadow-lg">
-                    Ordenar Ahora
+                  <button className="px-8 py-4 bg-[#6B7B3C] text-white font-bold text-lg rounded-full hover:bg-[#556030] transition-all transform hover:scale-105 shadow-lg">
+                    {slide.buttonText}
                   </button>
                 </div>
               </div>
@@ -146,7 +180,7 @@ const AppToCarousel = () => {
         className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 p-3 bg-white/30 hover:bg-white/50 rounded-full transition-all group"
         aria-label="Anterior"
       >
-        <ChevronLeft className="w-6 h-6 text-gray-800 group-hover:scale-110 transition-transform" />
+        <ChevronLeft className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
       </button>
 
       <button
@@ -154,7 +188,7 @@ const AppToCarousel = () => {
         className="absolute right-4 md:right-8 top-1/2 -translate-y-1/2 z-20 p-3 bg-white/30 hover:bg-white/50 rounded-full transition-all group"
         aria-label="Siguiente"
       >
-        <ChevronRight className="w-6 h-6 text-gray-800 group-hover:scale-110 transition-transform" />
+        <ChevronRight className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
       </button>
 
       {/* Indicadores (puntos) */}
@@ -165,38 +199,78 @@ const AppToCarousel = () => {
             onClick={() => goToSlide(index)}
             className={`transition-all rounded-full ${
               index === currentSlide
-                ? "w-12 h-3 bg-gray-800"
-                : "w-3 h-3 bg-gray-800/40 hover:bg-gray-800/70"
+                ? "w-12 h-3 bg-white"
+                : "w-3 h-3 bg-white/40 hover:bg-white/70"
             }`}
             aria-label={`Ir a slide ${index + 1}`}
           />
         ))}
       </div>
 
-      {/* Logo - SIN círculo verde */}
-      <div className="absolute top-6 left-4 sm:left-6 lg:left-8 z-30 max-w-7xl mx-auto">
-        <div className="flex items-center gap-3">
-          <span className="text-white font-bold text-2xl">AppTo</span>
-        </div>
-      </div>
+      {/* Navbar - con transición de scroll */}
+      <nav
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+          isScrolled ? "bg-white shadow-md" : "bg-white/20 backdrop-blur-md"
+        }`}
+      >
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            {/* Logo */}
+            <div className="flex items-center">
+              <span
+                className={`font-bold text-2xl transition-colors ${
+                  isScrolled ? "text-gray-800" : "text-white"
+                }`}
+              >
+                AppTo
+              </span>
+            </div>
 
-      {/* Navbar */}
-      <nav className="absolute top-6 right-4 sm:right-6 lg:right-8 z-30 hidden md:flex items-center gap-8 text-white font-semibold">
-        <a href="#inicio" className="hover:text-green-300 transition-colors">
-          Inicio
-        </a>
-        <a
-          href="#restaurantes"
-          className="hover:text-green-300 transition-colors"
-        >
-          Restaurantes
-        </a>
-        <a href="#opciones" className="hover:text-green-300 transition-colors">
-          Opciones Dietéticas
-        </a>
-        <a href="#nosotros" className="hover:text-green-300 transition-colors">
-          Sobre Nosotros
-        </a>
+            {/* Links */}
+            <div className="hidden md:flex items-center space-x-8">
+              <a
+                href="#inicio"
+                className={`font-medium transition ${
+                  isScrolled
+                    ? "text-gray-700 hover:text-[#4d7b0f]"
+                    : "text-white hover:text-green-200"
+                }`}
+              >
+                Inicio
+              </a>
+              <a
+                href="#restaurantes"
+                className={`font-medium transition ${
+                  isScrolled
+                    ? "text-gray-700 hover:text-[#4d7b0f]"
+                    : "text-white hover:text-green-200"
+                }`}
+              >
+                Restaurantes
+              </a>
+              <a
+                href="#opciones"
+                className={`font-medium transition ${
+                  isScrolled
+                    ? "text-gray-700 hover:text-[#4d7b0f]"
+                    : "text-white hover:text-green-200"
+                }`}
+              >
+                Opciones Dietéticas
+              </a>
+              <a
+                href="#nosotros"
+                className={`font-medium transition ${
+                  isScrolled
+                    ? "text-gray-700 hover:text-[#4d7b0f]"
+                    : "text-white hover:text-green-200"
+                }`}
+              >
+                Sobre Nosotros
+              </a>
+            </div>
+          </div>
+        </div>
       </nav>
     </div>
   );

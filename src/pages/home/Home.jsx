@@ -1,14 +1,15 @@
 import { Navbar } from "@/components/ui/Navbar";
-import { Hero } from "@/components/ui/Hero";
 import { DietaryCategory } from "@/components/ui/DietaryCategory";
+import AppToCarousel from "@/components/AppToCarousel";
 
 const Home = () => {
   return (
     <div className="min-h-screen bg-[#f8f4ef]">
-      <Navbar />
-      <Hero />
+      {/* Solo el Carousel - ya incluye el navbar dentro */}
+      <AppToCarousel />
 
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 ">
+      {/* Sección de Categorías Dietéticas */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-primary mb-4">
             Navegá por Necesidades Dietéticas
@@ -52,6 +53,7 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Sección Cómo Funciona */}
       <section className="bg-neutral-cream py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
@@ -64,6 +66,7 @@ const Home = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
+            {/* Paso 1 */}
             <div className="text-center">
               <div className="w-20 h-20 bg-secondary-light rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg
@@ -89,6 +92,7 @@ const Home = () => {
               </p>
             </div>
 
+            {/* Paso 2 */}
             <div className="text-center">
               <div className="w-20 h-20 bg-secondary-light rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg
@@ -114,6 +118,7 @@ const Home = () => {
               </p>
             </div>
 
+            {/* Paso 3 */}
             <div className="text-center">
               <div className="w-20 h-20 bg-secondary-light rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg
