@@ -1,12 +1,12 @@
-import { useNavigate } from 'react-router-dom';
-import VeganLogo from './Icons/VeganLogo.svg';
-import KosherLogo from './Icons/KosherLogo.png';
-import VegetarianLogo from './Icons/VegetarianLogo.png';
-import HalalLogo from './Icons/HalalLogo.png';
-import GlutenFreeLogo from './Icons/GlutenFree.webp';
-import DiabetesLogo from './Icons/DiabetesLogo.png';
-import BajoEnSodioLogo from './Icons/BajoEnSodio.jpg';
-import LactoseFreeLogo from './Icons/LactoseFree.jpg';
+import { useNavigate } from "react-router-dom";
+import VeganLogo from "./Icons/VeganLogo.svg";
+import KosherLogo from "./Icons/KosherLogo.png";
+import VegetarianLogo from "./Icons/VegetarianLogo.png";
+import HalalLogo from "./Icons/HalalLogo.png";
+import GlutenFreeLogo from "./Icons/GlutenFree.webp";
+import DiabetesLogo from "./Icons/DiabetesLogo.png";
+import BajoEnSodioLogo from "./Icons/BajoEnSodio.jpg";
+import LactoseFreeLogo from "./Icons/LactoseFree.jpg";
 
 const dietaryLogos = {
   vegano: VeganLogo,
@@ -29,7 +29,7 @@ export const DietaryCategory = ({ type, label }) => {
   return (
     <div
       onClick={handleClick}
-      className="relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer group border-2 border-transparent hover:border-secondary overflow-hidden"
+      className="relative bg-[#6B7B3C] to-transparent opacity-95 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer group border-2 border-transparent hover:border-secondary overflow-hidden"
     >
       {/* Gradient background overlay on hover */}
       <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -42,7 +42,9 @@ export const DietaryCategory = ({ type, label }) => {
             className="w-full h-full object-contain p-2"
           />
         </div>
-        <h3 className="font-bold text-lg text-center text-primary group-hover:text-secondary transition-colors duration-300">{label}</h3>
+        <h3 className="font-bold text-lg text-center text-primary group-hover:text-secondary transition-colors duration-300">
+          {label}
+        </h3>
       </div>
 
       {/* Decorative corner accent */}

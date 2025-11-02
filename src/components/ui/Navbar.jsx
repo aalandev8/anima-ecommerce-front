@@ -7,6 +7,8 @@ export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
+  let categoriesTimeout = null;
 
   const cartItems = useSelector((state) => state.cart.items);
   const { isAuthenticated, user } = useSelector((state) => state.auth);
@@ -20,6 +22,9 @@ export const Navbar = () => {
     setIsUserMenuOpen(false);
     navigate("/");
   };
+
+  const classCategory =
+    "block px-4 py-2 text-gray-700 border-b border-gray-200 hover:bg-green-50 hover:text-[#4d7b0f]";
 
   // Detectar scroll para cambiar el color de fondo
   useEffect(() => {
@@ -37,37 +42,39 @@ export const Navbar = () => {
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition-colors duration-300 ${
-        isScrolled ? "bg-[#f8f3e7] shadow-md" : "bg-transparent"
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+        isScrolled ? "bg-white shadow-md" : "bg-white/20 backdrop-blur-md"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-gradient-to-r from-green-300 to-emerald-400 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-xl">A</span>
-            </div>
-            <span className="font-bold text-xl text-gray-800">AppTo</span>
-          </Link>
+          <div className="flex items-center">
+            <span
+              className={`font-bold text-2xl transition-colors ${
+                isScrolled ? "text-gray-800" : "text-white"
+              }`}
+            >
+              AppTo
+            </span>
+          </div>
 
           {/* Links de navegación desktop */}
-          <div className="hidden md:flex items-center space-x-8">
-            <Link
-              to="/"
-              className="text-gray-700 hover:text-[#4d7b0f] font-medium transition"
+          <div className="flex items-center space-x-8">
+            <div
+              className="relative"
+              onMouseEnter={() => {
+                clearTimeout(categoriesTimeout);
+                setIsCategoriesOpen(true);
+              }}
+              onMouseLeave={() => {
+                categoriesTimeout = setTimeout(() => {
+                  setIsCategoriesOpen(false);
+                }, 300);
+              }}
             >
-              Inicio
-            </Link>
-            <Link
-              to="/menu"
-              className="text-gray-700 hover:text-[#4d7b0f] font-medium transition"
-            >
-              Restaurantes
-            </Link>
-            <div className="relative group">
-              <button className="text-gray-700 hover:text-[#4d7b0f] font-medium transition flex items-center">
-                Opciones dietéticas
+              <button className="text-white hover:text-[#4d7b0f] font-medium transition flex items-center">
+                Categorías
                 <svg
                   className="w-4 h-4 ml-1"
                   fill="none"
@@ -82,42 +89,34 @@ export const Navbar = () => {
                   />
                 </svg>
               </button>
-              <div className="absolute hidden group-hover:block w-48 bg-[#f8f3e7] shadow-lg rounded-md mt-2 py-2">
-                <a
-                  href="#kosher"
-                  className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-[#4d7b0f]"
-                >
-                  Kosher
-                </a>
-                <a
-                  href="#diabetic"
-                  className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-[#4d7b0f]"
-                >
-                  Diabetic-Friendly
-                </a>
-                <a
-                  href="#celiac"
-                  className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-[#4d7b0f]"
-                >
-                  Gluten-Free
-                </a>
-                <a
-                  href="#vegan"
-                  className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-[#4d7b0f]"
-                >
-                  Vegan
-                </a>
-                <a
-                  href="#halal"
-                  className="block px-4 py-2 text-gray-700 hover:bg-green-50 hover:text-[#4d7b0f]"
-                >
-                  Halal
-                </a>
-              </div>
+
+              {isCategoriesOpen && (
+                <div className="absolute w-48 bg-[#f8f3e7] shadow-lg rounded-md mt-2 py-2 z-10">
+                  <a href="#kosher" className={classCategory}>
+                    Kosher
+                  </a>
+                  <a href="#diabetic" className={classCategory}>
+                    Diabetic-Friendly
+                  </a>
+                  <a href="#celiac" className={classCategory}>
+                    Gluten-Free
+                  </a>
+                  <a href="#vegan" className={classCategory}>
+                    Vegan
+                  </a>
+                  <a href="#halal" className={classCategory}>
+                    Halal
+                  </a>
+                </div>
+              )}
             </div>
             <Link
               to="/about"
-              className="text-gray-700 hover:text-[#4d7b0f] font-medium transition"
+              className={`font-medium transition ${
+                isScrolled
+                  ? "text-gray-700 hover:text-[#4d7b0f]"
+                  : "text-white hover:text-green-200"
+              }`}
             >
               Sobre Nosotros
             </Link>
@@ -125,7 +124,13 @@ export const Navbar = () => {
 
           {/* Iconos derecha */}
           <div className="flex items-center space-x-4">
-            <button className="hidden md:block text-gray-600 hover:text-[#4d7b0f] transition">
+            <button
+              className={`font-medium transition ${
+                isScrolled
+                  ? "text-gray-700 hover:text-[#4d7b0f]"
+                  : "text-white hover:text-green-200"
+              }`}
+            >
               <svg
                 className="w-6 h-6"
                 fill="none"
@@ -143,7 +148,11 @@ export const Navbar = () => {
 
             <Link
               to="/cart"
-              className="relative text-gray-600 hover:text-[#4d7b0f] transition"
+              className={`font-medium transition ${
+                isScrolled
+                  ? "text-gray-700 hover:text-[#4d7b0f]"
+                  : "text-white hover:text-green-200"
+              }`}
             >
               <svg
                 className="w-6 h-6"
@@ -166,10 +175,10 @@ export const Navbar = () => {
             </Link>
 
             {isAuthenticated ? (
-              <div className="hidden md:block relative">
+              <div className="relative">
                 <button
                   onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                  className="flex items-center space-x-2 text-gray-600 hover:text-[#4d7b0f] transition"
+                  className="flex items-center space-x-2 text-white hover:text-[#4d7b0f] transition"
                 >
                   <svg
                     className="w-6 h-6"
@@ -233,7 +242,7 @@ export const Navbar = () => {
             ) : (
               <Link
                 to="/login"
-                className="hidden md:block text-gray-600 hover:text-[#4d7b0f] transition"
+                className="text-gray-600 hover:text-[#4d7b0f] transition"
               >
                 <svg
                   className="w-6 h-6"

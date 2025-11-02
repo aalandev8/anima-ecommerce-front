@@ -62,8 +62,8 @@ const slides = [
 
 const AppToCarousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const [isAutoPlaying] = useState(true);
+  const [/**isScrolled*/, setIsScrolled] = useState(false);
 
   // Auto-play
   useEffect(() => {
@@ -208,14 +208,13 @@ const AppToCarousel = () => {
       </div>
 
       {/* Navbar - con transición de scroll */}
-      <nav
+      {/* <nav
         className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
           isScrolled ? "bg-white shadow-md" : "bg-white/20 backdrop-blur-md"
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            {/* Logo */}
             <div className="flex items-center">
               <span
                 className={`font-bold text-2xl transition-colors ${
@@ -226,7 +225,6 @@ const AppToCarousel = () => {
               </span>
             </div>
 
-            {/* Links */}
             <div className="hidden md:flex items-center space-x-8">
               <a
                 href="#inicio"
@@ -271,7 +269,7 @@ const AppToCarousel = () => {
             </div>
           </div>
         </div>
-      </nav>
+      </nav> */}
     </div>
   );
 };
