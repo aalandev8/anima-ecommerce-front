@@ -86,8 +86,8 @@ const Register = () => {
 
     try {
       const data = await authAPI.register({
-        nombre: formData.name,
-        apellido: formData.lastname,
+        name: formData.name,
+        lastname: formData.lastname,
         email: formData.email,
         password: formData.password,
       });
