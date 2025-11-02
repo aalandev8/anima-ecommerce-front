@@ -19,7 +19,7 @@ const Register = () => {
   const navigate = useNavigate();
   const { loading, error, isAuthenticated } = useSelector((state) => state.auth);
 
-  // Redirect if user is already authenticated
+ 
   useEffect(() => {
     if (isAuthenticated) {
       navigate('/', { replace: true });
