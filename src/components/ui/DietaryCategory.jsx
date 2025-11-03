@@ -5,8 +5,6 @@ import VegetarianLogo from "./Icons/VegetarianLogo.png";
 import HalalLogo from "./Icons/HalalLogo.png";
 import GlutenFreeLogo from "./Icons/GlutenFree.webp";
 import DiabetesLogo from "./Icons/DiabetesLogo.png";
-import BajoEnSodioLogo from "./Icons/BajoEnSodio.jpg";
-import LactoseFreeLogo from "./Icons/LactoseFree.jpg";
 
 const dietaryLogos = {
   vegano: VeganLogo,
@@ -15,8 +13,6 @@ const dietaryLogos = {
   halal: HalalLogo,
   sinGluten: GlutenFreeLogo,
   diabetico: DiabetesLogo,
-  bajo_sodio: BajoEnSodioLogo,
-  sinLactosa: LactoseFreeLogo,
 };
 
 export const DietaryCategory = ({ type, label }) => {

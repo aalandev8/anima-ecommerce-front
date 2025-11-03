@@ -10,10 +10,8 @@ export const apiClient = axios.create({
   },
 });
 
-// Request interceptor
 apiClient.interceptors.request.use(
   (config) => {
-    // Add auth token if available
     const token = localStorage.getItem('authToken');
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
@@ -25,25 +23,24 @@ apiClient.interceptors.request.use(
   }
 );
 
-// Response interceptor
+
 apiClient.interceptors.response.use(
   (response) => {
     return response;
   },
   (error) => {
-    // Handle common error scenarios
     if (error.response) {
       switch (error.response.status) {
         case 401:
           // Solo redirigir si NO estamos en la ruta de login/register
           // Esto permite que los errores de login se muestren correctamente
-          const isAuthRoute = window.location.pathname === "/login" ||
+          { const isAuthRoute = window.location.pathname === "/login" ||
                              window.location.pathname === "/register";
           if (!isAuthRoute) {
             localStorage.removeItem('authToken');
             window.location.href = '/login';
           }
-          break;
+          break; }
         case 404:
           console.error('Resource not found');
           break;

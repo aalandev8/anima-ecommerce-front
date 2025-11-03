@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { logout } from "@/redux/slices/authSlice";
 
 export const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  // const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
@@ -25,6 +25,11 @@ export const Navbar = () => {
 
   const classCategory =
     "block px-4 py-2 text-gray-700 border-b border-gray-200 hover:bg-green-50 hover:text-[#4d7b0f]";
+  const classScrolled = `font-medium flex transition ${
+    isScrolled
+      ? "text-gray-700 hover:text-[#4d7b0f]"
+      : "text-white hover:text-green-200"
+  }`;
 
   // Detectar scroll para cambiar el color de fondo
   useEffect(() => {
@@ -35,7 +40,6 @@ export const Navbar = () => {
         setIsScrolled(false);
       }
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -48,7 +52,6 @@ export const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
           <div className="flex items-center">
             <span
               className={`font-bold text-2xl transition-colors ${
@@ -73,10 +76,10 @@ export const Navbar = () => {
                 }, 300);
               }}
             >
-              <button className="text-white hover:text-[#4d7b0f] font-medium transition flex items-center">
+              <button className={classScrolled}>
                 Categorías
                 <svg
-                  className="w-4 h-4 ml-1"
+                  className="w-4 h-4 ml-1 mt-1"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -110,27 +113,14 @@ export const Navbar = () => {
                 </div>
               )}
             </div>
-            <Link
-              to="/about"
-              className={`font-medium transition ${
-                isScrolled
-                  ? "text-gray-700 hover:text-[#4d7b0f]"
-                  : "text-white hover:text-green-200"
-              }`}
-            >
+            <Link to="/about" className={classScrolled}>
               Sobre Nosotros
             </Link>
           </div>
 
           {/* Iconos derecha */}
           <div className="flex items-center space-x-4">
-            <button
-              className={`font-medium transition ${
-                isScrolled
-                  ? "text-gray-700 hover:text-[#4d7b0f]"
-                  : "text-white hover:text-green-200"
-              }`}
-            >
+            <button className={classScrolled}>
               <svg
                 className="w-6 h-6"
                 fill="none"
@@ -146,14 +136,7 @@ export const Navbar = () => {
               </svg>
             </button>
 
-            <Link
-              to="/cart"
-              className={`font-medium transition ${
-                isScrolled
-                  ? "text-gray-700 hover:text-[#4d7b0f]"
-                  : "text-white hover:text-green-200"
-              }`}
-            >
+            <Link to="/cart" className={classScrolled}>
               <svg
                 className="w-6 h-6"
                 fill="none"
@@ -178,7 +161,7 @@ export const Navbar = () => {
               <div className="relative">
                 <button
                   onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                  className="flex items-center space-x-2 text-white hover:text-[#4d7b0f] transition"
+                  className={classScrolled}
                 >
                   <svg
                     className="w-6 h-6"
@@ -194,7 +177,7 @@ export const Navbar = () => {
                     />
                   </svg>
                   <svg
-                    className="w-4 h-4"
+                    className="w-4 mt-1 h-4"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -240,10 +223,7 @@ export const Navbar = () => {
                 )}
               </div>
             ) : (
-              <Link
-                to="/login"
-                className="text-gray-600 hover:text-[#4d7b0f] transition"
-              >
+              <Link to="/login" className={classScrolled}>
                 <svg
                   className="w-6 h-6"
                   fill="none"
@@ -261,7 +241,7 @@ export const Navbar = () => {
             )}
 
             {/* Botón menú mobile */}
-            <button
+            {/* <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="md:hidden text-gray-600 hover:text-[#4d7b0f] transition"
             >
@@ -287,12 +267,12 @@ export const Navbar = () => {
                   />
                 )}
               </svg>
-            </button>
+            </button> */}
           </div>
         </div>
 
         {/* Menú móvil */}
-        {isMenuOpen && (
+        {/* {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-gray-200 bg-[#f8f3e7]">
             <Link
               to="/"
@@ -384,7 +364,7 @@ export const Navbar = () => {
               </Link>
             )}
           </div>
-        )}
+        )} */}
       </div>
     </nav>
   );

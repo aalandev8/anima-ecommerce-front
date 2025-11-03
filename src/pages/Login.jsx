@@ -1,23 +1,28 @@
-import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, Link } from 'react-router-dom';
-import { loginStart, loginSuccess, loginFailure } from '@/redux/slices/authSlice';
-import { authAPI } from '@/api/auth';
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, Link } from "react-router-dom";
+import {
+  loginStart,
+  loginSuccess,
+  loginFailure,
+} from "@/redux/slices/authSlice";
+import { authAPI } from "@/api/auth";
 
 const Login = () => {
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
+    email: "",
+    password: "",
   });
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { loading, error, isAuthenticated } = useSelector((state) => state.auth);
-
+  const { loading, error, isAuthenticated } = useSelector(
+    (state) => state.auth
+  );
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate('/', { replace: true });
+      navigate("/", { replace: true });
     }
   }, [isAuthenticated, navigate]);
 
@@ -30,17 +35,22 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     dispatch(loginStart());
-    
+
     try {
       const data = await authAPI.login(formData);
-      dispatch(loginSuccess({ 
-        user: data.data.user,
-         token: data.data.token }));
-      navigate('/'); 
+      dispatch(
+        loginSuccess({
+          user: data.data.user,
+          token: data.data.token,
+        })
+      );
+      navigate("/");
     } catch (err) {
-      dispatch(loginFailure(err.response?.data?.message || 'Error al iniciar sesión'));
+      dispatch(
+        loginFailure(err.response?.data?.message || "Error al iniciar sesión")
+      );
     }
   };
 
@@ -60,7 +70,10 @@ const Login = () => {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-neutral-dark mb-2">
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium text-neutral-dark mb-2"
+            >
               Email
             </label>
             <input
@@ -76,7 +89,10 @@ const Login = () => {
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-neutral-dark mb-2">
+            <label
+              htmlFor="password"
+              className="block text-sm font-medium text-neutral-dark mb-2"
+            >
               Contraseña
             </label>
             <input
@@ -94,16 +110,19 @@ const Login = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-black text-white py-3 rounded-md font-semibold hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-[#4d7b0f] text-white py-3 rounded-md font-semibold hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {loading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
+            {loading ? "Iniciando sesión..." : "Iniciar Sesión"}
           </button>
         </form>
 
         <div className="mt-6 text-center">
           <p className="text-neutral-dark">
-            ¿No tenés cuenta?{' '}
-            <Link to="/register" className="text-primary font-semibold hover:underline">
+            ¿No tenés cuenta?{" "}
+            <Link
+              to="/register"
+              className="text-[#4d7b0f] font-semibold hover:underline"
+            >
               Registrate aquí
             </Link>
           </p>
