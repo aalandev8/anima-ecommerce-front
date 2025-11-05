@@ -23,8 +23,8 @@ export const ProductList = ({ products, onAddToCart, isLoading, storeId }) => {
   }
 
   return (
-    <div className="px-6 py-8">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="px-10 py-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-15">
         {products.map((product) => (
           <CardProduct
             key={product.id}

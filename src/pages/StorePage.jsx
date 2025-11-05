@@ -72,7 +72,7 @@ const StorePage = () => {
 
   if (isError || !store) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen  bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <div className="bg-red-50 border border-red-200 text-red-800 px-6 py-4 rounded-lg mb-4">
             Error al cargar la tienda. Por favor intenta nuevamente.
@@ -89,7 +89,7 @@ const StorePage = () => {
   }
 
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <div className="flex min-h-screen bg-white">
       <div className="flex-1">
         <StoreHeader store={store} />
 
@@ -108,8 +108,11 @@ const StorePage = () => {
           storeId={storeId}
         />
       </div>
-
-      <OrderSidebar />
+      <div className="h-screen">
+        <div className="border-l border-gray-700 ">
+          <OrderSidebar />
+        </div>
+      </div>
     </div>
   );
 };

@@ -10,7 +10,7 @@ export const OrderSidebar = () => {
   } = useCart();
 
   return (
-    <div className="w-96 bg-white border-l border-gray-200 h-screen sticky top-0 flex flex-col">
+    <div className="w-96 bg-white border-l border-gray-200 object-center sticky top-0 flex flex-col">
       <div className="p-6 border-b border-gray-200">
         <h2 className="text-2xl font-bold">Mi Pedido</h2>
       </div>
