@@ -61,3 +61,13 @@ export const categoryConfig = {
     colorClass: "bg-rose-100 text-rose-700",
   },
 };
+
+
+export const DIETARY_CATEGORIES = [
+  { type: "vegano", label: "Vegano" },
+  { type: "vegetariano", label: "Vegetariano" },
+  { type: "sinGluten", label: "Sin Gluten" },
+  { type: "diabetico", label: "Diabético" },
+  { type: "kosher", label: "Kosher" },
+  { type: "halal", label: "Halal" },
+];

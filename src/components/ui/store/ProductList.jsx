@@ -1,4 +1,4 @@
-import { CardProduct } from "@/components/products/CardProduct";
+import { CardProduct } from "../products/CardProduct";
 
 export const ProductList = ({ products, onAddToCart, isLoading, storeId }) => {
   if (isLoading) {
@@ -38,4 +38,3 @@ export const ProductList = ({ products, onAddToCart, isLoading, storeId }) => {
     </div>
   );
 };
-

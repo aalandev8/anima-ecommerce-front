@@ -1,12 +1,18 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import { removeFromCart, updateQuantity, clearCart } from '@/redux/slices/cartSlice';
+import { useSelector, useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  removeFromCart,
+  updateQuantity,
+  clearCart,
+} from "@/redux/slices/cartSlice";
 
 const Cart = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
-  const { items, totalQuantity, totalPrice } = useSelector((state) => state.cart);
+
+  const { items, totalQuantity, totalPrice } = useSelector(
+    (state) => state.cart
+  );
 
   const handleRemoveItem = (id) => {
     dispatch(removeFromCart(id));
@@ -23,20 +29,19 @@ const Cart = () => {
   };
 
   const handleClearCart = () => {
-    if (window.confirm('¿Estás seguro de que querés vaciar el carrito?')) {
+    if (window.confirm("¿Estás seguro de que querés vaciar el carrito?")) {
       dispatch(clearCart());
     }
   };
 
   const handleCheckout = () => {
-    navigate('/checkout');
+    navigate("/checkout");
   };
 
-const handleGoToRestaurants = () => {
-  navigate('/');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-};
-
+  const handleGoToRestaurants = () => {
+    navigate("/");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   if (items.length === 0) {
     return (
@@ -65,25 +70,25 @@ const handleGoToRestaurants = () => {
               <p className="text-gray-600 mb-8">
                 ¡Agregá productos para comenzar tu pedido!
               </p>
-             <button
-  onClick={handleGoToRestaurants}
-  className="inline-flex items-center gap-2 bg-[#4d7b0f] text-white px-6 py-3 rounded-md font-semibold hover:bg-[#3d6108] transition-colors"
->
-  <svg
-    className="w-5 h-5"
-    fill="none"
-    stroke="currentColor"
-    viewBox="0 0 24 24"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={2}
-      d="M15 19l-7-7 7-7"
-    />
-  </svg>
-  Ver Restaurantes
-</button>
+              <button
+                onClick={handleGoToRestaurants}
+                className="inline-flex items-center gap-2 bg-[#4d7b0f] text-white px-6 py-3 rounded-md font-semibold hover:bg-[#3d6108] transition-colors"
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M15 19l-7-7 7-7"
+                  />
+                </svg>
+                Ver Restaurantes
+              </button>
             </div>
           </div>
         </div>
@@ -98,9 +103,11 @@ const handleGoToRestaurants = () => {
           {/* Header */}
           <div className="flex items-center justify-between mb-8">
             <div>
-              <h1 className="text-3xl font-bold text-gray-800">Carrito de Compras</h1>
+              <h1 className="text-3xl font-bold text-gray-800">
+                Carrito de Compras
+              </h1>
               <p className="text-gray-600 mt-1">
-                {totalQuantity} {totalQuantity === 1 ? 'producto' : 'productos'}
+                {totalQuantity} {totalQuantity === 1 ? "producto" : "productos"}
               </p>
             </div>
             <button
@@ -136,13 +143,13 @@ const handleGoToRestaurants = () => {
                     {/* Product Image */}
                     <div className="w-24 h-24 flex-shrink-0 bg-gray-100 rounded-md overflow-hidden">
                       <img
-                        src={item.image || '/placeholder-product.jpg'}
+                        src={item.image || "/placeholder-product.jpg"}
                         alt={item.name}
                         className="w-full h-full object-cover"
                       />
                     </div>
 
-                    {/* Product Info */}
+                    
                     <div className="flex-1">
                       <div className="flex justify-between items-start mb-2">
                         <div>
@@ -179,7 +186,9 @@ const handleGoToRestaurants = () => {
                       <div className="flex items-center justify-between mt-4">
                         <div className="flex items-center gap-2 bg-gray-100 rounded-lg p-1">
                           <button
-                            onClick={() => handleDecrement(item.id, item.quantity)}
+                            onClick={() =>
+                              handleDecrement(item.id, item.quantity)
+                            }
                             disabled={item.quantity <= 1}
                             className="w-8 h-8 rounded-md bg-white flex items-center justify-center hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                             aria-label="Disminuir cantidad"
@@ -190,7 +199,9 @@ const handleGoToRestaurants = () => {
                             {item.quantity}
                           </span>
                           <button
-                            onClick={() => handleIncrement(item.id, item.quantity)}
+                            onClick={() =>
+                              handleIncrement(item.id, item.quantity)
+                            }
                             className="w-8 h-8 rounded-md bg-white flex items-center justify-center hover:bg-gray-50 transition-colors"
                             aria-label="Aumentar cantidad"
                           >
@@ -206,7 +217,7 @@ const handleGoToRestaurants = () => {
                 </div>
               ))}
 
-              {/* Clear Cart Button */}
+            
               <button
                 onClick={handleClearCart}
                 className="w-full text-red-600 hover:text-red-700 font-semibold py-3 transition-colors"
@@ -215,7 +226,6 @@ const handleGoToRestaurants = () => {
               </button>
             </div>
 
-            {/* Order Summary */}
             <div className="lg:col-span-1">
               <div className="bg-white rounded-lg shadow-md p-6 sticky top-20">
                 <h2 className="text-xl font-bold text-gray-800 mb-4">
@@ -233,7 +243,9 @@ const handleGoToRestaurants = () => {
                   </div>
                   <div className="border-t pt-3 flex justify-between text-xl font-bold text-gray-800">
                     <span>Total</span>
-                    <span className="text-[#4d7b0f]">${Number(totalPrice).toFixed(2)}</span>
+                    <span className="text-[#4d7b0f]">
+                      ${Number(totalPrice).toFixed(2)}
+                    </span>
                   </div>
                 </div>
 
@@ -245,13 +257,12 @@ const handleGoToRestaurants = () => {
                 </button>
 
                 <Link
-             to="/"  
-           className="block text-center text-[#4d7b0f] hover:underline font-semibold"
-                   >
-                 Continuar Comprando
-                 </Link>s
+                  to="/"
+                  className="block text-center text-[#4d7b0f] hover:underline font-semibold"
+                >
+                  Continuar Comprando
+                </Link>
 
-                {/* Additional Info */}
                 <div className="mt-6 pt-6 border-t space-y-3">
                   <div className="flex items-start gap-2 text-sm text-gray-600">
                     <svg

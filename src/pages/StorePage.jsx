@@ -3,10 +3,10 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useStore } from "@/api/stores";
 import { useProductsByStore } from "@/api/products";
-import { StoreHeader } from "@/components/store/StoreHeader";
-import { CategoryTabs }from "@/components/store/CategoryTabs";
-import { ProductList } from "@/components/store/ProductList";
-import { OrderSidebar }  from "@/components/cart/OrderSidebar";
+import { StoreHeader } from "@/components/ui/store/StoreHeader";
+import { CategoryTabs } from "@/components/ui/store/CategoryTabs";
+import { ProductList } from "@/components/ui/store/ProductList";
+import { OrderSidebar } from "../components/ui/cart/OrderSidebar";
 import { addToCart } from "../redux/slices/cartSlice";
 
 const StorePage = () => {
@@ -15,11 +15,22 @@ const StorePage = () => {
   const dispatch = useDispatch();
   const [activeCategory, setActiveCategory] = useState(null);
 
-  const { data: storeData, isLoading: isLoadingStore, isError: isStoreError } = useStore(storeId);
-  const { data: productsData = [], isLoading: isLoadingProducts, isError: isProductsError } = useProductsByStore(storeId);
+  const {
+    data: storeData,
+    isLoading: isLoadingStore,
+    isError: isStoreError,
+  } = useStore(storeId);
+  const {
+    data: productsData = [],
+    isLoading: isLoadingProducts,
+    isError: isProductsError,
+  } = useProductsByStore(storeId);
 
   const store = storeData?.data;
-  const products = Array.isArray(productsData) ? productsData : [];
+  const products = useMemo(
+    () => (Array.isArray(productsData) ? productsData : []),
+    [productsData]
+  );
   const isLoading = isLoadingStore || isLoadingProducts;
   const isError = isStoreError || isProductsError;
 

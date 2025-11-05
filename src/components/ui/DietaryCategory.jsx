@@ -1,19 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import VeganLogo from "./Icons/VeganLogo.svg";
-import KosherLogo from "./Icons/KosherLogo.png";
-import VegetarianLogo from "./Icons/VegetarianLogo.png";
-import HalalLogo from "./Icons/HalalLogo.png";
-import GlutenFreeLogo from "./Icons/GlutenFree.webp";
-import DiabetesLogo from "./Icons/DiabetesLogo.png";
-
-const dietaryLogos = {
-  vegano: VeganLogo,
-  kosher: KosherLogo,
-  vegetariano: VegetarianLogo,
-  halal: HalalLogo,
-  sinGluten: GlutenFreeLogo,
-  diabetico: DiabetesLogo,
-};
+import { dietaryLogos } from "../../constants/categories";
 
 export const DietaryCategory = ({ type, label }) => {
   const navigate = useNavigate();
@@ -27,7 +13,6 @@ export const DietaryCategory = ({ type, label }) => {
       onClick={handleClick}
       className="relative bg-[#6B7B3C] to-transparent opacity-95 rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer group border-2 border-transparent hover:border-secondary overflow-hidden"
     >
-      {/* Gradient background overlay on hover */}
       <div className="absolute inset-0 bg-gradient-to-br from-secondary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
       <div className="relative z-10">
@@ -42,8 +27,6 @@ export const DietaryCategory = ({ type, label }) => {
           {label}
         </h3>
       </div>
-
-      {/* Decorative corner accent */}
       <div className="absolute top-0 right-0 w-16 h-16 bg-secondary/10 rounded-bl-full transform translate-x-8 -translate-y-8 group-hover:translate-x-6 group-hover:-translate-y-6 transition-transform duration-300" />
     </div>
   );

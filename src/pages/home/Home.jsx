@@ -5,7 +5,7 @@ import AppToCarousel from "@/components/AppToCarousel";
 const Home = () => {
   return (
     <div className="min-h-screen bg-[#f8f4ef]">
-      {/* Solo el Carousel - ya incluye el navbar dentro */}
+    
       <Navbar />
       <AppToCarousel />
 
