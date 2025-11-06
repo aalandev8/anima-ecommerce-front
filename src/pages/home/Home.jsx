@@ -4,8 +4,7 @@ import AppToCarousel from "@/components/AppToCarousel";
 
 const Home = () => {
   return (
-    <div className="min-h-screen bg-[#f8f4ef]">
-    
+    <div className="min-h-screen bg-[#FCF4E8]">
       <Navbar />
       <AppToCarousel />
 

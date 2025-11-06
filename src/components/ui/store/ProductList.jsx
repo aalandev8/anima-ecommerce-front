@@ -1,6 +1,11 @@
 import { CardProduct } from "../products/CardProduct";
 
-export const ProductList = ({ products, onAddToCart, isLoading, storeId }) => {
+export const ProductList = ({
+  products,
+  onAddToCart,
+  isLoading,
+  onProductClick,
+}) => {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center py-20">
@@ -30,8 +35,8 @@ export const ProductList = ({ products, onAddToCart, isLoading, storeId }) => {
             key={product.id}
             product={product}
             onAddToCart={onAddToCart}
-            storeId={storeId}
             showBadge={product.isBestSeller || product.featured}
+            onProductClick={onProductClick}
           />
         ))}
       </div>

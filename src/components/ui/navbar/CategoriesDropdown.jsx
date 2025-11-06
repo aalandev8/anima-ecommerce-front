@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { Link } from "react-router-dom";  
+import { Link } from "react-router-dom";
 import { DIETARY_CATEGORIES } from "@/constants/categories";
 
 export const CategoriesDropdown = ({
@@ -21,7 +21,7 @@ export const CategoriesDropdown = ({
 
   const classScrolled = `font-medium flex transition ${
     isScrolled
-      ? "text-gray-700 hover:text-[#4d7b0f]"
+      ? "text-gray-300 hover:text-gray-800"
       : "text-white hover:text-green-200"
   }`;
 

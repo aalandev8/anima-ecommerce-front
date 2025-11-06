@@ -33,7 +33,7 @@ export const Navbar = () => {
 
   const classScrolled = `font-medium flex transition ${
     isScrolled
-      ? "text-gray-700 hover:text-[#4d7b0f]"
+      ? "text-gray-300 hover:text-gray-800"
       : "text-white hover:text-green-200"
   }`;
 
@@ -62,7 +62,9 @@ export const Navbar = () => {
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
-        isScrolled ? "bg-white shadow-md" : "bg-white/20 backdrop-blur-md"
+        isScrolled
+          ? "bg-[#556030]/80 backdrop-blur-md shadow-md"
+          : "bg-white/20 backdrop-blur-md"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -8,12 +8,15 @@ import { CategoryTabs } from "@/components/ui/store/CategoryTabs";
 import { ProductList } from "@/components/ui/store/ProductList";
 import { OrderSidebar } from "../components/ui/cart/OrderSidebar";
 import { addToCart } from "../redux/slices/cartSlice";
+import { Modal } from "@/components/ui/Modal";
+import { ProductModal } from "./ProductModal";
 
 const StorePage = () => {
   const { storeId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [activeCategory, setActiveCategory] = useState(null);
+  const [selectedProductId, setSelectedProductId] = useState(null);
 
   const {
     data: storeData,
@@ -108,6 +111,7 @@ const StorePage = () => {
               onAddToCart={handleAddToCart}
               isLoading={false}
               storeId={storeId}
+              onProductClick={(productId) => setSelectedProductId(productId)}
             />
           </div>
           <div className="sticky mt-10">
@@ -115,6 +119,18 @@ const StorePage = () => {
           </div>
         </div>
       </div>
+      <Modal
+        isOpen={selectedProductId !== null}
+        onClose={() => setSelectedProductId(null)}
+      >
+        {selectedProductId && (
+          <ProductModal
+            productId={selectedProductId}
+            storeId={storeId}
+            onClose={() => setSelectedProductId(null)}
+          />
+        )}
+      </Modal>
     </div>
   );
 };

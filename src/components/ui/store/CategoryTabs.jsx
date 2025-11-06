@@ -4,7 +4,7 @@ export const CategoryTabs = ({
   onSelectCategory,
 }) => {
   return (
-    <div className="bg-[#556030] border-b border-amber-500 px-13 overflow-x-auto">
+    <div className="bg-[#556030] border-b border-lime-900 px-13 overflow-x-auto">
       <div className="flex gap-1 min-w-max">
         <button
           onClick={() => onSelectCategory(null)}
