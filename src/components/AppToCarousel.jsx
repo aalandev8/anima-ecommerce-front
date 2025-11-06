@@ -2,10 +2,15 @@ import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { slides } from "../constants/slides";
 
+// Importar la fuente de Google Fonts
+const style = document.createElement("link");
+style.rel = "stylesheet";
+style.href = "https://fonts.googleapis.com/css2?family=Questrial&display=swap";
+document.head.appendChild(style);
+
 const AppToCarousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying] = useState(true);
-
 
   useEffect(() => {
     if (!isAutoPlaying) return;
@@ -16,7 +21,6 @@ const AppToCarousel = () => {
 
     return () => clearInterval(interval);
   }, [isAutoPlaying]);
-
 
   const goToSlide = (index) => {
     setCurrentSlide(index);
@@ -33,9 +37,8 @@ const AppToCarousel = () => {
   return (
     <div
       className="relative w-full h-screen overflow-hidden bg-gray-900"
-      style={{ fontFamily: "'Lato', sans-serif" }}
+      style={{ fontFamily: "'Questrial', sans-serif" }}
     >
-     
       <div className="relative w-full h-full">
         {slides.map((slide, index) => (
           <div
@@ -44,13 +47,15 @@ const AppToCarousel = () => {
               index === currentSlide ? "opacity-100 z-10" : "opacity-0 z-0"
             }`}
           >
-          
             <div
-              className="absolute inset-0 bg-cover bg-center brightness-90"
-              style={{ backgroundImage: `url(${slide.image})`, opacity: 0.85 }}
+              className="absolute inset-0 bg-cover brightness-75"
+              style={{
+                backgroundImage: `url(${slide.image})`,
+                opacity: 0.7,
+                backgroundPosition: slide.isHero ? "center right" : "center",
+              }}
             />
 
-    
             <div
               className={`absolute inset-0 ${
                 slide.isHero
@@ -59,7 +64,6 @@ const AppToCarousel = () => {
               }`}
             ></div>
 
-          
             <div className="relative h-full flex items-center">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
                 <div className="max-w-3xl">
@@ -76,25 +80,26 @@ const AppToCarousel = () => {
                     </div>
                   )}
 
-                 
                   {slide.isHero ? (
                     <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6">
-                      Comida Deliciosa
-                      <span className="text-green-400"> Adaptada</span> a Tus
-                      Necesidades
+                      Comida deliciosa
+                      <span className="text-[#6B7B3C]"> Adaptada</span> a tus
+                      necesidades
                     </h1>
                   ) : (
-                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight drop-shadow-lg">
-                      {slide.title}
+                    <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6">
+                      {slide.title.split(" ").slice(0, -3).join(" ")}
+                      <span className="text-[#6B7B3C]">
+                        {" "}
+                        {slide.title.split(" ").slice(-3).join(" ")}
+                      </span>
                     </h1>
                   )}
 
-                
                   <p className="text-lg md:text-xl text-white mb-8 leading-relaxed drop-shadow-md">
                     {slide.subtitle}
                   </p>
 
-                
                   <button className="px-8 py-4 bg-[#6B7B3C] text-white font-bold text-lg rounded-full hover:bg-[#556030] transition-all transform hover:scale-105 shadow-lg">
                     {slide.buttonText}
                   </button>
@@ -105,7 +110,6 @@ const AppToCarousel = () => {
         ))}
       </div>
 
-      
       <button
         onClick={prevSlide}
         className="absolute left-4 md:left-8 top-1/2 -translate-y-1/2 z-20 p-3 bg-white/30 hover:bg-white/50 rounded-full transition-all group"
@@ -122,7 +126,6 @@ const AppToCarousel = () => {
         <ChevronRight className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
       </button>
 
-      
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex gap-3">
         {slides.map((_, index) => (
           <button
@@ -137,7 +140,6 @@ const AppToCarousel = () => {
           />
         ))}
       </div>
-
     </div>
   );
 };
