@@ -89,28 +89,30 @@ const StorePage = () => {
   }
 
   return (
-    <div className="flex min-h-screen bg-white">
+    <div className="flex min-h-screen bg-[#FCF4E8]">
       <div className="flex-1">
-        <StoreHeader store={store} />
-
-        {categories.length > 0 && (
-          <CategoryTabs
-            categories={categories}
-            activeCategory={activeCategory}
-            onSelectCategory={setActiveCategory}
-          />
-        )}
-
-        <ProductList
-          products={filteredProducts}
-          onAddToCart={handleAddToCart}
-          isLoading={false}
-          storeId={storeId}
-        />
-      </div>
-      <div className="h-screen">
-        <div className="border-l border-gray-700 ">
-          <OrderSidebar />
+        <div className="sticky top-0 z-50">
+          <StoreHeader store={store} />
+          {categories.length > 0 && (
+            <CategoryTabs
+              categories={categories}
+              activeCategory={activeCategory}
+              onSelectCategory={setActiveCategory}
+            />
+          )}
+        </div>
+        <div className="grid grid-cols-4 gap-6 px-2 py-8">
+          <div className="col-span-3">
+            <ProductList
+              products={filteredProducts}
+              onAddToCart={handleAddToCart}
+              isLoading={false}
+              storeId={storeId}
+            />
+          </div>
+          <div className="sticky mt-10">
+            <OrderSidebar />
+          </div>
         </div>
       </div>
     </div>

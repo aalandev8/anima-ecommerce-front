@@ -10,8 +10,8 @@ export const OrderSidebar = () => {
   } = useCart();
 
   return (
-    <div className="w-96 bg-white border-l border-gray-200 object-center sticky top-0 flex flex-col">
-      <div className="p-6 border-b border-gray-200">
+    <div className="w-80 bg-[#FAF7F0] border-1 border-[#FFFFFA] shadow rounded-lg object-center sticky top-0 flex flex-col">
+      <div className="p-6">
         <h2 className="text-2xl font-bold">Mi Pedido</h2>
       </div>
       <div className="flex-1 overflow-y-auto p-6">
