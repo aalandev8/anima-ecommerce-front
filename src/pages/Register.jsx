@@ -115,8 +115,8 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-light flex items-center justify-center px-4 py-12">
-      <div className="max-w-md w-full bg-white rounded-lg shadow-md p-8">
+    <div className="min-h-screen bg-[#FCF4E8] flex items-center justify-center px-4 py-12">
+      <div className="max-w-md w-full bg-[#FAF7F0] border-1 border-[#F0F0B6] shadow rounded-lg p-8">
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-gray-800">Crear Cuenta</h2>
           <p className="text-gray-600 mt-2">Registrate para comenzar a ordenar</p>
@@ -239,7 +239,7 @@ const Register = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-[#4d7b0f] text-white py-3 rounded-md font-semibold hover:bg-[#3d6108] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-[#556030] text-white py-3 rounded-md font-semibold hover:bg-[#383f21] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? 'Creando cuenta...' : 'Crear Cuenta'}
           </button>
@@ -248,7 +248,7 @@ const Register = () => {
         <div className="mt-6 text-center">
           <p className="text-gray-600">
             ¿Ya tenés cuenta?{' '}
-            <Link to="/login" className="text-[#4d7b0f] font-semibold hover:underline">
+            <Link to="/login" className="text-[#556030] font-semibold hover:underline">
               Iniciá sesión aquí
             </Link>
           </p>

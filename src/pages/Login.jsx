@@ -7,6 +7,7 @@ import {
   loginFailure,
 } from "@/redux/slices/authSlice";
 import { authAPI } from "@/api/auth";
+import { Navbar } from "@/components/ui/Navbar";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -55,8 +56,32 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-light flex items-center justify-center px-4">
-      <div className="max-w-md w-full bg-white rounded-lg shadow-md p-8">
+    <div className="min-h-screen bg-[#FCF4E8] flex items-center justify-center px-4">
+      {/* <div className="">
+        <button
+          onClick={() => navigate("/")}
+          className="flex items-center text-gray-600 hover:text-gray-900 mb-4 transition-colors"
+        >
+          <svg
+            className="w-5 h-5 mr-2"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+          Volver al inicio
+        </button>
+      </div> */}
+      <div
+        className="max-w-md w-full p-8
+       bg-[#FAF7F0] border-1 border-[#F0F0B6] shadow rounded-lg "
+      >
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-primary">Iniciar Sesión</h2>
           <p className="text-neutral-dark mt-2">Bienvenido de vuelta</p>
@@ -110,7 +135,7 @@ const Login = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-[#4d7b0f] text-white py-3 rounded-md font-semibold hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-full bg-[#556030] hover:bg-[#454d2d] text-white py-3 rounded-md font-semibold hover:bg-primary-dark transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? "Iniciando sesión..." : "Iniciar Sesión"}
           </button>
@@ -121,7 +146,7 @@ const Login = () => {
             ¿No tenés cuenta?{" "}
             <Link
               to="/register"
-              className="text-[#4d7b0f] font-semibold hover:underline"
+              className="text-[#556030] font-semibold hover:underline"
             >
               Registrate aquí
             </Link>
