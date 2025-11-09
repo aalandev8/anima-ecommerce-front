@@ -32,7 +32,7 @@ const StoreList = () => {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-[#FCF4E8] flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-green-600 mx-auto mb-4"></div>
           <p className="text-gray-600">Cargando tiendas...</p>
@@ -42,7 +42,7 @@ const StoreList = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#FCF4E8]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
           <button
@@ -121,11 +121,11 @@ const StoreList = () => {
               <div
                 key={store.id}
                 onClick={() => handleStoreClick(store.id)}
-                className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all cursor-pointer p-4 flex items-center justify-between"
+                className="bg-[#6B7B3C] rounded-lg shadow-sm hover:shadow-md transition-all cursor-pointer p-4 flex items-center justify-between hover:bg-[#5d6a34]"
               >
                 {/* Logo a la izquierda */}
                 <div className="flex items-center flex-1 min-w-0">
-                  <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 mr-4 bg-gray-100">
+                  <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 mr-4 bg-white">
                     <img
                       src={
                         store.image_url ||
@@ -138,12 +138,12 @@ const StoreList = () => {
 
                   {/* Información de la tienda */}
                   <div className="flex-1 min-w-0">
-                    <h3 className="text-lg font-bold text-gray-900 truncate">
+                    <h3 className="text-lg font-bold text-white truncate">
                       {store.name}
                     </h3>
 
                     {/* Tiempo de entrega */}
-                    <div className="flex items-center text-sm text-gray-600 mt-1">
+                    <div className="flex items-center text-sm text-white/90 mt-1">
                       <svg
                         className="w-4 h-4 mr-1"
                         fill="none"
@@ -163,7 +163,7 @@ const StoreList = () => {
                     </div>
 
                     {/* Costo de envío */}
-                    <div className="flex items-center text-sm text-gray-600 mt-1">
+                    <div className="flex items-center text-sm text-white/90 mt-1">
                       <svg
                         className="w-4 h-4 mr-1"
                         fill="none"
@@ -190,13 +190,13 @@ const StoreList = () => {
                 {/* Rating a la derecha */}
                 <div className="flex items-center ml-4 flex-shrink-0">
                   <svg
-                    className="w-5 h-5 text-gray-900 mr-1"
+                    className="w-5 h-5 text-white mr-1"
                     fill="currentColor"
                     viewBox="0 0 20 20"
                   >
                     <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                   </svg>
-                  <span className="text-base font-semibold text-gray-900">
+                  <span className="text-base font-semibold text-white">
                     {store.rating || "4.5"}
                   </span>
                 </div>
