@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { slides } from "../constants/slides";
+import { slideColors } from "../constants/colors";
 
-// Importar la fuente de Google Fonts
 const style = document.createElement("link");
 style.rel = "stylesheet";
 style.href = "https://fonts.googleapis.com/css2?family=Questrial&display=swap";
@@ -83,13 +83,16 @@ const AppToCarousel = () => {
                   {slide.isHero ? (
                     <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6">
                       Comida deliciosa
-                      <span className="text-[#6B7B3C]"> Adaptada</span> a tus
-                      necesidades
+                      <span style={{ color: slideColors[index].accentColor }}>
+                        {" "}
+                        Adaptada
+                      </span>{" "}
+                      a tus necesidades
                     </h1>
                   ) : (
                     <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6">
                       {slide.title.split(" ").slice(0, -3).join(" ")}
-                      <span className="text-[#6B7B3C]">
+                      <span style={{ color: slideColors[index].accentColor }}>
                         {" "}
                         {slide.title.split(" ").slice(-3).join(" ")}
                       </span>
@@ -100,7 +103,18 @@ const AppToCarousel = () => {
                     {slide.subtitle}
                   </p>
 
-                  <button className="px-8 py-4 bg-[#6B7B3C] text-white font-bold text-lg rounded-full hover:bg-[#556030] transition-all transform hover:scale-105 shadow-lg">
+                  <button
+                    className="px-8 py-4 text-white font-bold text-lg rounded-full transition-all transform hover:scale-105 shadow-lg"
+                    style={{
+                      backgroundColor: slideColors[index].buttonColor,
+                    }}
+                    onMouseEnter={(e) => {
+                      e.target.style.opacity = "0.85";
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.opacity = "1";
+                    }}
+                  >
                     {slide.buttonText}
                   </button>
                 </div>

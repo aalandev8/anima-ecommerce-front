@@ -1,9 +1,9 @@
-import VeganLogo from "@/components/ui/Icons/VeganLogo.svg";
-import KosherLogo from "@/components/ui/Icons/KosherLogo.png";
+import VeganLogo from "@/components/ui/Icons/VeganLogo.jpg";
+import KosherLogo from "@/components/ui/Icons/KosherLogo.jpg";
 import VegetarianLogo from "@/components/ui/Icons/VegetarianLogo.png";
 import HalalLogo from "@/components/ui/Icons/HalalLogo.png";
-import GlutenFreeLogo from "@/components/ui/Icons/GlutenFree.webp";
-import DiabetesLogo from "@/components/ui/Icons/DiabetesLogo.png";
+import GlutenFreeLogo from "@/components/ui/Icons/GlutenFreeLogo.jpg";
+import DiabetesLogo from "@/components/ui/Icons/SugarFreeLogo.jpg";
 
 export const categoryMapping = {
   vegano: "vegan",
@@ -61,7 +61,6 @@ export const categoryConfig = {
     colorClass: "bg-rose-100 text-rose-700",
   },
 };
-
 
 export const DIETARY_CATEGORIES = [
   { type: "vegano", label: "Vegano" },

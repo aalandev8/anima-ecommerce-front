@@ -3,7 +3,6 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useStoresByCategory } from "@/api/stores";
 import { categoryMapping, categoryConfig } from "@/constants/categories";
 
-
 const StoreList = () => {
   const { category } = useParams();
   const navigate = useNavigate();
@@ -117,53 +116,36 @@ const StoreList = () => {
             No hay tiendas disponibles en esta categoría por el momento.
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="space-y-3">
             {stores.map((store) => (
               <div
                 key={store.id}
                 onClick={() => handleStoreClick(store.id)}
-                className="bg-white rounded-2xl shadow-md hover:shadow-xl transition-all cursor-pointer group overflow-hidden"
+                className="bg-white rounded-lg shadow-sm hover:shadow-md transition-all cursor-pointer p-4 flex items-center justify-between"
               >
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={
-                      store.image_url ||
-                      "https://placehold.co/400x300?text=Tienda"
-                    }
-                    alt={store.name}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                  />
-                  {store.featured && (
-                    <div className="absolute top-3 right-3 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
-                      Destacado
-                    </div>
-                  )}
-                </div>
+                {/* Logo a la izquierda */}
+                <div className="flex items-center flex-1 min-w-0">
+                  <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 mr-4 bg-gray-100">
+                    <img
+                      src={
+                        store.image_url ||
+                        "https://placehold.co/100x100?text=Logo"
+                      }
+                      alt={store.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
 
-                <div className="p-5">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2">
-                    {store.name}
-                  </h3>
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-                    {store.description || "Deliciosas opciones para ti"}
-                  </p>
+                  {/* Información de la tienda */}
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-lg font-bold text-gray-900 truncate">
+                      {store.name}
+                    </h3>
 
-                  <div className="flex items-center justify-between text-sm text-gray-600 mb-3">
-                    <div className="flex items-center">
+                    {/* Tiempo de entrega */}
+                    <div className="flex items-center text-sm text-gray-600 mt-1">
                       <svg
-                        className="w-5 h-5 text-yellow-400 mr-1"
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                      >
-                        <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                      </svg>
-                      <span className="font-semibold">
-                        {store.rating || "4.5"}
-                      </span>
-                    </div>
-                    <div className="flex items-center">
-                      <svg
-                        className="w-5 h-5 mr-1"
+                        className="w-4 h-4 mr-1"
                         fill="none"
                         stroke="currentColor"
                         viewBox="0 0 24 24"
@@ -175,31 +157,48 @@ const StoreList = () => {
                           d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
                         />
                       </svg>
-                      <span>{store.deliveryTime || "30-45 min"}</span>
+                      <span>
+                        Recibes en {store.deliveryTime || "15-30 min"}
+                      </span>
+                    </div>
+
+                    {/* Costo de envío */}
+                    <div className="flex items-center text-sm text-gray-600 mt-1">
+                      <svg
+                        className="w-4 h-4 mr-1"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"
+                        />
+                      </svg>
+                      <span>
+                        Envío{" "}
+                        {store.deliveryFee === 0 || store.deliveryFee === "0"
+                          ? "Gratis"
+                          : `$${store.deliveryFee}`}
+                      </span>
                     </div>
                   </div>
+                </div>
 
-                  <div className="flex items-center justify-between pt-3 border-t border-gray-100">
-                    <span className="text-sm text-gray-600">Envío</span>
-                    <span className="font-semibold text-green-600">
-                      {store.deliveryFee === 0 || store.deliveryFee === "0"
-                        ? "Gratis"
-                        : `$${store.deliveryFee}`}
-                    </span>
-                  </div>
-
-                  {store.tags && store.tags.length > 0 && (
-                    <div className="flex flex-wrap gap-2 mt-3">
-                      {store.tags.slice(0, 3).map((tag, index) => (
-                        <span
-                          key={index}
-                          className="px-2 py-1 bg-gray-100 text-gray-700 rounded-full text-xs"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  )}
+                {/* Rating a la derecha */}
+                <div className="flex items-center ml-4 flex-shrink-0">
+                  <svg
+                    className="w-5 h-5 text-gray-900 mr-1"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                  <span className="text-base font-semibold text-gray-900">
+                    {store.rating || "4.5"}
+                  </span>
                 </div>
               </div>
             ))}
