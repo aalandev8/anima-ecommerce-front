@@ -3,13 +3,13 @@ import { QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import queryClient from "./lib/queryClient";
 import AuthProvider from "./components/auth/AuthProvider";
-
 import Home from "./pages/home/Home";
 import StoreList from "./pages/StoreList";
 import StorePage from "./pages/StorePage";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
 
 function App() {
   return (
@@ -23,6 +23,7 @@ function App() {
             <Route path="/cart" element={<Cart />} />
             <Route path="/stores/:category" element={<StoreList />} />
             <Route path="/store/:storeId" element={<StorePage />} />
+            <Route path="/checkout" element={<Checkout />} />
           </Routes>
         </Router>
       </AuthProvider>

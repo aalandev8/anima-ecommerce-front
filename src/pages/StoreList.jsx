@@ -1,11 +1,13 @@
-import { useMemo } from "react";
+import { useMemo, useState, useCallback } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useStoresByCategory } from "@/api/stores";
 import { categoryMapping, categoryConfig } from "@/constants/categories";
+import StoreSearchBar from "@/components/Store/StoreSearchBar";
 
 const StoreList = () => {
   const { category } = useParams();
   const navigate = useNavigate();
+  const [filteredStores, setFilteredStores] = useState([]);
 
   const backendCategory = useMemo(
     () => categoryMapping[category] || category,
@@ -29,6 +31,14 @@ const StoreList = () => {
   const handleStoreClick = (storeId) => {
     navigate(`/store/${storeId}`);
   };
+
+  const handleFilteredStores = useCallback((filtered) => {
+    setFilteredStores(filtered);
+  }, []);
+
+  // Usar filteredStores si hay búsqueda activa, sino usar stores originales
+  const displayStores =
+    filteredStores.length > 0 || stores.length === 0 ? filteredStores : stores;
 
   if (isLoading) {
     return (
@@ -92,6 +102,14 @@ const StoreList = () => {
           </div>
         </div>
 
+        {/* COMPONENTE DE BÚSQUEDA - NUEVO */}
+        {stores.length > 0 && (
+          <StoreSearchBar
+            stores={stores}
+            onFilteredStores={handleFilteredStores}
+          />
+        )}
+
         {isError && (
           <div className="bg-red-50 border border-red-200 text-red-800 px-4 py-3 rounded-lg mb-6">
             <div className="flex items-center">
@@ -111,19 +129,20 @@ const StoreList = () => {
           </div>
         )}
 
-        {stores.length === 0 ? (
+        {displayStores.length === 0 ? (
           <div className="bg-blue-50 border border-blue-200 text-blue-800 px-4 py-3 rounded-lg">
-            No hay tiendas disponibles en esta categoría por el momento.
+            {stores.length === 0
+              ? "No hay tiendas disponibles en esta categoría por el momento."
+              : "No se encontraron tiendas con los filtros seleccionados."}
           </div>
         ) : (
           <div className="space-y-3">
-            {stores.map((store) => (
+            {displayStores.map((store) => (
               <div
                 key={store.id}
                 onClick={() => handleStoreClick(store.id)}
                 className="bg-[#6B7B3C] rounded-lg shadow-sm hover:shadow-md transition-all cursor-pointer p-4 flex items-center justify-between hover:bg-[#5d6a34]"
               >
-                {/* Logo a la izquierda */}
                 <div className="flex items-center flex-1 min-w-0">
                   <div className="w-16 h-16 rounded-full overflow-hidden flex-shrink-0 mr-4 bg-white">
                     <img
@@ -136,13 +155,11 @@ const StoreList = () => {
                     />
                   </div>
 
-                  {/* Información de la tienda */}
                   <div className="flex-1 min-w-0">
                     <h3 className="text-lg font-bold text-white truncate">
                       {store.name}
                     </h3>
 
-                    {/* Tiempo de entrega */}
                     <div className="flex items-center text-sm text-white/90 mt-1">
                       <svg
                         className="w-4 h-4 mr-1"
@@ -162,7 +179,6 @@ const StoreList = () => {
                       </span>
                     </div>
 
-                    {/* Costo de envío */}
                     <div className="flex items-center text-sm text-white/90 mt-1">
                       <svg
                         className="w-4 h-4 mr-1"
@@ -187,7 +203,6 @@ const StoreList = () => {
                   </div>
                 </div>
 
-                {/* Rating a la derecha */}
                 <div className="flex items-center ml-4 flex-shrink-0">
                   <svg
                     className="w-5 h-5 text-white mr-1"
