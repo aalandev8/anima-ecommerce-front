@@ -1,4 +1,3 @@
-// components/navbar/UserMenu.jsx
 import { Link } from "react-router-dom";
 
 export const UserMenu = ({

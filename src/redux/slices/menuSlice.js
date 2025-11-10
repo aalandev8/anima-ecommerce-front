@@ -1,4 +1,3 @@
-// redux/slices/menuSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
 const menuSlice = createSlice({
@@ -7,6 +6,7 @@ const menuSlice = createSlice({
     isMainMenuOpen: false,
     isUserMenuOpen: false,
     isCategoriesOpen: false,
+    isSearchOpen: false,
     isScrolled: false,
     isMobile: window.innerWidth < 768,
   },
@@ -26,6 +26,15 @@ const menuSlice = createSlice({
     closeCategories: (state) => {
       state.isCategoriesOpen = false;
     },
+    toggleSearch: (state) => {
+      state.isSearchOpen = !state.isSearchOpen;
+    },
+    openSearch: (state) => {
+      state.isSearchOpen = true;
+    },
+    closeSearch: (state) => {
+      state.isSearchOpen = false;
+    },
     setScrolled: (state, action) => {
       state.isScrolled = action.payload;
     },
@@ -36,6 +45,7 @@ const menuSlice = createSlice({
       state.isMainMenuOpen = false;
       state.isUserMenuOpen = false;
       state.isCategoriesOpen = false;
+      state.isSearchOpen = false;
     },
   },
 });
@@ -46,6 +56,9 @@ export const {
   closeUserMenu,
   openCategories,
   closeCategories,
+  toggleSearch, 
+  openSearch, 
+  closeSearch,
   setScrolled,
   setIsMobile,
   closeAllMenus,

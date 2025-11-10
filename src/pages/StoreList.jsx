@@ -1,12 +1,14 @@
-import { useMemo, useState, useCallback } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useMemo, useState, useCallback, useEffect } from "react";
+import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 import { useStoresByCategory } from "@/api/stores";
 import { categoryMapping, categoryConfig } from "@/constants/categories";
-import StoreSearchBar from "@/components/Store/StoreSearchBar";
+import StoreSearchBar from "@/components/store/StoreSearchBar";
 
 const StoreList = () => {
   const { category } = useParams();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams(); // 👈 Nuevo
+  const searchQuery = searchParams.get("search");
   const [filteredStores, setFilteredStores] = useState([]);
 
   const backendCategory = useMemo(
@@ -35,6 +37,18 @@ const StoreList = () => {
   const handleFilteredStores = useCallback((filtered) => {
     setFilteredStores(filtered);
   }, []);
+
+  useEffect(() => {
+    if (searchQuery && stores.length > 0) {
+      const filtered = stores.filter((store) =>
+        store.name.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredStores(filtered);
+    } else if (!searchQuery) {
+      // Si no hay búsqueda en URL, resetear filtros
+      setFilteredStores([]);
+    }
+  }, [searchQuery, stores]);
 
   // Usar filteredStores si hay búsqueda activa, sino usar stores originales
   const displayStores =
@@ -98,6 +112,30 @@ const StoreList = () => {
               <p className="text-gray-600 mt-1">
                 {currentCategory.description}
               </p>
+              {searchQuery && (
+                <p className="text-sm text-green-600 mt-1 flex items-center">
+                  <svg
+                    className="w-4 h-4 mr-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    />
+                  </svg>
+                  Buscando: "{searchQuery}"
+                  <button
+                    onClick={() => navigate(`/stores/${category}`)}
+                    className="ml-2 text-xs underline hover:text-green-700"
+                  >
+                    Limpiar búsqueda
+                  </button>
+                </p>
+              )}
             </div>
           </div>
         </div>
@@ -107,6 +145,7 @@ const StoreList = () => {
           <StoreSearchBar
             stores={stores}
             onFilteredStores={handleFilteredStores}
+            initialSearch={searchQuery}
           />
         )}
 

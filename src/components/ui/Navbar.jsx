@@ -10,10 +10,13 @@ import {
   closeCategories,
   setScrolled,
   setIsMobile,
+  toggleSearch,
+  closeSearch, // 👈 Importar
 } from "@/redux/slices/menuSlice";
 import { MobileMenu } from "./navbar/MobileMenu";
 import { CategoriesDropdown } from "./navbar/CategoriesDropdown";
 import { UserMenu } from "./navbar/UserMenu";
+import { SearchBar } from "../store/SearchBar" // 👈 Importar
 
 export const Navbar = () => {
   const dispatch = useDispatch();
@@ -25,6 +28,7 @@ export const Navbar = () => {
     isCategoriesOpen,
     isScrolled,
     isMobile,
+    isSearchOpen, // 👈 Agregar
   } = useSelector((state) => state.menu);
   const cartItems = useSelector((state) => state.cart.items);
   const { isAuthenticated, user } = useSelector((state) => state.auth);
@@ -94,7 +98,11 @@ export const Navbar = () => {
           )}
 
           <div className="flex items-center space-x-4">
-            <button className={classScrolled}>
+            {/* 👇 Botón de búsqueda actualizado */}
+            <button
+              onClick={() => dispatch(toggleSearch())}
+              className={classScrolled}
+            >
               <svg
                 className="w-6 h-6"
                 fill="none"
@@ -198,6 +206,13 @@ export const Navbar = () => {
           onLogout={handleLogout}
         />
       </div>
+
+      {/* 👇 Componente de búsqueda */}
+      <SearchBar
+        isScrolled={isScrolled}
+        isOpen={isSearchOpen}
+        onClose={() => dispatch(closeSearch())}
+      />
     </nav>
   );
 };

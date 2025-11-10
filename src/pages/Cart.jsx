@@ -111,7 +111,7 @@ const Cart = () => {
               </p>
             </div>
             <button
-              onClick={() => navigate(-1)}
+              onClick={() => navigate("/")}
               className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors"
             >
               <svg
@@ -149,7 +149,6 @@ const Cart = () => {
                       />
                     </div>
 
-                    
                     <div className="flex-1">
                       <div className="flex justify-between items-start mb-2">
                         <div>
@@ -217,7 +216,6 @@ const Cart = () => {
                 </div>
               ))}
 
-            
               <button
                 onClick={handleClearCart}
                 className="w-full text-red-600 hover:text-red-700 font-semibold py-3 transition-colors"
