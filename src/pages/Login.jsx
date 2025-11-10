@@ -9,12 +9,13 @@ import {
 import { authAPI } from "@/api/auth";
 import { Navbar } from "@/components/ui/Navbar";
 
-const Login = () => {
+const Login = (store) => {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
 
+  const backUrl = store?.type ? `/stores/${store.type}` : "/";
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { loading, error, isAuthenticated } = useSelector(
@@ -57,15 +58,19 @@ const Login = () => {
 
   return (
     <div className="min-h-screen bg-[#FCF4E8] flex items-center justify-center px-4">
-      {/* <div className="">
-        <button
-          onClick={() => navigate("/")}
-          className="flex items-center text-gray-600 hover:text-gray-900 mb-4 transition-colors"
+      <div className=""></div>
+      <div
+        className="max-w-md w-full p-8
+       bg-[#FAF7F0] border-1 border-[#F0F0B6] shadow rounded-lg "
+      >
+        <Link
+          to={backUrl}
+          className=" text-gray-600 hover:text-gray-900 transition"
         >
           <svg
-            className="w-5 h-5 mr-2"
+            className="w-6 h-6"
             fill="none"
-            stroke="currentColor"
+            stroke="#556030"
             viewBox="0 0 24 24"
           >
             <path
@@ -75,13 +80,7 @@ const Login = () => {
               d="M15 19l-7-7 7-7"
             />
           </svg>
-          Volver al inicio
-        </button>
-      </div> */}
-      <div
-        className="max-w-md w-full p-8
-       bg-[#FAF7F0] border-1 border-[#F0F0B6] shadow rounded-lg "
-      >
+        </Link>
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-primary">Iniciar Sesión</h2>
           <p className="text-neutral-dark mt-2">Bienvenido de vuelta</p>
