@@ -7,7 +7,7 @@ import StoreSearchBar from "@/components/store/StoreSearchBar";
 const StoreList = () => {
   const { category } = useParams();
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams(); // 👈 Nuevo
+  const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get("search");
   const [filteredStores, setFilteredStores] = useState([]);
 
@@ -45,12 +45,10 @@ const StoreList = () => {
       );
       setFilteredStores(filtered);
     } else if (!searchQuery) {
-      // Si no hay búsqueda en URL, resetear filtros
       setFilteredStores([]);
     }
   }, [searchQuery, stores]);
 
-  // Usar filteredStores si hay búsqueda activa, sino usar stores originales
   const displayStores =
     filteredStores.length > 0 || stores.length === 0 ? filteredStores : stores;
 
@@ -140,7 +138,6 @@ const StoreList = () => {
           </div>
         </div>
 
-        {/* COMPONENTE DE BÚSQUEDA - NUEVO */}
         {stores.length > 0 && (
           <StoreSearchBar
             stores={stores}

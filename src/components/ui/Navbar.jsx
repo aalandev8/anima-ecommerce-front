@@ -11,7 +11,7 @@ import {
   setScrolled,
   setIsMobile,
   toggleSearch,
-  closeSearch, // 👈 Importar
+  closeSearch, 
 } from "@/redux/slices/menuSlice";
 import { MobileMenu } from "./navbar/MobileMenu";
 import { CategoriesDropdown } from "./navbar/CategoriesDropdown";
@@ -28,7 +28,7 @@ export const Navbar = () => {
     isCategoriesOpen,
     isScrolled,
     isMobile,
-    isSearchOpen, // 👈 Agregar
+    isSearchOpen, 
   } = useSelector((state) => state.menu);
   const cartItems = useSelector((state) => state.cart.items);
   const { isAuthenticated, user } = useSelector((state) => state.auth);
