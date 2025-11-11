@@ -74,14 +74,19 @@ export const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <Link to="/" className="flex items-center">
-            <img
-              src="/Appto.png"
-              alt="AppTo Logo"
-              className={`w-auto transition-all duration-300 hover:scale-105 ${
-                isScrolled ? "h-8" : "h-12"
-              }`}
-            />
-          </Link>
+  <div className="flex items-center gap-2 transition-all duration-300 hover:scale-105">
+    <img
+      src="/tenedor-logo.png"
+      alt="AppTo Icon"
+      className={`${isScrolled ? "h-8" : "h-13"} w-auto`}
+    />
+    <img
+      src="/letras-logo.png"
+      alt="AppTo Text"
+      className={`${isScrolled ? "h-8" : "h-9"} w-auto`}
+    />
+  </div>
+</Link>
 
           {!isMobile && (
             <div className="hidden md:flex items-center space-x-8">
