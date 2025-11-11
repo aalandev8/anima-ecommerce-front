@@ -10,7 +10,7 @@ export const UserMenu = ({
 }) => {
   const classScrolled = `font-medium flex transition ${
     isScrolled
-      ? "text-gray-700 hover:text-[#4d7b0f]"
+      ? "text-gray-300 hover:text-gray-800"
       : "text-white hover:text-green-200"
   }`;
 
@@ -30,7 +30,7 @@ export const UserMenu = ({
             d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
           />
         </svg>
-        
+
         <svg
           className="w-4 mt-1 h-4"
           fill="none"
