@@ -89,15 +89,15 @@ const StoreList = () => {
 
           <div className="flex items-center mb-4">
             <div
-              className={`w-16 h-16 ${
+              className={`w-26 h-26 ${
                 currentCategory.colorClass.split(" ")[0]
-              } rounded-full flex items-center justify-center mr-4 p-2`}
+              } rounded-4xl flex items-center justify-center mr-4`}
             >
               {currentCategory.logo ? (
                 <img
                   src={currentCategory.logo}
                   alt={currentCategory.title}
-                  className="w-full h-full object-contain"
+                  className="w-full h-full rounded-4xl object-contain"
                 />
               ) : (
                 <span className="text-3xl">🏪</span>
