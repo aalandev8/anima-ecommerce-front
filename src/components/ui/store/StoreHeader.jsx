@@ -1,13 +1,14 @@
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 export const StoreHeader = ({ store, storeId }) => {
-  const backUrl = store?.type ? `/stores/${store.type}` : "/";
+  const navigate = useNavigate();
 
   return (
     <div className="bg-[#556030] w-full border-b border-[#49581c] px-6 py-4">
       <div className="flex items-center gap-4">
-        <Link
-          to={backUrl}
+        <button
+          onClick={() => navigate(-1)}
           className="text-gray-600 hover:text-gray-900 transition"
         >
           <svg
@@ -23,7 +24,7 @@ export const StoreHeader = ({ store, storeId }) => {
               d="M15 19l-7-7 7-7"
             />
           </svg>
-        </Link>
+        </button>
 
         <Link to={`/store/${storeId}/product/${store.id}`}>
           <img
