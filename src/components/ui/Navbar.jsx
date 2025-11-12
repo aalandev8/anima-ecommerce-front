@@ -11,12 +11,12 @@ import {
   setScrolled,
   setIsMobile,
   toggleSearch,
-  closeSearch, 
+  closeSearch,
 } from "@/redux/slices/menuSlice";
 import { MobileMenu } from "./navbar/MobileMenu";
 import { CategoriesDropdown } from "./navbar/CategoriesDropdown";
 import { UserMenu } from "./navbar/UserMenu";
-import { SearchBar } from "../store/SearchBar" // 👈 Importar
+import { SearchBar } from "../store/SearchBar"; // 👈 Importar
 
 export const Navbar = () => {
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ export const Navbar = () => {
     isCategoriesOpen,
     isScrolled,
     isMobile,
-    isSearchOpen, 
+    isSearchOpen,
   } = useSelector((state) => state.menu);
   const cartItems = useSelector((state) => state.cart.items);
   const { isAuthenticated, user } = useSelector((state) => state.auth);
@@ -73,20 +73,24 @@ export const Navbar = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          <Link to="/" className="flex items-center">
+          {/* 🔥 Logo con glow verde suave */}
+        <Link to="/" className="flex items-center">
   <div className="flex items-center gap-2 transition-all duration-300 hover:scale-105">
     <img
       src="/tenedor-logo.png"
       alt="AppTo Icon"
-      className={`${isScrolled ? "h-8" : "h-13"} w-auto`}
+      className={`${isScrolled ? "h-8" : "h-13"} w-auto drop-shadow-[0_0_14px_rgba(207,255,141,1)] transition-all duration-500`}
     />
     <img
       src="/letras-logo.png"
       alt="AppTo Text"
-      className={`${isScrolled ? "h-8" : "h-9"} w-auto`}
+      className={`${isScrolled ? "h-8" : "h-9"} w-auto drop-shadow-[0_0_12px_rgba(207,255,141,0.95)] transition-all duration-500`}
     />
   </div>
 </Link>
+
+
+
 
           {!isMobile && (
             <div className="hidden md:flex items-center space-x-8">
@@ -134,7 +138,7 @@ export const Navbar = () => {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0z"
                 />
               </svg>
               {totalItems > 0 && (
