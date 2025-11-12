@@ -5,12 +5,15 @@ import HowToOrder from "../../components/ui/HowToOrder";
 
 const Home = () => {
   return (
-    <div className="min-h-screen bg-[#FCF4E8] ">
+    <div className="min-h-screen bg-[#FCF4E8]">
       <Navbar />
       <AppToCarousel />
 
       {/* Sección de Categorías Dietéticas */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <section
+        id="categorias-dieteticas"
+        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 scroll-mt-24"
+      >
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-primary mb-4">
             Navegá por Necesidades Dietéticas
@@ -20,7 +23,7 @@ const Home = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-y-6 gap-x-24 ">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-y-6 gap-x-24">
           <DietaryCategory
             type="vegano"
             label="Vegano"

@@ -34,6 +34,17 @@ const AppToCarousel = () => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
   };
 
+  // Función para hacer scroll a las categorías dietéticas
+  const scrollToCategorias = () => {
+    const categoriasSection = document.getElementById("categorias-dieteticas");
+    if (categoriasSection) {
+      categoriasSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
+
   return (
     <div
       className="relative w-full h-screen overflow-hidden bg-gray-900"
@@ -104,6 +115,7 @@ const AppToCarousel = () => {
                   </p>
 
                   <button
+                    onClick={scrollToCategorias}
                     className="px-8 py-4 text-white font-bold text-lg rounded-full transition-all transform hover:scale-105 shadow-lg"
                     style={{
                       backgroundColor: slideColors[index].buttonColor,
