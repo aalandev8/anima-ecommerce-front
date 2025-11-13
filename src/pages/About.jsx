@@ -28,11 +28,9 @@ const About = () => {
               "url(https://images.unsplash.com/photo-1576398289164-c48dc021b4e1?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)",
           }}
         >
-          {/* Overlay más oscuro */}
           <div className="absolute inset-0 bg-[#FCF4E8]/60"></div>
         </div>
 
-        {/* Contenido */}
         <div className="relative h-full flex items-center justify-center px-4 sm:px-6 lg:px-8">
           <div className="max-w-5xl w-full">
             {/* Título principal - Grande y separado */}
