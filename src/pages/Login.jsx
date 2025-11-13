@@ -81,6 +81,23 @@ const Login = (store) => {
             />
           </svg>
         </Link>
+
+        {/* Logo de AppTo */}
+        <div className="flex justify-center mb-6">
+          <div className="flex items-center gap-2">
+            <img
+              src="/tenedor-logo.png"
+              alt="AppTo Icon"
+              className="h-12 w-auto"
+            />
+            <img
+              src="/letras-logo.png"
+              alt="AppTo Text"
+              className="h-12 w-auto"
+            />
+          </div>
+        </div>
+
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-primary">Iniciar Sesión</h2>
           <p className="text-neutral-dark mt-2">Bienvenido de vuelta</p>

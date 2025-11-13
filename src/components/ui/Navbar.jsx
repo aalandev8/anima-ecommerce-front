@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { logout } from "@/redux/slices/authSlice";
 import {
   toggleMainMenu,
@@ -16,11 +16,15 @@ import {
 import { MobileMenu } from "./navbar/MobileMenu";
 import { CategoriesDropdown } from "./navbar/CategoriesDropdown";
 import { UserMenu } from "./navbar/UserMenu";
-import { SearchBar } from "../store/SearchBar"; // 👈 Importar
+import { SearchBar } from "../store/SearchBar";
 
 export const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  // Estado para el color dinámico del carousel
+  const [carouselColor, setCarouselColor] = useState(null);
 
   const {
     isMainMenuOpen,
@@ -34,6 +38,18 @@ export const Navbar = () => {
   const { isAuthenticated, user } = useSelector((state) => state.auth);
 
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+
+  // Solo aplicar el color del carousel en la página de inicio
+  const isHomePage = location.pathname === "/";
+  const shouldUseCarouselColor = isHomePage && !isScrolled && carouselColor;
+
+  // Función para convertir hex a rgba con transparencia
+  const hexToRgba = (hex, alpha) => {
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+  };
 
   const classScrolled = `font-medium flex transition ${
     isScrolled
@@ -57,40 +73,65 @@ export const Navbar = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, [dispatch]);
 
+  // Escuchar cambios de color del carousel
+  useEffect(() => {
+    const handleColorChange = (event) => {
+      setCarouselColor(event.detail.color);
+    };
+
+    window.addEventListener("carouselColorChange", handleColorChange);
+    return () =>
+      window.removeEventListener("carouselColorChange", handleColorChange);
+  }, []);
+
   const handleLogout = () => {
     dispatch(logout());
     dispatch(closeUserMenu());
     navigate("/");
   };
 
+  // Determinar el color de fondo del navbar
+  const getNavbarBackground = () => {
+    if (isScrolled) {
+      return "bg-[#556030]/80 backdrop-blur-md shadow-md";
+    }
+    if (shouldUseCarouselColor) {
+      return "backdrop-blur-md";
+    }
+    return "bg-white/20 backdrop-blur-md";
+  };
+
+  const navbarStyle = shouldUseCarouselColor
+    ? {
+        backgroundColor: hexToRgba(carouselColor, 0.3),
+      }
+    : {};
+
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
-        isScrolled
-          ? "bg-[#556030]/80 backdrop-blur-md shadow-md"
-          : "bg-white/20 backdrop-blur-md"
-      }`}
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${getNavbarBackground()}`}
+      style={navbarStyle}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* 🔥 Logo con glow verde suave */}
-        <Link to="/" className="flex items-center">
-  <div className="flex items-center gap-2 transition-all duration-300 hover:scale-105">
-    <img
-      src="/tenedor-logo.png"
-      alt="AppTo Icon"
-      className={`${isScrolled ? "h-8" : "h-13"} w-auto drop-shadow-[0_0_14px_rgba(207,255,141,1)] transition-all duration-500`}
-    />
-    <img
-      src="/letras-logo.png"
-      alt="AppTo Text"
-      className={`${isScrolled ? "h-8" : "h-9"} w-auto drop-shadow-[0_0_12px_rgba(207,255,141,0.95)] transition-all duration-500`}
-    />
-  </div>
-</Link>
-
-
-
+          <Link to="/" className="flex items-center">
+            <div className="flex items-center gap-2 transition-all duration-300 hover:scale-105">
+              <img
+                src="/tenedor-logo.png"
+                alt="AppTo Icon"
+                className={`${
+                  isScrolled ? "h-8" : "h-13"
+                } w-auto drop-shadow-[0_0_14px_rgba(207,255,141,1)] transition-all duration-500`}
+              />
+              <img
+                src="/letras-logo.png"
+                alt="AppTo Text"
+                className={`${
+                  isScrolled ? "h-8" : "h-9"
+                } w-auto drop-shadow-[0_0_12px_rgba(207,255,141,0.95)] transition-all duration-500`}
+              />
+            </div>
+          </Link>
 
           {!isMobile && (
             <div className="hidden md:flex items-center space-x-8">
@@ -107,7 +148,6 @@ export const Navbar = () => {
           )}
 
           <div className="flex items-center space-x-4">
-            {/* 👇 Botón de búsqueda actualizado */}
             <button
               onClick={() => dispatch(toggleSearch())}
               className={classScrolled}
@@ -138,7 +178,7 @@ export const Navbar = () => {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0z"
+                  d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 000-4z"
                 />
               </svg>
               {totalItems > 0 && (
@@ -216,7 +256,6 @@ export const Navbar = () => {
         />
       </div>
 
-      {/* 👇 Componente de búsqueda */}
       <SearchBar
         isScrolled={isScrolled}
         isOpen={isSearchOpen}

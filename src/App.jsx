@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
+import About from "./pages/About";
 
 import Footer from "./components/ui/Footer";
 
@@ -20,7 +21,6 @@ function App() {
       <AuthProvider>
         <Router>
           <div className="min-h-screen flex flex-col">
-
             {/* Contenido principal */}
             <div className="flex-1">
               <Routes>
@@ -31,6 +31,7 @@ function App() {
                 <Route path="/stores/:category" element={<StoreList />} />
                 <Route path="/store/:storeId" element={<StorePage />} />
                 <Route path="/checkout" element={<Checkout />} />
+                <Route path="/about" element={<About />} />
               </Routes>
             </div>
 

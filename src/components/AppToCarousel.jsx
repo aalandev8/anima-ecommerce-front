@@ -22,6 +22,16 @@ const AppToCarousel = () => {
     return () => clearInterval(interval);
   }, [isAutoPlaying]);
 
+  // Emitir el color actual del slide para que el Navbar lo use
+  useEffect(() => {
+    const currentColor = slideColors[currentSlide];
+    // Crear un evento personalizado con el color actual
+    const event = new CustomEvent("carouselColorChange", {
+      detail: { color: currentColor.accentColor },
+    });
+    window.dispatchEvent(event);
+  }, [currentSlide]);
+
   const goToSlide = (index) => {
     setCurrentSlide(index);
   };
@@ -38,10 +48,12 @@ const AppToCarousel = () => {
   const scrollToCategorias = () => {
     const categoriasSection = document.getElementById("categorias-dieteticas");
     if (categoriasSection) {
-      categoriasSection.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
+      const navbarHeight = 72;
+      const y =
+        categoriasSection.getBoundingClientRect().top +
+        window.pageYOffset -
+        navbarHeight;
+      window.scrollTo({ top: y, behavior: "smooth" });
     }
   };
 
