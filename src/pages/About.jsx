@@ -25,34 +25,44 @@ const About = () => {
           className="absolute inset-0 bg-cover bg-center"
           style={{
             backgroundImage:
-              "url(https://plus.unsplash.com/premium_photo-1690272335531-65699dc9ce67?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)",
+              "url(https://images.unsplash.com/photo-1576398289164-c48dc021b4e1?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)",
           }}
         >
-          {/* Overlay con color hueso semi-transparente */}
-          <div className="absolute inset-0 bg-[#FCF4E8]/75"></div>
+          {/* Overlay más oscuro */}
+          <div className="absolute inset-0 bg-[#FCF4E8]/60"></div>
         </div>
 
         {/* Contenido */}
         <div className="relative h-full flex items-center justify-center px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl w-full text-center">
-            {/* Título principal */}
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-[#556030] mb-8 leading-tight">
-              AppTo para todo público
+          <div className="max-w-5xl w-full">
+            {/* Título principal - Grande y separado */}
+            <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold text-[#FCF4E8] mb-16 leading-tight tracking-wide">
+              APPTO PARA
+              <br />
+              TODO PÚBLICO
             </h1>
 
-            {/* Texto descriptivo */}
-            <p className="text-lg sm:text-xl lg:text-2xl text-gray-700 leading-relaxed max-w-3xl mx-auto">
-              Este comercio nace desde una integrante celíaca de nuestro equipo.
-              Al tener que relacionar la vida digna con un comercio que pueda
-              poner en alto este concepto, pensamos en todas las complicaciones
-              que tienen las personas que por diversas razones, se les dificulta
-              el acceso a la alimentación fuera de casa. De ahí nace AppTo,
-              donde priorizamos las necesidades no solo de los celíacos, sino
-              también de otros sectores dietéticos como diabéticos, veganos,
-              vegetarianos, y pertenecientes a la comunidad kosher y halal,
-              asegurándoles calidad, seguridad y confianza en la preparación de
-              sus alimentos favoritos.
-            </p>
+            {/* Contenedor del texto descriptivo con fondo semi-transparente */}
+            <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-8 sm:p-10 lg:p-12 shadow-2xl max-w-4xl">
+              <p className="text-lg sm:text-xl lg:text-2xl text-gray-800 leading-relaxed mb-6">
+                Nuestro proyecto nace de una experiencia personal: una
+                integrante celíaca de nuestro equipo nos abrió los ojos a los
+                desafíos diarios que enfrentan millones de personas. Al buscar
+                conectar la dignidad humana con un modelo de negocio inclusivo,
+                nos dimos cuenta de que muchas personas encuentran barreras
+                significativas para disfrutar de una comida fuera de casa.
+              </p>
+
+              <p className="text-lg sm:text-xl lg:text-2xl text-gray-800 leading-relaxed">
+                Así nació{" "}
+                <span className="font-bold text-[#556030]">AppTo</span>: una
+                plataforma donde no solo los celíacos, sino también diabéticos,
+                veganos, vegetarianos, y quienes siguen dietas kosher o halal
+                pueden encontrar opciones confiables. Garantizamos calidad,
+                seguridad alimentaria y, sobre todo, la tranquilidad de saber
+                que tus alimentos favoritos están preparados pensando en ti.
+              </p>
+            </div>
 
             {/* Decoración - Flechas hacia abajo */}
             <div className="mt-12 flex justify-center">
@@ -105,8 +115,9 @@ const About = () => {
                 Calidad
               </h3>
               <p className="text-gray-600">
-                Nos comprometemos con la excelencia en cada plato, garantizando
-                ingredientes frescos y preparaciones cuidadosas.
+                Seleccionamos cuidadosamente cada restaurante asociado,
+                garantizando ingredientes frescos, preparaciones rigurosas y el
+                más alto estándar en cada plato.
               </p>
             </div>
 
@@ -131,8 +142,9 @@ const About = () => {
                 Seguridad
               </h3>
               <p className="text-gray-600">
-                Protocolo estricto de manipulación y preparación para evitar
-                contaminación cruzada y garantizar tu bienestar.
+                Implementamos protocolos estrictos de manipulación y preparación
+                para prevenir la contaminación cruzada, protegiendo tu salud en
+                todo momento.
               </p>
             </div>
 
@@ -157,8 +169,9 @@ const About = () => {
                 Inclusión
               </h3>
               <p className="text-gray-600">
-                Conectamos a todos sin importar sus necesidades dietéticas,
-                creando un espacio donde todos pueden disfrutar.
+                Creemos que todos merecen acceso a comida deliciosa y segura.
+                Construimos puentes entre personas y restaurantes que entienden
+                sus necesidades únicas.
               </p>
             </div>
           </div>
@@ -172,8 +185,9 @@ const About = () => {
             A quién servimos
           </h2>
           <p className="text-center text-gray-600 mb-16 max-w-2xl mx-auto text-lg">
-            Nos especializamos en conectar personas con necesidades dietéticas
-            específicas con restaurantes certificados y de confianza.
+            Conectamos a personas con necesidades dietéticas específicas con
+            restaurantes certificados que entienden la importancia de una
+            preparación cuidadosa y responsable.
           </p>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
@@ -200,16 +214,17 @@ const About = () => {
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#556030]">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl font-bold text-white mb-6">
-            ¿Listo para empezar?
+            ¿Listo para comenzar tu experiencia?
           </h2>
           <p className="text-xl text-green-100 mb-8">
-            Descubre restaurantes que se adaptan a tus necesidades dietéticas
+            Descubre restaurantes que comprenden y respetan tus necesidades
+            dietéticas
           </p>
           <a
             href="/"
-            className="inline-block bg-[#8BA446] hover:bg-[#7a9338] text-white font-bold py-4 px-8 rounded-full text-lg transition-colors"
+            className="inline-block bg-[#8BA446] hover:bg-[#7a9338] text-white font-bold py-4 px-8 rounded-full text-lg transition-colors shadow-lg hover:shadow-xl"
           >
-            Explorar Tiendas
+            Explorar Restaurantes
           </a>
         </div>
       </section>
