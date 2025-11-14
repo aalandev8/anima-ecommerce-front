@@ -44,11 +44,10 @@ const AppToCarousel = () => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
   };
 
-  // Función para hacer scroll a las categorías dietéticas
   const scrollToCategorias = () => {
     const categoriasSection = document.getElementById("categorias-dieteticas");
     if (categoriasSection) {
-      const navbarHeight = 72;
+      const navbarHeight = 34;
       const y =
         categoriasSection.getBoundingClientRect().top +
         window.pageYOffset -
