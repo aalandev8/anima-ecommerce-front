@@ -11,7 +11,6 @@ import { addToCart } from "../redux/slices/cartSlice";
 import { Modal } from "@/components/ui/Modal";
 import { ProductModal } from "./ProductModal";
 
-
 const StorePage = ({ type }) => {
   const { storeId } = useParams();
   const navigate = useNavigate();
@@ -24,6 +23,7 @@ const StorePage = ({ type }) => {
     isLoading: isLoadingStore,
     isError: isStoreError,
   } = useStore(storeId);
+
   const {
     data: productsData = [],
     isLoading: isLoadingProducts,
@@ -35,12 +35,14 @@ const StorePage = ({ type }) => {
     () => (Array.isArray(productsData) ? productsData : []),
     [productsData]
   );
+
   const isLoading = isLoadingStore || isLoadingProducts;
   const isError = isStoreError || isProductsError;
 
   const categories = useMemo(() => {
     const uniqueCategories = [];
     const categoryIds = new Set();
+
     products.forEach((product) => {
       if (product.category && !categoryIds.has(product.category.id)) {
         categoryIds.add(product.category.id);
@@ -50,6 +52,7 @@ const StorePage = ({ type }) => {
         });
       }
     });
+
     return uniqueCategories;
   }, [products]);
 
@@ -76,13 +79,15 @@ const StorePage = ({ type }) => {
 
   if (isError || !store) {
     return (
-      <div className="min-h-screen  bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <div className="bg-red-50 border border-red-200 text-red-800 px-6 py-4 rounded-lg mb-4">
             Error al cargar la tienda. Por favor intenta nuevamente.
           </div>
+
+          {/* 🔹 BOTÓN CORREGIDO */}
           <button
-            onClick={() => navigate(`/stores/${type}`)}
+            onClick={() => navigate(-1)}
             className="text-gray-600 hover:text-gray-900"
           >
             ← Volver a tiendas
@@ -97,6 +102,7 @@ const StorePage = ({ type }) => {
       <div className="flex-1">
         <div className="sticky top-0 z-50">
           <StoreHeader store={store} />
+
           {categories.length > 0 && (
             <CategoryTabs
               categories={categories}
@@ -105,6 +111,7 @@ const StorePage = ({ type }) => {
             />
           )}
         </div>
+
         <div className="grid grid-cols-4 gap-6 px-2 py-8">
           <div className="col-span-3">
             <ProductList
@@ -115,11 +122,13 @@ const StorePage = ({ type }) => {
               onProductClick={(productId) => setSelectedProductId(productId)}
             />
           </div>
+
           <div className="sticky mt-10">
             <OrderSidebar />
           </div>
         </div>
       </div>
+
       <Modal
         isOpen={selectedProductId !== null}
         onClose={() => setSelectedProductId(null)}
