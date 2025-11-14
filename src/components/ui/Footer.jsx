@@ -10,7 +10,7 @@ export default function Footer() {
 
         <div className="flex items-center gap-3 mt-3 md:mt-0">
           <Link
-            to="/sobre-nosotros"
+            to="/about"
             className="px-3 py-1.5 rounded-lg text-sm
             bg-[#c8d6a8] text-[#3e2c24] hover:bg-[#b1c494]
             transition shadow-sm"

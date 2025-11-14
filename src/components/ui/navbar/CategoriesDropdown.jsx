@@ -19,10 +19,11 @@ export const CategoriesDropdown = ({
     timeoutRef.current = setTimeout(onClose, 300);
   };
 
+  // ✨ COLORES ACTUALIZADOS - Coinciden con la paleta
   const classScrolled = `font-medium flex transition ${
     isScrolled
-      ? "text-gray-300 hover:text-gray-800"
-      : "text-white hover:text-green-200"
+      ? "text-[#3e2c24] hover:text-[#5c4033]"
+      : "text-white hover:text-[#c8d6a8]"
   }`;
 
   return (
@@ -48,14 +49,18 @@ export const CategoriesDropdown = ({
         </svg>
       </button>
 
+      {/* ✨ DROPDOWN ACTUALIZADO - Colores de tu paleta */}
       {isCategoriesOpen && (
-        <div className="absolute w-48 bg-[#f8f3e7] shadow-lg rounded-md mt-2 py-2 z-10">
+        <div className="absolute w-48 bg-white border border-[#e2dcc7] shadow-lg rounded-xl mt-2 py-2 z-10">
           {DIETARY_CATEGORIES.map((cat) => (
             <Link
               key={cat.type}
               to={`/stores/${cat.type}`}
               onClick={onClose}
-              className="block px-4 py-2 text-gray-700 border-b border-gray-200 hover:bg-green-50 hover:text-[#4d7b0f]"
+              className="block px-4 py-2 text-[#3e2c24] 
+              border-b border-[#e2dcc7] last:border-b-0
+              hover:bg-[#c8d6a8] hover:text-white
+              transition-colors duration-150"
             >
               {cat.label}
             </Link>

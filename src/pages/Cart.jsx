@@ -5,6 +5,17 @@ import {
   updateQuantity,
   clearCart,
 } from "@/redux/slices/cartSlice";
+import {
+  ShoppingCart,
+  Plus,
+  Minus,
+  Trash2,
+  ArrowLeft,
+  ShoppingBag,
+  Check,
+  Shield,
+  RefreshCw,
+} from "lucide-react";
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -45,48 +56,31 @@ const Cart = () => {
 
   if (items.length === 0) {
     return (
-      <div className="min-h-screen bg-gray-50 py-12">
+      <div className="min-h-screen bg-[#FCF4E8] py-12">
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto text-center">
-            <div className="bg-white rounded-lg shadow-md p-12">
-              <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <svg
-                  className="w-12 h-12 text-gray-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
-                  />
-                </svg>
+            <div className="bg-white rounded-2xl shadow-sm border border-[#e2dcc7] p-12">
+              <div className="w-32 h-32 mx-auto mb-6 bg-gradient-to-br from-[#c8d6a8] to-[#b1c494] rounded-full flex items-center justify-center">
+                <ShoppingBag className="w-16 h-16 text-white" />
               </div>
-              <h2 className="text-3xl font-bold text-gray-800 mb-4">
+
+              <h2 className="text-3xl font-bold text-[#3e2c24] mb-3">
                 Tu carrito está vacío
               </h2>
-              <p className="text-gray-600 mb-8">
+
+              <p className="text-[#5c4033] mb-8 text-lg">
                 ¡Agregá productos para comenzar tu pedido!
               </p>
+
               <button
                 onClick={handleGoToRestaurants}
-                className="inline-flex items-center gap-2 bg-[#4d7b0f] text-white px-6 py-3 rounded-md font-semibold hover:bg-[#3d6108] transition-colors"
+                className="inline-flex items-center gap-2 px-8 py-4 
+                bg-gradient-to-r from-[#6b7c5a] to-[#596b4a] 
+                text-white rounded-xl font-medium
+                hover:shadow-lg hover:scale-105 
+                transition-all duration-200"
               >
-                <svg
-                  className="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M15 19l-7-7 7-7"
-                  />
-                </svg>
+                <ArrowLeft className="w-5 h-5" />
                 Ver Restaurantes
               </button>
             </div>
@@ -97,38 +91,37 @@ const Cart = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12">
+    <div className="min-h-screen bg-[#FCF4E8] py-8">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <h1 className="text-3xl font-bold text-gray-800">
-                Carrito de Compras
-              </h1>
-              <p className="text-gray-600 mt-1">
-                {totalQuantity} {totalQuantity === 1 ? "producto" : "productos"}
-              </p>
-            </div>
+          <div className="mb-8">
             <button
               onClick={() => navigate("/")}
-              className="flex items-center gap-2 text-gray-600 hover:text-gray-800 transition-colors"
+              className="inline-flex items-center gap-2 text-[#5c4033] 
+              hover:text-[#3e2c24] transition mb-4"
             >
-              <svg
-                className="w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
+              <ArrowLeft className="w-5 h-5" />
               Volver
             </button>
+
+            <div className="flex items-center gap-3">
+              <div
+                className="w-12 h-12 bg-gradient-to-br from-[#c8d6a8] to-[#b1c494] 
+              rounded-xl flex items-center justify-center"
+              >
+                <ShoppingCart className="w-6 h-6 text-white" />
+              </div>
+              <div>
+                <h1 className="text-3xl font-bold text-[#3e2c24]">
+                  Carrito de Compras
+                </h1>
+                <p className="text-[#5c4033]">
+                  {totalQuantity}{" "}
+                  {totalQuantity === 1 ? "producto" : "productos"}
+                </p>
+              </div>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -137,11 +130,12 @@ const Cart = () => {
               {items.map((item) => (
                 <div
                   key={item.id}
-                  className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow"
+                  className="bg-white rounded-xl shadow-sm border border-[#e2dcc7] 
+                  p-6 hover:shadow-md transition-all duration-200"
                 >
                   <div className="flex gap-4">
                     {/* Product Image */}
-                    <div className="w-24 h-24 flex-shrink-0 bg-gray-100 rounded-md overflow-hidden">
+                    <div className="w-24 h-24 flex-shrink-0 bg-[#f8f4ef] rounded-lg overflow-hidden">
                       <img
                         src={item.image || "/placeholder-product.jpg"}
                         alt={item.name}
@@ -149,165 +143,166 @@ const Cart = () => {
                       />
                     </div>
 
-                    <div className="flex-1">
+                    <div className="flex-1 min-w-0">
                       <div className="flex justify-between items-start mb-2">
-                        <div>
-                          <h3 className="text-lg font-semibold text-gray-800">
+                        <div className="flex-1 min-w-0 pr-2">
+                          <h3 className="text-lg font-semibold text-[#3e2c24] truncate">
                             {item.name}
                           </h3>
                           {item.description && (
-                            <p className="text-sm text-gray-600 mt-1 line-clamp-2">
+                            <p className="text-sm text-[#5c4033] mt-1 line-clamp-2">
                               {item.description}
                             </p>
                           )}
                         </div>
                         <button
                           onClick={() => handleRemoveItem(item.id)}
-                          className="text-red-500 hover:text-red-700 transition-colors p-2 ml-2"
+                          className="w-9 h-9 flex-shrink-0 rounded-lg 
+                          bg-red-50 hover:bg-red-100 text-red-600
+                          flex items-center justify-center transition"
                           aria-label="Eliminar producto"
                         >
-                          <svg
-                            className="w-5 h-5"
-                            fill="none"
-                            stroke="currentColor"
-                            viewBox="0 0 24 24"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                            />
-                          </svg>
+                          <Trash2 className="w-4 h-4" />
                         </button>
                       </div>
 
                       <div className="flex items-center justify-between mt-4">
-                        <div className="flex items-center gap-2 bg-gray-100 rounded-lg p-1">
+                        {/* Quantity Controls */}
+                        <div className="flex items-center gap-2 bg-[#f8f4ef] rounded-lg p-1">
                           <button
                             onClick={() =>
                               handleDecrement(item.id, item.quantity)
                             }
                             disabled={item.quantity <= 1}
-                            className="w-8 h-8 rounded-md bg-white flex items-center justify-center hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                            className="w-8 h-8 rounded-lg bg-white 
+                            hover:bg-[#e2dcc7] text-[#3e2c24] 
+                            flex items-center justify-center transition
+                            disabled:opacity-50 disabled:cursor-not-allowed"
                             aria-label="Disminuir cantidad"
                           >
-                            <span className="text-gray-600 font-bold">−</span>
+                            <Minus className="w-4 h-4" />
                           </button>
-                          <span className="w-8 text-center font-semibold text-gray-800">
+
+                          <span className="w-10 text-center font-medium text-[#3e2c24]">
                             {item.quantity}
                           </span>
+
                           <button
                             onClick={() =>
                               handleIncrement(item.id, item.quantity)
                             }
-                            className="w-8 h-8 rounded-md bg-white flex items-center justify-center hover:bg-gray-50 transition-colors"
+                            className="w-8 h-8 rounded-lg bg-[#c8d6a8] 
+                            hover:bg-[#b1c494] text-white 
+                            flex items-center justify-center transition"
                             aria-label="Aumentar cantidad"
                           >
-                            <span className="text-gray-600 font-bold">+</span>
+                            <Plus className="w-4 h-4" />
                           </button>
                         </div>
-                        <p className="text-xl font-bold text-[#4d7b0f]">
-                          ${(Number(item.price) * item.quantity).toFixed(2)}
-                        </p>
+
+                        {/* Price */}
+                        <div className="text-right">
+                          <p className="text-xl font-bold text-[#3e2c24]">
+                            ${(Number(item.price) * item.quantity).toFixed(2)}
+                          </p>
+                          {item.quantity > 1 && (
+                            <p className="text-xs text-[#5c4033]">
+                              ${Number(item.price).toFixed(2)} c/u
+                            </p>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               ))}
 
+              {/* Clear Cart Button */}
               <button
                 onClick={handleClearCart}
-                className="w-full text-red-600 hover:text-red-700 font-semibold py-3 transition-colors"
+                className="w-full py-3 text-sm text-red-600 hover:text-red-700 
+                hover:bg-red-50 rounded-lg transition font-medium"
               >
                 Vaciar Carrito
               </button>
             </div>
 
+            {/* Order Summary */}
             <div className="lg:col-span-1">
-              <div className="bg-white rounded-lg shadow-md p-6 sticky top-20">
-                <h2 className="text-xl font-bold text-gray-800 mb-4">
+              <div
+                className="bg-white rounded-xl shadow-sm border border-[#e2dcc7] 
+              p-6 sticky top-20"
+              >
+                <h2 className="text-xl font-bold text-[#3e2c24] mb-4">
                   Resumen del Pedido
                 </h2>
 
                 <div className="space-y-3 mb-6">
-                  <div className="flex justify-between text-gray-600">
+                  <div className="flex justify-between text-[#5c4033]">
                     <span>Subtotal ({totalQuantity} items)</span>
-                    <span>${Number(totalPrice).toFixed(2)}</span>
-                  </div>
-                  <div className="flex justify-between text-gray-600">
-                    <span>Envío</span>
-                    <span className="text-green-600 font-medium">Gratis</span>
-                  </div>
-                  <div className="border-t pt-3 flex justify-between text-xl font-bold text-gray-800">
-                    <span>Total</span>
-                    <span className="text-[#4d7b0f]">
+                    <span className="font-medium">
                       ${Number(totalPrice).toFixed(2)}
                     </span>
+                  </div>
+
+                  <div className="flex justify-between text-[#5c4033]">
+                    <span>Envío</span>
+                    <span className="font-medium text-[#6b7c5a]">Gratis</span>
+                  </div>
+
+                  <div className="border-t border-[#e2dcc7] pt-3 mt-3">
+                    <div className="flex justify-between">
+                      <span className="text-lg font-bold text-[#3e2c24]">
+                        Total
+                      </span>
+                      <span className="text-2xl font-bold text-[#3e2c24]">
+                        ${Number(totalPrice).toFixed(2)}
+                      </span>
+                    </div>
                   </div>
                 </div>
 
                 <button
                   onClick={handleCheckout}
-                  className="w-full bg-[#4d7b0f] text-white py-3 rounded-md font-semibold hover:bg-[#3d6108] transition-colors mb-3"
+                  className="w-full py-4 px-6 mb-3
+                  bg-gradient-to-r from-[#6b7c5a] to-[#596b4a]
+                  text-white rounded-xl font-medium text-lg
+                  hover:shadow-lg hover:scale-105
+                  transition-all duration-200
+                  flex items-center justify-center gap-2"
                 >
+                  <ShoppingBag className="w-5 h-5" />
                   Proceder al Pago
                 </button>
 
                 <Link
                   to="/"
-                  className="block text-center text-[#4d7b0f] hover:underline font-semibold"
+                  className="block text-center text-[#6b7c5a] hover:text-[#596b4a] 
+                  font-medium transition"
                 >
                   Continuar Comprando
                 </Link>
 
-                <div className="mt-6 pt-6 border-t space-y-3">
-                  <div className="flex items-start gap-2 text-sm text-gray-600">
-                    <svg
-                      className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
+                {/* Benefits Section */}
+                <div className="mt-6 pt-6 border-t border-[#e2dcc7] space-y-3">
+                  <div className="flex items-start gap-3 text-sm text-[#5c4033]">
+                    <div className="w-5 h-5 bg-[#c8d6a8] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Check className="w-3 h-3 text-white" />
+                    </div>
                     <span>Envío gratis en compras mayores a $1000</span>
                   </div>
-                  <div className="flex items-start gap-2 text-sm text-gray-600">
-                    <svg
-                      className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
-                      />
-                    </svg>
+
+                  <div className="flex items-start gap-3 text-sm text-[#5c4033]">
+                    <div className="w-5 h-5 bg-[#c8d6a8] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <Shield className="w-3 h-3 text-white" />
+                    </div>
                     <span>Pago seguro y protegido</span>
                   </div>
-                  <div className="flex items-start gap-2 text-sm text-gray-600">
-                    <svg
-                      className="w-5 h-5 text-green-600 flex-shrink-0 mt-0.5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
-                      />
-                    </svg>
+
+                  <div className="flex items-start gap-3 text-sm text-[#5c4033]">
+                    <div className="w-5 h-5 bg-[#c8d6a8] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <RefreshCw className="w-3 h-3 text-white" />
+                    </div>
                     <span>Devoluciones fáciles en 30 días</span>
                   </div>
                 </div>

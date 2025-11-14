@@ -51,10 +51,11 @@ export const Navbar = () => {
     return `rgba(${r}, ${g}, ${b}, ${alpha})`;
   };
 
+  // ✨ COLORES ACTUALIZADOS - Coinciden con la paleta de la app
   const classScrolled = `font-medium flex transition ${
     isScrolled
-      ? "text-gray-300 hover:text-gray-800"
-      : "text-white hover:text-green-200"
+      ? "text-[#3e2c24] hover:text-[#5c4033]"
+      : "text-white hover:text-[#c8d6a8]"
   }`;
 
   useEffect(() => {
@@ -90,10 +91,10 @@ export const Navbar = () => {
     navigate("/");
   };
 
-  // Determinar el color de fondo del navbar
+  // ✨ FONDO ACTUALIZADO - Verde del hero (#8BA446)
   const getNavbarBackground = () => {
     if (isScrolled) {
-      return "bg-[#556030]/80 backdrop-blur-md shadow-md";
+      return "bg-[#8BA446] backdrop-blur-sm shadow-lg";
     }
     if (shouldUseCarouselColor) {
       return "backdrop-blur-md";
@@ -181,8 +182,9 @@ export const Navbar = () => {
                   d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 000-4z"
                 />
               </svg>
+              {/* ✨ BADGE ACTUALIZADO - Verde oliva */}
               {totalItems > 0 && (
-                <span className="absolute -top-2 -right-2 bg-green-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                <span className="absolute -top-2 -right-2 bg-[#6b7c5a] text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shadow-md">
                   {totalItems}
                 </span>
               )}
