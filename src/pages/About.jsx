@@ -103,15 +103,16 @@ const About = () => {
               {/* Texto descriptivo */}
               <div className="flex-1">
                 <p className="text-base sm:text-lg lg:text-xl text-white leading-relaxed mb-6 drop-shadow-lg">
-                  Todo comenzó cuando una integrante celíaca de nuestro equipo
-                  compartió su experiencia diaria: la dificultad de encontrar
-                  opciones seguras y confiables para comer fuera de casa.
+                  Todo comenzó cuando una integrante de nuestro equipo compartió
+                  su experiencia como persona celíaca: la dificultad de
+                  encontrar opciones seguras y confiables para comer fuera de
+                  casa.
                 </p>
 
                 <p className="text-base sm:text-lg lg:text-xl text-white leading-relaxed drop-shadow-lg">
                   <span className="font-bold">Así nació AppTo:</span> una
                   plataforma donde no solo los celíacos, sino también
-                  diabéticos, veganos, vegetarianos, y quienes siguen dietas
+                  diabéticos, veganos, vegetarianos y quienes siguen dietas
                   kosher o halal pueden encontrar opciones confiables.
                   Garantizamos calidad, seguridad alimentaria y, sobre todo, la
                   tranquilidad de saber que tus alimentos favoritos están
