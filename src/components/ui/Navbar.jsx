@@ -94,7 +94,7 @@ export const Navbar = () => {
   // ✨ FONDO ACTUALIZADO - Verde del hero (#8BA446)
   const getNavbarBackground = () => {
     if (isScrolled) {
-      return "bg-[#8BA446] backdrop-blur-sm shadow-lg";
+      return "bg-[#556030] backdrop-blur-sm shadow-lg";
     }
     if (shouldUseCarouselColor) {
       return "backdrop-blur-md";
