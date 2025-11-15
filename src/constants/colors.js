@@ -1,7 +1,7 @@
 export const slideColors = [
   {
-    accentColor: "#556030",
-    buttonColor: "#556030",
+    accentColor: "#6B7B3C",
+    buttonColor: "#6B7B3C",
   },
   {
     accentColor: "#E8955B",

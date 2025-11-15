@@ -12,7 +12,7 @@ export default function Footer() {
           <Link
             to="/about"
             className="px-3 py-1.5 rounded-lg text-sm
-            bg-[#c8d6a8] text-[#3e2c24] hover:bg-[#b1c494]
+            bg-[#6B7B3C] text-white hover:bg-[#596b4a]
             transition shadow-sm"
           >
             Sobre Nosotros
@@ -21,7 +21,7 @@ export default function Footer() {
           <a
             href="http://localhost:5174/"
             className="px-3 py-1.5 rounded-lg text-sm
-            bg-[#6b7c5a] text-white hover:bg-[#596b4a]
+            bg-[#6B7B3C] text-white hover:bg-[#596b4a]
             transition shadow-sm"
           >
             Registra tu empresa

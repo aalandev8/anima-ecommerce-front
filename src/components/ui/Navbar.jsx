@@ -74,7 +74,6 @@ export const Navbar = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, [dispatch]);
 
-  // Escuchar cambios de color del carousel
   useEffect(() => {
     const handleColorChange = (event) => {
       setCarouselColor(event.detail.color);
@@ -91,10 +90,9 @@ export const Navbar = () => {
     navigate("/");
   };
 
-  // ✨ FONDO ACTUALIZADO - Verde del hero (#8BA446)
   const getNavbarBackground = () => {
     if (isScrolled) {
-      return "bg-[#556030] backdrop-blur-sm shadow-lg";
+      return "bg-[#6B7B3C] backdrop-blur-sm shadow-lg";
     }
     if (shouldUseCarouselColor) {
       return "backdrop-blur-md";

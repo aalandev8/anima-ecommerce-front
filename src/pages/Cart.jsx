@@ -60,7 +60,8 @@ const Cart = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto text-center">
             <div className="bg-white rounded-2xl shadow-sm border border-[#e2dcc7] p-12">
-              <div className="w-32 h-32 mx-auto mb-6 bg-gradient-to-br from-[#c8d6a8] to-[#b1c494] rounded-full flex items-center justify-center">
+              {/* ✨ VERDE UNIFICADO #6B7B3C */}
+              <div className="w-32 h-32 mx-auto mb-6 bg-[#6B7B3C] rounded-full flex items-center justify-center shadow-md">
                 <ShoppingBag className="w-16 h-16 text-white" />
               </div>
 
@@ -72,12 +73,12 @@ const Cart = () => {
                 ¡Agregá productos para comenzar tu pedido!
               </p>
 
+              {/* ✨ VERDE UNIFICADO #6B7B3C */}
               <button
                 onClick={handleGoToRestaurants}
                 className="inline-flex items-center gap-2 px-8 py-4 
-                bg-gradient-to-r from-[#6b7c5a] to-[#596b4a] 
-                text-white rounded-xl font-medium
-                hover:shadow-lg hover:scale-105 
+                bg-[#6B7B3C] text-white rounded-xl font-medium
+                hover:bg-[#5a6632] hover:shadow-lg hover:scale-105 
                 transition-all duration-200"
               >
                 <ArrowLeft className="w-5 h-5" />
@@ -106,10 +107,8 @@ const Cart = () => {
             </button>
 
             <div className="flex items-center gap-3">
-              <div
-                className="w-12 h-12 bg-gradient-to-br from-[#c8d6a8] to-[#b1c494] 
-              rounded-xl flex items-center justify-center"
-              >
+              {/* ✨ VERDE UNIFICADO #6B7B3C */}
+              <div className="w-12 h-12 bg-[#6B7B3C] rounded-xl flex items-center justify-center shadow-md">
                 <ShoppingCart className="w-6 h-6 text-white" />
               </div>
               <div>
@@ -187,12 +186,13 @@ const Cart = () => {
                             {item.quantity}
                           </span>
 
+                          {/* ✨ VERDE UNIFICADO #6B7B3C */}
                           <button
                             onClick={() =>
                               handleIncrement(item.id, item.quantity)
                             }
-                            className="w-8 h-8 rounded-lg bg-[#c8d6a8] 
-                            hover:bg-[#b1c494] text-white 
+                            className="w-8 h-8 rounded-lg bg-[#6B7B3C] 
+                            hover:bg-[#5a6632] text-white 
                             flex items-center justify-center transition"
                             aria-label="Aumentar cantidad"
                           >
@@ -229,10 +229,7 @@ const Cart = () => {
 
             {/* Order Summary */}
             <div className="lg:col-span-1">
-              <div
-                className="bg-white rounded-xl shadow-sm border border-[#e2dcc7] 
-              p-6 sticky top-20"
-              >
+              <div className="bg-white rounded-xl shadow-sm border border-[#e2dcc7] p-6 sticky top-20">
                 <h2 className="text-xl font-bold text-[#3e2c24] mb-4">
                   Resumen del Pedido
                 </h2>
@@ -245,9 +242,10 @@ const Cart = () => {
                     </span>
                   </div>
 
+                  {/* ✨ VERDE UNIFICADO #6B7B3C */}
                   <div className="flex justify-between text-[#5c4033]">
                     <span>Envío</span>
-                    <span className="font-medium text-[#6b7c5a]">Gratis</span>
+                    <span className="font-medium text-[#6B7B3C]">Gratis</span>
                   </div>
 
                   <div className="border-t border-[#e2dcc7] pt-3 mt-3">
@@ -262,12 +260,12 @@ const Cart = () => {
                   </div>
                 </div>
 
+                {/* ✨ VERDE UNIFICADO #6B7B3C */}
                 <button
                   onClick={handleCheckout}
                   className="w-full py-4 px-6 mb-3
-                  bg-gradient-to-r from-[#6b7c5a] to-[#596b4a]
-                  text-white rounded-xl font-medium text-lg
-                  hover:shadow-lg hover:scale-105
+                  bg-[#6B7B3C] text-white rounded-xl font-medium text-lg
+                  hover:bg-[#5a6632] hover:shadow-lg hover:scale-105
                   transition-all duration-200
                   flex items-center justify-center gap-2"
                 >
@@ -275,32 +273,33 @@ const Cart = () => {
                   Proceder al Pago
                 </button>
 
+                {/* ✨ VERDE UNIFICADO #6B7B3C */}
                 <Link
                   to="/"
-                  className="block text-center text-[#6b7c5a] hover:text-[#596b4a] 
+                  className="block text-center text-[#6B7B3C] hover:text-[#5a6632] 
                   font-medium transition"
                 >
                   Continuar Comprando
                 </Link>
 
-                {/* Benefits Section */}
+                {/* Benefits Section - ✨ VERDE UNIFICADO #6B7B3C */}
                 <div className="mt-6 pt-6 border-t border-[#e2dcc7] space-y-3">
                   <div className="flex items-start gap-3 text-sm text-[#5c4033]">
-                    <div className="w-5 h-5 bg-[#c8d6a8] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <div className="w-5 h-5 bg-[#6B7B3C] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                       <Check className="w-3 h-3 text-white" />
                     </div>
                     <span>Envío gratis en compras mayores a $1000</span>
                   </div>
 
                   <div className="flex items-start gap-3 text-sm text-[#5c4033]">
-                    <div className="w-5 h-5 bg-[#c8d6a8] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <div className="w-5 h-5 bg-[#6B7B3C] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                       <Shield className="w-3 h-3 text-white" />
                     </div>
                     <span>Pago seguro y protegido</span>
                   </div>
 
                   <div className="flex items-start gap-3 text-sm text-[#5c4033]">
-                    <div className="w-5 h-5 bg-[#c8d6a8] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <div className="w-5 h-5 bg-[#6B7B3C] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                       <RefreshCw className="w-3 h-3 text-white" />
                     </div>
                     <span>Devoluciones fáciles en 30 días</span>

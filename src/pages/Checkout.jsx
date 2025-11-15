@@ -544,10 +544,7 @@ const Checkout = () => {
                       <span>Subtotal</span>
                       <span>${subtotal.toFixed(2)}</span>
                     </div>
-                    <div className="flex justify-between text-gray-600">
-                      <span>Envío</span>
-                      <span className="text-green-600 font-medium">Gratis</span>
-                    </div>
+
                     <div className="flex justify-between text-xl font-bold text-gray-800 pt-2 border-t">
                       <span>Total</span>
                       <span className="text-[#6B7B3C]">
@@ -565,12 +562,7 @@ const Checkout = () => {
 
                   <div className="space-y-2 pt-4 border-t">
                     <div className="flex items-center gap-2 text-xs text-gray-600">
-                      <Check className="w-4 h-4 text-green-600" />
                       <span>Pago 100% seguro</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-xs text-gray-600">
-                      <Check className="w-4 h-4 text-green-600" />
-                      <span>Entrega en 30-45 minutos</span>
                     </div>
                   </div>
                 </div>

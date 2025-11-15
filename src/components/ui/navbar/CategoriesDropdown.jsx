@@ -59,7 +59,7 @@ export const CategoriesDropdown = ({
               onClick={onClose}
               className="block px-4 py-2 text-[#3e2c24] 
               border-b border-[#e2dcc7] last:border-b-0
-              hover:bg-[#c8d6a8] hover:text-white
+              hover:bg-[#6B7B3C] hover:text-white
               transition-colors duration-150"
             >
               {cat.label}
