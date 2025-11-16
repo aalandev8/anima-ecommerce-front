@@ -254,6 +254,7 @@ const Cart = () => {
                   </div>
                 </div>
 
+                {/* ✨ VERDE UNIFICADO #6B7B3C */}
                 <button
                   onClick={handleCheckout}
                   className="w-full py-4 px-6 mb-3
@@ -266,6 +267,7 @@ const Cart = () => {
                   Proceder al Pago
                 </button>
 
+                {/* ✨ VERDE UNIFICADO #6B7B3C */}
                 <Link
                   to="/"
                   className="block text-center text-[#6B7B3C] hover:text-[#5a6632] 
@@ -274,6 +276,7 @@ const Cart = () => {
                   Continuar Comprando
                 </Link>
 
+                {/* Benefits Section - ✨ VERDE UNIFICADO #6B7B3C */}
                 <div className="mt-6 pt-6 border-t border-[#e2dcc7] space-y-3">
                   <div className="flex items-start gap-3 text-sm text-[#5c4033]">
                     <div className="w-5 h-5 bg-[#6B7B3C] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
