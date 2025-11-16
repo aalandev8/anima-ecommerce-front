@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { logout } from "@/redux/slices/authSlice";
@@ -23,9 +23,6 @@ export const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-
-  const [carouselColor, setCarouselColor] = useState(null);
-
   const {
     isMainMenuOpen,
     isUserMenuOpen,
@@ -39,17 +36,6 @@ export const Navbar = () => {
 
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
-  const isHomePage = location.pathname === "/";
-  const shouldUseCarouselColor = isHomePage && !isScrolled && carouselColor;
-
-  const hexToRgba = (hex, alpha) => {
-    const r = parseInt(hex.slice(1, 3), 16);
-    const g = parseInt(hex.slice(3, 5), 16);
-    const b = parseInt(hex.slice(5, 7), 16);
-    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-  };
-
-  // ✨ COLORES ACTUALIZADOS - Coinciden con la paleta de la app
   const classScrolled = `font-medium flex transition ${
     isScrolled
       ? "text-green-100 hover:text-green-200"
@@ -72,44 +58,22 @@ export const Navbar = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, [dispatch]);
 
- 
-  useEffect(() => {
-    const handleColorChange = (event) => {
-      setCarouselColor(event.detail.color);
-    };
-
-    window.addEventListener("carouselColorChange", handleColorChange);
-    return () =>
-      window.removeEventListener("carouselColorChange", handleColorChange);
-  }, []);
-
   const handleLogout = () => {
     dispatch(logout());
     dispatch(closeUserMenu());
     navigate("/");
   };
 
- 
   const getNavbarBackground = () => {
     if (isScrolled) {
       return "bg-[#556030]/85 backdrop-blur-sm shadow-lg";
     }
-    if (shouldUseCarouselColor) {
-      return "backdrop-blur-md";
-    }
     return "bg-white/20 backdrop-blur-md";
   };
-
-  const navbarStyle = shouldUseCarouselColor
-    ? {
-        backgroundColor: hexToRgba(carouselColor, 0.3),
-      }
-    : {};
 
   return (
     <nav
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${getNavbarBackground()}`}
-      style={navbarStyle}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">

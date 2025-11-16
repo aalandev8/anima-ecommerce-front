@@ -60,27 +60,22 @@ const Cart = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-2xl mx-auto text-center">
             <div className="bg-white rounded-2xl shadow-sm border border-[#e2dcc7] p-12">
-              {/* ✨ VERDE UNIFICADO #6B7B3C */}
               <div className="w-32 h-32 mx-auto mb-6 bg-[#6B7B3C] rounded-full flex items-center justify-center shadow-md">
                 <ShoppingBag className="w-16 h-16 text-white" />
               </div>
-
               <h2 className="text-3xl font-bold text-[#3e2c24] mb-3">
                 Tu carrito está vacío
               </h2>
-
               <p className="text-[#5c4033] mb-8 text-lg">
                 ¡Agregá productos para comenzar tu pedido!
               </p>
-
-              {/* ✨ VERDE UNIFICADO #6B7B3C */}
               <button
                 onClick={handleGoToRestaurants}
                 className="inline-flex items-center gap-2 px-8 py-4 
                 bg-[#6B7B3C] text-white rounded-xl font-medium
                 hover:bg-[#5a6632] hover:shadow-lg hover:scale-105 
                 transition-all duration-200"
-              >        
+              >
                 Ver Restaurantes
               </button>
             </div>
@@ -94,7 +89,6 @@ const Cart = () => {
     <div className="min-h-screen bg-[#FCF4E8] py-8">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          {/* Header */}
           <div className="mb-8">
             <button
               onClick={() => navigate("/")}
@@ -106,7 +100,6 @@ const Cart = () => {
             </button>
 
             <div className="flex items-center gap-3">
-              {/* ✨ VERDE UNIFICADO #6B7B3C */}
               <div className="w-12 h-12 bg-[#6B7B3C] rounded-xl flex items-center justify-center shadow-md">
                 <ShoppingCart className="w-6 h-6 text-white" />
               </div>
@@ -123,7 +116,6 @@ const Cart = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          
             <div className="lg:col-span-2 space-y-4">
               {items.map((item) => (
                 <div
@@ -183,7 +175,6 @@ const Cart = () => {
                             {item.quantity}
                           </span>
 
-                          {/* ✨ VERDE UNIFICADO #6B7B3C */}
                           <button
                             onClick={() =>
                               handleIncrement(item.id, item.quantity)
@@ -236,7 +227,6 @@ const Cart = () => {
                     </span>
                   </div>
 
-                  {/* ✨ VERDE UNIFICADO #6B7B3C */}
                   <div className="flex justify-between text-[#5c4033]">
                     <span>Envío</span>
                     <span className="font-medium text-[#6B7B3C]">Gratis</span>
@@ -254,7 +244,6 @@ const Cart = () => {
                   </div>
                 </div>
 
-                {/* ✨ VERDE UNIFICADO #6B7B3C */}
                 <button
                   onClick={handleCheckout}
                   className="w-full py-4 px-6 mb-3
@@ -267,7 +256,6 @@ const Cart = () => {
                   Proceder al Pago
                 </button>
 
-                {/* ✨ VERDE UNIFICADO #6B7B3C */}
                 <Link
                   to="/"
                   className="block text-center text-[#6B7B3C] hover:text-[#5a6632] 
@@ -276,27 +264,12 @@ const Cart = () => {
                   Continuar Comprando
                 </Link>
 
-                {/* Benefits Section - ✨ VERDE UNIFICADO #6B7B3C */}
                 <div className="mt-6 pt-6 border-t border-[#e2dcc7] space-y-3">
-                  <div className="flex items-start gap-3 text-sm text-[#5c4033]">
-                    <div className="w-5 h-5 bg-[#6B7B3C] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <Check className="w-3 h-3 text-white" />
-                    </div>
-                    <span>Envío gratis en compras mayores a $1000</span>
-                  </div>
-
                   <div className="flex items-start gap-3 text-sm text-[#5c4033]">
                     <div className="w-5 h-5 bg-[#6B7B3C] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
                       <Shield className="w-3 h-3 text-white" />
                     </div>
                     <span>Pago seguro y protegido</span>
-                  </div>
-
-                  <div className="flex items-start gap-3 text-sm text-[#5c4033]">
-                    <div className="w-5 h-5 bg-[#6B7B3C] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <RefreshCw className="w-3 h-3 text-white" />
-                    </div>
-                    <span>Devoluciones fáciles en 30 días</span>
                   </div>
                 </div>
               </div>

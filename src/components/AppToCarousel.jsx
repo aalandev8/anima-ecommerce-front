@@ -22,10 +22,9 @@ const AppToCarousel = () => {
     return () => clearInterval(interval);
   }, [isAutoPlaying]);
 
-  // Emitir el color actual del slide para que el Navbar lo use
   useEffect(() => {
     const currentColor = slideColors[currentSlide];
-    // Crear un evento personalizado con el color actual
+
     const event = new CustomEvent("carouselColorChange", {
       detail: { color: currentColor.accentColor },
     });

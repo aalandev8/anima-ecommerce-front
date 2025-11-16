@@ -60,14 +60,12 @@ const About = () => {
 
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-[#556030] mb-16">
+          <h2 className="text-4xl font-bold text-center text-[#6B7B3C] mb-16">
             Nuestros Valores
           </h2>
-
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Valor 1 */}
             <div className="bg-white rounded-lg shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
-              <div className="w-16 h-16 bg-[#8BA446] rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-[#6B7B3C] rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg
                   className="w-8 h-8 text-white"
                   fill="none"
@@ -82,7 +80,7 @@ const About = () => {
                   />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-[#556030] mb-4">
+              <h3 className="text-2xl font-bold text-[#6B7B3C] mb-4">
                 Calidad
               </h3>
               <p className="text-gray-600">
@@ -91,9 +89,8 @@ const About = () => {
                 más alto estándar en cada plato.
               </p>
             </div>
-
             <div className="bg-white rounded-lg shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
-              <div className="w-16 h-16 bg-[#E8955B] rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-[#6B7B3C] rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg
                   className="w-8 h-8 text-white"
                   fill="none"
@@ -108,7 +105,7 @@ const About = () => {
                   />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-[#556030] mb-4">
+              <h3 className="text-2xl font-bold text-[#6B7B3C] mb-4">
                 Seguridad
               </h3>
               <p className="text-gray-600">
@@ -117,9 +114,8 @@ const About = () => {
                 todo momento.
               </p>
             </div>
-
             <div className="bg-white rounded-lg shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
-              <div className="w-16 h-16 bg-[#F4B324] rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-[#6B7B3C] rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg
                   className="w-8 h-8 text-white"
                   fill="none"
@@ -134,7 +130,7 @@ const About = () => {
                   />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-[#556030] mb-4">
+              <h3 className="text-2xl font-bold text-[#6B7B3C] mb-4">
                 Inclusión
               </h3>
               <p className="text-gray-600">
@@ -146,10 +142,9 @@ const About = () => {
           </div>
         </div>
       </section>
-
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#FCF4E8]">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-[#556030] mb-8">
+          <h2 className="text-4xl font-bold text-center text-[#6B7B3C] mb-8">
             A quién servimos
           </h2>
           <p className="text-center text-gray-600 mb-16 max-w-2xl mx-auto text-lg">
@@ -157,28 +152,26 @@ const About = () => {
             restaurantes certificados que entienden la importancia de una
             preparación cuidadosa y responsable.
           </p>
-
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
             {[
-              { name: "Vegano", color: "bg-green-100 text-green-700" },
-              { name: "Vegetariano", color: "bg-lime-100 text-lime-700" },
-              { name: "Sin Gluten", color: "bg-amber-100 text-amber-700" },
-              { name: "Diabético", color: "bg-purple-100 text-purple-700" },
-              { name: "Kosher", color: "bg-indigo-100 text-indigo-700" },
-              { name: "Halal", color: "bg-rose-100 text-rose-700" },
+              "Vegano",
+              "Vegetariano",
+              "Sin Gluten",
+              "Diabético",
+              "Kosher",
+              "Halal",
             ].map((category, index) => (
               <div
                 key={index}
-                className={`${category.color} rounded-lg p-6 text-center font-semibold shadow-md hover:shadow-lg transition-shadow`}
+                className="bg-[#6B7B3C] text-white rounded-lg p-6 text-center font-semibold shadow-md hover:shadow-lg hover:bg-[#5a6632] transition-all"
               >
-                {category.name}
+                {category}
               </div>
             ))}
           </div>
         </div>
       </section>
-
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#556030]">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#6B7B3C]">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl font-bold text-white mb-6">
             ¿Listo para comenzar tu experiencia?
@@ -187,10 +180,9 @@ const About = () => {
             Descubre restaurantes que comprenden y respetan tus necesidades
             dietéticas
           </p>
-
           <a
             href="/"
-            className="inline-block bg-[#8BA446] hover:bg-[#7a9338] text-white font-bold py-4 px-8 rounded-full text-lg transition-colors shadow-lg hover:shadow-xl"
+            className="inline-block bg-[#FCF4E8] hover:bg-[#e8dcc7] text-[#6B7B3C] font-bold py-4 px-8 rounded-full text-lg transition-colors shadow-lg hover:shadow-xl"
           >
             Explorar Restaurantes
           </a>

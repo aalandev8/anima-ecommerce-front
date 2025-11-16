@@ -5,7 +5,6 @@ export const StoreHeader = ({ store, storeId }) => {
   const navigate = useNavigate();
 
   return (
-    // ✨ VERDE UNIFICADO #6B7B3C
     <div className="bg-[#6B7B3C] w-full border-b border-[#5a6632] px-6 py-4">
       <div className="flex items-center gap-4">
         <button

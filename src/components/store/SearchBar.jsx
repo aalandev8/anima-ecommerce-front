@@ -10,7 +10,6 @@ export const SearchBar = ({ isScrolled, isOpen, onClose }) => {
   const dropdownRef = useRef(null);
   const navigate = useNavigate();
 
-  // Categorías correctas según tu sistema
   const categories = [
     { id: "vegano", name: "Vegano" },
     { id: "vegetariano", name: "Vegetariano" },
@@ -26,7 +25,6 @@ export const SearchBar = ({ isScrolled, isOpen, onClose }) => {
     }
   }, [isOpen]);
 
-  // Cerrar dropdown al hacer click fuera
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
@@ -79,10 +77,8 @@ export const SearchBar = ({ isScrolled, isOpen, onClose }) => {
 
   return (
     <>
-      {/* Overlay oscuro */}
       <div className="fixed inset-0 bg-black/50 z-40" onClick={onClose} />
 
-      {/* Barra de búsqueda */}
       <div className="fixed top-16 left-0 right-0 z-50 px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mx-auto">
           <form
@@ -91,7 +87,6 @@ export const SearchBar = ({ isScrolled, isOpen, onClose }) => {
               isScrolled ? "bg-white" : "bg-white/95 backdrop-blur-md"
             }`}
           >
-            {/* ✨ Custom Select de categorías - Verde unificado (#6B7B3C) */}
             <div className="relative" ref={dropdownRef}>
               <button
                 type="button"
@@ -110,7 +105,6 @@ export const SearchBar = ({ isScrolled, isOpen, onClose }) => {
                 />
               </button>
 
-              {/* Dropdown menu */}
               {isDropdownOpen && (
                 <div
                   className="absolute top-full left-0 right-0 mt-1 
@@ -136,7 +130,6 @@ export const SearchBar = ({ isScrolled, isOpen, onClose }) => {
               )}
             </div>
 
-            {/* ✨ Input de búsqueda - Focus ring verde unificado */}
             <div className="flex items-center flex-1 border border-gray-300 rounded-lg px-3 py-2 focus-within:ring-2 focus-within:ring-[#6B7B3C]">
               <svg
                 className="w-5 h-5 text-gray-400 mr-2"

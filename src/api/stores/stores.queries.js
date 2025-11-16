@@ -1,19 +1,17 @@
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-import storesApi from './stores.api';
+import { useQuery, useQueryClient } from "@tanstack/react-query";
+import storesApi from "./stores.api";
 
-// Query keys for stores
 export const storesKeys = {
-  all: ['stores'],
-  lists: () => [...storesKeys.all, 'list'],
+  all: ["stores"],
+  lists: () => [...storesKeys.all, "list"],
   list: (filters) => [...storesKeys.lists(), { filters }],
-  details: () => [...storesKeys.all, 'detail'],
+  details: () => [...storesKeys.all, "detail"],
   detail: (id) => [...storesKeys.details(), id],
-  byCategory: (category) => [...storesKeys.all, 'category', category],
-  featured: () => [...storesKeys.all, 'featured'],
-  search: (query) => [...storesKeys.all, 'search', query],
+  byCategory: (category) => [...storesKeys.all, "category", category],
+  featured: () => [...storesKeys.all, "featured"],
+  search: (query) => [...storesKeys.all, "search", query],
 };
 
-// Get all stores with optional category filter
 export const useStores = (category = null, options = {}) => {
   return useQuery({
     queryKey: category ? storesKeys.byCategory(category) : storesKeys.lists(),
@@ -23,7 +21,6 @@ export const useStores = (category = null, options = {}) => {
   });
 };
 
-// Get stores by dietary category
 export const useStoresByCategory = (category, options = {}) => {
   return useQuery({
     queryKey: storesKeys.byCategory(category),
@@ -34,7 +31,6 @@ export const useStoresByCategory = (category, options = {}) => {
   });
 };
 
-// Get single store by ID
 export const useStore = (storeId, options = {}) => {
   return useQuery({
     queryKey: storesKeys.detail(storeId),
@@ -46,17 +42,15 @@ export const useStore = (storeId, options = {}) => {
   });
 };
 
-// Get featured stores
 export const useFeaturedStores = (options = {}) => {
   return useQuery({
     queryKey: storesKeys.featured(),
     queryFn: () => storesApi.getFeaturedStores(),
-    staleTime: 10 * 60 * 1000, // 10 minutes
+    staleTime: 10 * 60 * 1000,
     ...options,
   });
 };
 
-// Search stores
 export const useSearchStores = (query, options = {}) => {
   return useQuery({
     queryKey: storesKeys.search(query),
@@ -67,7 +61,6 @@ export const useSearchStores = (query, options = {}) => {
   });
 };
 
-// Prefetch store (useful for optimistic loading)
 export const usePrefetchStore = () => {
   const queryClient = useQueryClient();
 
@@ -79,14 +72,16 @@ export const usePrefetchStore = () => {
   };
 };
 
-// Invalidate stores cache
 export const useInvalidateStores = () => {
   const queryClient = useQueryClient();
 
   return {
-    invalidateAll: () => queryClient.invalidateQueries({ queryKey: storesKeys.all }),
+    invalidateAll: () =>
+      queryClient.invalidateQueries({ queryKey: storesKeys.all }),
     invalidateByCategory: (category) =>
-      queryClient.invalidateQueries({ queryKey: storesKeys.byCategory(category) }),
+      queryClient.invalidateQueries({
+        queryKey: storesKeys.byCategory(category),
+      }),
     invalidateStore: (storeId) =>
       queryClient.invalidateQueries({ queryKey: storesKeys.detail(storeId) }),
   };

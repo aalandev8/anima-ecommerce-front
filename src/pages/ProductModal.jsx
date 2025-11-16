@@ -98,12 +98,11 @@ export const ProductModal = ({ productId, storeId, onClose }) => {
                 />
               </div>
 
-              {/* ✨ VERDE UNIFICADO #6B7B3C */}
               <button
                 className="bg-[#6B7B3C] mb-3 w-full text-white px-6 py-3 rounded-lg font-semibold hover:bg-[#5a6632] transition-colors"
                 onClick={() => {
                   addToCart({ ...product, quantity });
-                  onClose(); // ✨ Cierra el modal automáticamente
+                  onClose();
                 }}
               >
                 Agregar al carrito

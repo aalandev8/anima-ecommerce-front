@@ -14,15 +14,6 @@ export const slides = [
       "Descubre una experiencia culinaria personalizada con nuestras comidas a domicilio, diseñadas para satisfacer tus necesidades dietéticas específicas y deleitar tu paladar.",
     tags: [],
     isHero: true,
-    image: "/BreakfastImage.avif",
-    buttonText: "Ordenar Ahora",
-  },
-  {
-    title: "Comida deliciosa Adaptada a Tus Necesidades",
-    subtitle:
-      "Descubre una experiencia culinaria personalizada con nuestras comidas a domicilio, diseñadas para satisfacer tus necesidades dietéticas específicas y deleitar tu paladar.",
-    tags: [],
-    isHero: true,
     image: "/SoupImage.avif",
     buttonText: "Ordenar Ahora",
   },
@@ -51,15 +42,6 @@ export const slides = [
     tags: [],
     isHero: true,
     image: "/PolloImage.jpg",
-    buttonText: "Ordenar Ahora",
-  },
-  {
-    title: "Comida deliciosa Adaptada a Tus Necesidades",
-    subtitle:
-      "Descubre una experiencia culinaria personalizada con nuestras comidas a domicilio, diseñadas para satisfacer tus necesidades dietéticas específicas y deleitar tu paladar.",
-    tags: [],
-    isHero: true,
-    image: "/FrutasImage.jpg",
     buttonText: "Ordenar Ahora",
   },
 ];

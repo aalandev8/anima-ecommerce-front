@@ -7,14 +7,12 @@ const StoreSearchBar = ({ stores, onFilteredStores }) => {
   const [selectedDelivery, setSelectedDelivery] = useState("all");
 
   const filteredStores = useMemo(() => {
-    // Validar que stores sea un array válido
     if (!stores || !Array.isArray(stores)) {
       return [];
     }
 
     let filtered = [...stores];
 
-    // Filtrar por búsqueda
     if (searchQuery.trim() !== "") {
       const query = searchQuery.toLowerCase();
       filtered = filtered.filter(
@@ -24,14 +22,12 @@ const StoreSearchBar = ({ stores, onFilteredStores }) => {
       );
     }
 
-    // Filtrar por rating
     if (selectedRating > 0) {
       filtered = filtered.filter(
         (store) => parseFloat(store.rating || 0) >= selectedRating
       );
     }
 
-    // Filtrar por envío
     if (selectedDelivery === "free") {
       filtered = filtered.filter(
         (store) => store.deliveryFee === 0 || store.deliveryFee === "0"
@@ -62,7 +58,6 @@ const StoreSearchBar = ({ stores, onFilteredStores }) => {
 
   return (
     <div className="bg-[#FCF4E8] rounded-lg shadow-md p-4 mb-6">
-      {/* Barra de búsqueda principal */}
       <div className="relative">
         <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-600 w-5 h-5" />
         <input

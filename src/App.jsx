@@ -12,6 +12,7 @@ import Register from "./pages/Register";
 import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import About from "./pages/About";
+import OrderConfirmation from "./pages/OrderConfirmation";
 import Footer from "./components/ui/Footer";
 
 function App() {
@@ -20,7 +21,6 @@ function App() {
       <AuthProvider>
         <Router>
           <div className="min-h-screen flex flex-col">
-            {/* Contenido principal */}
             <div className="flex-1">
               <Routes>
                 <Route path="/" element={<Home />} />
@@ -31,10 +31,12 @@ function App() {
                 <Route path="/store/:storeId" element={<StorePage />} />
                 <Route path="/checkout" element={<Checkout />} />
                 <Route path="/about" element={<About />} />
+                <Route
+                  path="/order-confirmation"
+                  element={<OrderConfirmation />}
+                />
               </Routes>
             </div>
-
-            {/* Footer visible en todas las páginas */}
             <Footer />
           </div>
         </Router>

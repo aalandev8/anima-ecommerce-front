@@ -121,10 +121,7 @@ const Checkout = () => {
     e.preventDefault();
 
     if (validateForm()) {
-      // Aquí harías la llamada a tu API para procesar el pago
       console.log("Procesando pago:", { formData, selectedPayment, total });
-
-      // Simulación de pago exitoso
       alert("¡Pedido realizado con éxito! 🎉");
       navigate("/order-confirmation");
     }
@@ -139,7 +136,6 @@ const Checkout = () => {
     <div className="min-h-screen bg-[#FCF4E8] py-8">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          {/* Header */}
           <div className="mb-8">
             <button
               onClick={() => navigate("/cart")}
@@ -167,9 +163,7 @@ const Checkout = () => {
 
           <form onSubmit={handleSubmit}>
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-              {/* Left Column - Forms */}
               <div className="lg:col-span-2 space-y-6">
-                {/* Información de contacto */}
                 <div className="bg-white rounded-lg shadow-md p-6">
                   <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center">
                     <span className="w-8 h-8 bg-[#6B7B3C] text-white rounded-full flex items-center justify-center mr-3 text-sm">
@@ -244,7 +238,6 @@ const Checkout = () => {
                   </div>
                 </div>
 
-                {/* Dirección de entrega */}
                 <div className="bg-white rounded-lg shadow-md p-6">
                   <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center">
                     <span className="w-8 h-8 bg-[#6B7B3C] text-white rounded-full flex items-center justify-center mr-3 text-sm">
@@ -328,7 +321,6 @@ const Checkout = () => {
                   </div>
                 </div>
 
-                {/* Método de pago */}
                 <div className="bg-white rounded-lg shadow-md p-6">
                   <h2 className="text-xl font-bold text-gray-800 mb-4 flex items-center">
                     <span className="w-8 h-8 bg-[#6B7B3C] text-white rounded-full flex items-center justify-center mr-3 text-sm">
@@ -385,7 +377,6 @@ const Checkout = () => {
                     </p>
                   )}
 
-                  {/* Formulario de tarjeta */}
                   {selectedPayment === "card" && (
                     <div className="bg-gray-50 rounded-lg p-6 space-y-4">
                       <div>
@@ -490,7 +481,7 @@ const Checkout = () => {
                   {selectedPayment === "cash" && (
                     <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                       <p className="text-sm text-blue-800">
-                        💵 Prepará el monto exacto para facilitar la entrega. El
+                        Prepará el monto exacto para facilitar la entrega. El
                         repartidor llevará cambio limitado.
                       </p>
                     </div>
@@ -516,7 +507,6 @@ const Checkout = () => {
                 </div>
               </div>
 
-              {/* Right Column - Order Summary */}
               <div className="lg:col-span-1">
                 <div className="bg-white rounded-lg shadow-md p-6 sticky top-20">
                   <h2 className="text-xl font-bold text-gray-800 mb-4">

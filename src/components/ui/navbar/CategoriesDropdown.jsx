@@ -19,7 +19,6 @@ export const CategoriesDropdown = ({
     timeoutRef.current = setTimeout(onClose, 300);
   };
 
-  // ✨ COLORES ACTUALIZADOS - Coinciden con la paleta
   const classScrolled = `font-medium flex transition ${
     isScrolled
       ? "text-green-100 hover:text-green-200"
@@ -49,7 +48,6 @@ export const CategoriesDropdown = ({
         </svg>
       </button>
 
-      {/* ✨ DROPDOWN ACTUALIZADO - Colores de tu paleta */}
       {isCategoriesOpen && (
         <div className="absolute w-48 bg-white border border-[#e2dcc7] shadow-lg rounded-xl mt-2 py-2 z-10">
           {DIETARY_CATEGORIES.map((cat) => (

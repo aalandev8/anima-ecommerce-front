@@ -1,18 +1,18 @@
-import axios from 'axios';
+import axios from "axios";
 
-const API_BASE_URL = import.meta.env.VITE_API_URL ;
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 export const apiClient = axios.create({
   baseURL: `${API_BASE_URL}/api`,
   timeout: 10000,
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
 });
 
 apiClient.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('authToken');
+    const token = localStorage.getItem("authToken");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -23,7 +23,6 @@ apiClient.interceptors.request.use(
   }
 );
 
-
 apiClient.interceptors.response.use(
   (response) => {
     return response;
@@ -31,29 +30,29 @@ apiClient.interceptors.response.use(
   (error) => {
     if (error.response) {
       switch (error.response.status) {
-        case 401:
-          // Solo redirigir si NO estamos en la ruta de login/register
-          // Esto permite que los errores de login se muestren correctamente
-          { const isAuthRoute = window.location.pathname === "/login" ||
-                             window.location.pathname === "/register";
+        case 401: {
+          const isAuthRoute =
+            window.location.pathname === "/login" ||
+            window.location.pathname === "/register";
           if (!isAuthRoute) {
-            localStorage.removeItem('authToken');
-            window.location.href = '/login';
+            localStorage.removeItem("authToken");
+            window.location.href = "/login";
           }
-          break; }
+          break;
+        }
         case 404:
-          console.error('Resource not found');
+          console.error("Resource not found");
           break;
         case 500:
-          console.error('Server error');
+          console.error("Server error");
           break;
         default:
-          console.error('API Error:', error.response.data);
+          console.error("API Error:", error.response.data);
       }
     } else if (error.request) {
-      console.error('Network error - no response received');
+      console.error("Network error - no response received");
     } else {
-      console.error('Error setting up request:', error.message);
+      console.error("Error setting up request:", error.message);
     }
     return Promise.reject(error);
   }
