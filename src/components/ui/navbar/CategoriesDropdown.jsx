@@ -22,7 +22,7 @@ export const CategoriesDropdown = ({
   // ✨ COLORES ACTUALIZADOS - Coinciden con la paleta
   const classScrolled = `font-medium flex transition ${
     isScrolled
-      ? "text-[#3e2c24] hover:text-[#5c4033]"
+      ? "text-green-100 hover:text-green-200"
       : "text-white hover:text-[#c8d6a8]"
   }`;
 

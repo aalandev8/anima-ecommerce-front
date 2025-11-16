@@ -23,7 +23,7 @@ export const Navbar = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Estado para el color dinámico del carousel
+
   const [carouselColor, setCarouselColor] = useState(null);
 
   const {
@@ -39,11 +39,9 @@ export const Navbar = () => {
 
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
-  // Solo aplicar el color del carousel en la página de inicio
   const isHomePage = location.pathname === "/";
   const shouldUseCarouselColor = isHomePage && !isScrolled && carouselColor;
 
-  // Función para convertir hex a rgba con transparencia
   const hexToRgba = (hex, alpha) => {
     const r = parseInt(hex.slice(1, 3), 16);
     const g = parseInt(hex.slice(3, 5), 16);
@@ -54,7 +52,7 @@ export const Navbar = () => {
   // ✨ COLORES ACTUALIZADOS - Coinciden con la paleta de la app
   const classScrolled = `font-medium flex transition ${
     isScrolled
-      ? "text-[#3e2c24] hover:text-[#5c4033]"
+      ? "text-green-100 hover:text-green-200"
       : "text-white hover:text-[#c8d6a8]"
   }`;
 
@@ -74,6 +72,7 @@ export const Navbar = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, [dispatch]);
 
+ 
   useEffect(() => {
     const handleColorChange = (event) => {
       setCarouselColor(event.detail.color);
@@ -90,9 +89,10 @@ export const Navbar = () => {
     navigate("/");
   };
 
+ 
   const getNavbarBackground = () => {
     if (isScrolled) {
-      return "bg-[#6B7B3C] backdrop-blur-sm shadow-lg";
+      return "bg-[#556030]/85 backdrop-blur-sm shadow-lg";
     }
     if (shouldUseCarouselColor) {
       return "backdrop-blur-md";
@@ -180,7 +180,6 @@ export const Navbar = () => {
                   d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 000-4z"
                 />
               </svg>
-              {/* ✨ BADGE ACTUALIZADO - Verde oliva */}
               {totalItems > 0 && (
                 <span className="absolute -top-2 -right-2 bg-[#6b7c5a] text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center shadow-md">
                   {totalItems}

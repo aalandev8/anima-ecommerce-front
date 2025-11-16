@@ -80,8 +80,7 @@ const Cart = () => {
                 bg-[#6B7B3C] text-white rounded-xl font-medium
                 hover:bg-[#5a6632] hover:shadow-lg hover:scale-105 
                 transition-all duration-200"
-              >
-                <ArrowLeft className="w-5 h-5" />
+              >        
                 Ver Restaurantes
               </button>
             </div>
@@ -124,7 +123,7 @@ const Cart = () => {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Cart Items */}
+          
             <div className="lg:col-span-2 space-y-4">
               {items.map((item) => (
                 <div
@@ -133,7 +132,6 @@ const Cart = () => {
                   p-6 hover:shadow-md transition-all duration-200"
                 >
                   <div className="flex gap-4">
-                    {/* Product Image */}
                     <div className="w-24 h-24 flex-shrink-0 bg-[#f8f4ef] rounded-lg overflow-hidden">
                       <img
                         src={item.image || "/placeholder-product.jpg"}
@@ -166,7 +164,6 @@ const Cart = () => {
                       </div>
 
                       <div className="flex items-center justify-between mt-4">
-                        {/* Quantity Controls */}
                         <div className="flex items-center gap-2 bg-[#f8f4ef] rounded-lg p-1">
                           <button
                             onClick={() =>
@@ -200,7 +197,6 @@ const Cart = () => {
                           </button>
                         </div>
 
-                        {/* Price */}
                         <div className="text-right">
                           <p className="text-xl font-bold text-[#3e2c24]">
                             ${(Number(item.price) * item.quantity).toFixed(2)}
@@ -217,7 +213,6 @@ const Cart = () => {
                 </div>
               ))}
 
-              {/* Clear Cart Button */}
               <button
                 onClick={handleClearCart}
                 className="w-full py-3 text-sm text-red-600 hover:text-red-700 
@@ -227,7 +222,6 @@ const Cart = () => {
               </button>
             </div>
 
-            {/* Order Summary */}
             <div className="lg:col-span-1">
               <div className="bg-white rounded-xl shadow-sm border border-[#e2dcc7] p-6 sticky top-20">
                 <h2 className="text-xl font-bold text-[#3e2c24] mb-4">
@@ -260,7 +254,6 @@ const Cart = () => {
                   </div>
                 </div>
 
-                {/* ✨ VERDE UNIFICADO #6B7B3C */}
                 <button
                   onClick={handleCheckout}
                   className="w-full py-4 px-6 mb-3
@@ -273,7 +266,6 @@ const Cart = () => {
                   Proceder al Pago
                 </button>
 
-                {/* ✨ VERDE UNIFICADO #6B7B3C */}
                 <Link
                   to="/"
                   className="block text-center text-[#6B7B3C] hover:text-[#5a6632] 
@@ -282,7 +274,6 @@ const Cart = () => {
                   Continuar Comprando
                 </Link>
 
-                {/* Benefits Section - ✨ VERDE UNIFICADO #6B7B3C */}
                 <div className="mt-6 pt-6 border-t border-[#e2dcc7] space-y-3">
                   <div className="flex items-start gap-3 text-sm text-[#5c4033]">
                     <div className="w-5 h-5 bg-[#6B7B3C] rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">

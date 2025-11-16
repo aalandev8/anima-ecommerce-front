@@ -110,11 +110,7 @@ export const OrderSidebar = () => {
               ${Number(totalPrice || 0).toFixed(2)}
             </span>
           </div>
-          {/* ✨ VERDE UNIFICADO #6B7B3C + Navigate al Checkout */}
-          <button
-            onClick={() => navigate("/checkout")}
-            className="w-full bg-[#6B7B3C] text-white py-3 rounded-lg font-semibold hover:bg-[#5a6632] transition-colors"
-          >
+          <button className="w-full bg-[#556030] text-white py-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors">
             Realizar Pedido
           </button>
           <button

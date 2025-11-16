@@ -17,9 +17,7 @@ const About = () => {
     >
       <Navbar />
 
-      {/* Hero Section con imagen de fondo */}
       <div className="relative min-h-screen w-full">
-        {/* Imagen de fondo sin capa blanca */}
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
@@ -27,7 +25,6 @@ const About = () => {
               "url(https://plus.unsplash.com/premium_photo-1690272336574-78b0db790a7b?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D)",
           }}
         >
-          {/* Degradado sutil para mejor legibilidad */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/20 to-transparent"></div>
         </div>
 
@@ -41,7 +38,7 @@ const About = () => {
               </h1>
             </div>
 
-            <div className="flex-1">
+            <div className="flex-1 bg-amber-900/20 rounded-xl p-10">
               <p className="text-base sm:text-lg lg:text-xl text-white leading-relaxed mb-6 drop-shadow-lg">
                 Todo comenzó cuando una integrante de nuestro equipo compartió
                 su experiencia como persona celíaca: la dificultad de encontrar

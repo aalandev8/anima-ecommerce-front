@@ -82,7 +82,7 @@ const Login = (store) => {
           </svg>
         </Link>
 
-        {/* Logo de AppTo */}
+        
         <div className="flex justify-center mb-6">
           <div className="flex items-center gap-2">
             <img

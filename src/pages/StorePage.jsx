@@ -11,7 +11,7 @@ import { addToCart } from "../redux/slices/cartSlice";
 import { Modal } from "@/components/ui/Modal";
 import { ProductModal } from "./ProductModal";
 
-const StorePage = ({ type }) => {
+const StorePage = () => {
   const { storeId } = useParams();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -85,7 +85,7 @@ const StorePage = ({ type }) => {
             Error al cargar la tienda. Por favor intenta nuevamente.
           </div>
 
-          {/* 🔹 BOTÓN CORREGIDO */}
+          
           <button
             onClick={() => navigate(-1)}
             className="text-gray-600 hover:text-gray-900"
