@@ -126,7 +126,7 @@ const AppToCarousel = () => {
 
                   <button
                     onClick={scrollToCategorias}
-                    className="px-8 py-4 text-white font-bold text-lg rounded-full transition-all transform hover:scale-105 shadow-lg"
+                    className="px-8 py-4 text-white cursor-pointer font-bold text-lg rounded-full transition-all transform hover:scale-105 shadow-lg"
                     style={{
                       backgroundColor: slideColors[index].buttonColor,
                     }}

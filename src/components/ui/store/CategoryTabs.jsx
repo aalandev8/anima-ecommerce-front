@@ -8,7 +8,7 @@ export const CategoryTabs = ({
       <div className="flex gap-1 min-w-max">
         <button
           onClick={() => onSelectCategory(null)}
-          className={`px-4 py-3 font-medium whitespace-nowrap transition-colors border-1 border-lime-900 ${
+          className={`px-4 py-3 font-medium cursor-pointer whitespace-nowrap transition-colors border-1 border-lime-900 ${
             activeCategory === null
               ? "border-black text-[#FAF0E6]"
               : "border-transparent text-[#FAEBD7] hover:text-gray-300"
@@ -20,7 +20,7 @@ export const CategoryTabs = ({
           <button
             key={category.id}
             onClick={() => onSelectCategory(category.id)}
-            className={`px-4 py-3 font-medium whitespace-nowrap transition-colors border-1 border-lime-900  ${
+            className={`px-4 py-3 cursor-pointer font-medium whitespace-nowrap transition-colors border-1 border-lime-900  ${
               activeCategory === category.id
                 ? "border-black text-[#FAF0E6]"
                 : "border-transparent text-[#FAEBD7] hover:text-gray-300"

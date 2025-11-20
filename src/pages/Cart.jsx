@@ -25,6 +25,8 @@ const Cart = () => {
     (state) => state.cart
   );
 
+
+  
   const handleRemoveItem = (id) => {
     dispatch(removeFromCart(id));
   };

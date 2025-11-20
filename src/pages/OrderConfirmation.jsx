@@ -1,12 +1,20 @@
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { clearCart } from "@/redux/slices/cartSlice";
 import { CheckCircle, Package, Clock, MapPin } from "lucide-react";
 import { Navbar } from "@/components/ui/Navbar";
 
 const OrderConfirmation = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const orderNumber = Math.floor(Math.random() * 10000) + 1000;
   const estimatedTime = "30-45 minutos";
+
+  useEffect(() => {
+    dispatch(clearCart());
+  }, [dispatch]);
 
   return (
     <div className="min-h-screen bg-[#FCF4E8]">

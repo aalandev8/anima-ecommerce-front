@@ -1,12 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { CreditCard, Wallet, DollarSign, Building2, Check } from "lucide-react";
+import {
+  CreditCard,
+  Wallet,
+  DollarSign,
+  Building2,
+  Check,
+  LogIn,
+  X,
+  ShoppingBag,
+} from "lucide-react";
 
 const Checkout = () => {
   const navigate = useNavigate();
   const { items, totalPrice } = useSelector((state) => state.cart);
+  const { isAuthenticated } = useSelector((state) => state.auth);
 
+  const [showAuthModal, setShowAuthModal] = useState(false);
   const [selectedPayment, setSelectedPayment] = useState("");
   const [formData, setFormData] = useState({
     fullName: "",
@@ -54,6 +65,26 @@ const Checkout = () => {
       description: "BROU, Itaú, Santander",
     },
   ];
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      setShowAuthModal(true);
+    }
+  }, [isAuthenticated]);
+
+  useEffect(() => {
+    if (items.length === 0 && isAuthenticated) {
+      navigate("/cart");
+    }
+  }, [items.length, isAuthenticated, navigate]);
+
+  const handleGoToLogin = () => {
+    navigate("/login");
+  };
+
+  const handleContinueShopping = () => {
+    navigate(-1);
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -122,13 +153,71 @@ const Checkout = () => {
 
     if (validateForm()) {
       console.log("Procesando pago:", { formData, selectedPayment, total });
-      alert("¡Pedido realizado con éxito! 🎉");
       navigate("/order-confirmation");
     }
   };
 
+  // Modal de autenticación
+  if (showAuthModal) {
+    return (
+      <div className="fixed inset-0 bg-[#556030]/10 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+        <div className="bg-white rounded-2xl shadow-2xl max-w-md w-full p-8 relative animate-in fade-in zoom-in duration-300">
+          <button
+            onClick={handleContinueShopping}
+            className="absolute top-4 right-4 cursor-pointer text-gray-400 hover:text-gray-600 transition-colors"
+          >
+            <X className="w-6 h-6" />
+          </button>
+
+          <div className="text-center mb-6">
+            <div className="w-16 h-16 bg-[#6B7B3C] rounded-full flex items-center justify-center mx-auto mb-4">
+              <LogIn className="w-8 h-8 text-white" />
+            </div>
+            <h2 className="text-2xl font-bold text-gray-900 mb-2">
+              Inicia Sesión para Continuar
+            </h2>
+            <p className="text-gray-600">
+              Para continuar con tu compra es necesario que inicies sesión en tu
+              cuenta
+            </p>
+          </div>
+
+          <div className="space-y-3">
+            <button
+              onClick={handleGoToLogin}
+              className="w-full bg-[#6B7B3C] text-white py-3 px-6 rounded-xl font-semibold hover:bg-[#5a6632] transition-all duration-200 flex items-center justify-center gap-2"
+            >
+              <LogIn className="w-5 h-5" />
+              Iniciar Sesión
+            </button>
+
+            <button
+              onClick={handleContinueShopping}
+              className="w-full bg-gray-100 text-gray-700  cursor-pointer py-3 px-6 rounded-xl font-semibold hover:bg-gray-200 transition-all duration-200 flex items-center justify-center gap-2"
+            >
+              <ShoppingBag className="w-5 h-5" />
+              Continuar Comprando
+            </button>
+          </div>
+
+          <div className="mt-6 pt-6 border-t border-gray-200 text-center">
+            <p className="text-sm text-gray-600">
+              ¿No tenés cuenta?{" "}
+              <button
+                onClick={() => navigate("/register")}
+                className="text-[#6B7B3C] font-semibold hover:underline"
+              >
+                Registrate aquí
+              </button>
+            </p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // No renderizar el checkout si no hay items
   if (items.length === 0) {
-    navigate("/cart");
     return null;
   }
 

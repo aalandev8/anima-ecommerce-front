@@ -85,7 +85,6 @@ const StorePage = () => {
             Error al cargar la tienda. Por favor intenta nuevamente.
           </div>
 
-          
           <button
             onClick={() => navigate(-1)}
             className="text-gray-600 hover:text-gray-900"
@@ -123,7 +122,7 @@ const StorePage = () => {
             />
           </div>
 
-          <div className="sticky mt-10">
+          <div className="sticky top-50 self-start z-15 mt-25">
             <OrderSidebar />
           </div>
         </div>

@@ -60,7 +60,7 @@ const About = () => {
 
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-[#6B7B3C] mb-16">
+          <h2 className="text-4xl font-bold text-center text-[#273109] mb-16">
             Nuestros Valores
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -90,7 +90,7 @@ const About = () => {
               </p>
             </div>
             <div className="bg-white rounded-lg shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
-              <div className="w-16 h-16 bg-[#6B7B3C] rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-[#003858] rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg
                   className="w-8 h-8 text-white"
                   fill="none"
@@ -105,7 +105,7 @@ const About = () => {
                   />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-[#6B7B3C] mb-4">
+              <h3 className="text-2xl font-bold text-[#003858] mb-4">
                 Seguridad
               </h3>
               <p className="text-gray-600">
@@ -115,7 +115,7 @@ const About = () => {
               </p>
             </div>
             <div className="bg-white rounded-lg shadow-lg p-8 text-center hover:shadow-xl transition-shadow">
-              <div className="w-16 h-16 bg-[#6B7B3C] rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-16 h-16 bg-[#470101] rounded-full flex items-center justify-center mx-auto mb-4">
                 <svg
                   className="w-8 h-8 text-white"
                   fill="none"
@@ -130,7 +130,7 @@ const About = () => {
                   />
                 </svg>
               </div>
-              <h3 className="text-2xl font-bold text-[#6B7B3C] mb-4">
+              <h3 className="text-2xl font-bold text-[#470101] mb-4">
                 Inclusión
               </h3>
               <p className="text-gray-600">
@@ -163,7 +163,7 @@ const About = () => {
             ].map((category, index) => (
               <div
                 key={index}
-                className="bg-[#6B7B3C] text-white rounded-lg p-6 text-center font-semibold shadow-md hover:shadow-lg hover:bg-[#5a6632] transition-all"
+                className="bg-[#30361b] text-white rounded-lg p-6 text-center font-semibold shadow-md hover:shadow-lg hover:bg-[#5a6632] transition-all"
               >
                 {category}
               </div>
@@ -171,8 +171,9 @@ const About = () => {
           </div>
         </div>
       </section>
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-[#6B7B3C]">
-        <div className="max-w-4xl mx-auto text-center">
+      <section className="py-10 px-4 sm:px-6 lg:px-8 bg-[#6B7B3C]">
+        
+      <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl font-bold text-white mb-6">
             ¿Listo para comenzar tu experiencia?
           </h2>
@@ -182,7 +183,7 @@ const About = () => {
           </p>
           <a
             href="/"
-            className="inline-block bg-[#FCF4E8] hover:bg-[#e8dcc7] text-[#6B7B3C] font-bold py-4 px-8 rounded-full text-lg transition-colors shadow-lg hover:shadow-xl"
+            className="inline-block bg-[#FCF4E8] hover:bg-[#e8dcc7] text-[#6B7B3C] font-bold py-3 px-6 rounded-full text-lg transition-colors shadow-lg hover:shadow-xl"
           >
             Explorar Restaurantes
           </a>

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { logout } from "@/redux/slices/authSlice";
 import {
   toggleMainMenu,
@@ -21,7 +21,7 @@ import { SearchBar } from "../store/SearchBar";
 export const Navbar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation();
+ 
 
   const {
     isMainMenuOpen,
@@ -116,7 +116,7 @@ export const Navbar = () => {
               className={classScrolled}
             >
               <svg
-                className="w-6 h-6"
+                className="w-6 h-6 cursor-pointer"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
